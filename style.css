@@ -626,4 +626,64 @@ footer p {
     .floating-particle {
         display: none;
     }
+
+    /* Добавляем обратно пиксельные декорации в блок "Обо мне" */
+.about {
+    padding: 10rem 3rem;
+    background: transparent;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Пиксельные декоративные элементы */
+.pixel-decoration {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff6b00;
+    animation: pixelFloat 4s ease-in-out infinite;
+    z-index: 1;
+}
+
+.pixel-decoration:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.pixel-decoration:nth-child(2) {
+    top: 60%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.pixel-decoration:nth-child(3) {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+.pixel-decoration:nth-child(4) {
+    top: 40%;
+    right: 8%;
+    animation-delay: 3s;
+}
+
+.pixel-decoration:nth-child(5) {
+    bottom: 20%;
+    right: 25%;
+    animation-delay: 1.5s;
+}
+
+@keyframes pixelFloat {
+    0%, 100% { 
+        transform: translateY(0px) scale(1);
+        opacity: 0.7;
+    }
+    50% { 
+        transform: translateY(-15px) scale(1.2);
+        opacity: 1;
+    }
+}
 }
