@@ -288,13 +288,29 @@ nav {
 
 .works h2 {
     text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 5rem;
+    font-size: 4rem; /* ИЗМЕНИЛ: был 1.2rem */
+    margin-bottom: 3rem; /* ИЗМЕНИЛ: был 5rem */
     color: #000000;
-    font-weight: 600;
-    letter-spacing: 1px;
+    font-weight: 800; /* ИЗМЕНИЛ: был 600 */
+    letter-spacing: -0.02em; /* ИЗМЕНИЛ: был 1px */
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 1; /* ИЗМЕНИЛ: был 0.8 */
+    position: relative; /* ДОБАВИЛ */
+    display: inline-block; /* ДОБАВИЛ */
+    left: 50%; /* ДОБАВИЛ */
+    transform: translateX(-50%); /* ДОБАВИЛ */
+}
+
+.works h2::after { /* ДОБАВИЛ ВЕСЬ ЭТОТ БЛОК */
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #ff6b00;
+    animation: linePulse 2s ease-in-out infinite;
 }
 
 .works-grid {
@@ -479,6 +495,9 @@ nav {
     background: #000000;
     text-align: center;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* ВЫРАВНИВАНИЕ ПО ЦЕНТРУ */
 }
 
 .contact::before {
@@ -510,47 +529,6 @@ nav {
     margin: 0 auto;
 }
 
-.contact-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 16px 32px;
-    background: transparent;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 0;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 1px solid #333333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-links a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #ff6b00;
-    transition: left 0.3s ease;
-    z-index: -1;
-}
-
-.contact-links a:hover::before {
-    left: 0;
-}
-
-.contact-links a:hover {
-    color: #000000;
-    border-color: #ff6b00;
-    transform: translateY(-2px);
-}
-
 /* Подвал */
 footer {
     background: #000000;
@@ -559,10 +537,14 @@ footer {
     padding: 4rem 2rem;
     font-size: 0.9rem;
     border-top: 1px solid #333333;
+    display: flex;
+    justify-content: center; /* ВЫРАВНИВАНИЕ ПО ЦЕНТРУ */
+    align-items: center;
 }
 
 footer p {
     opacity: 0.7;
+    margin: 0; /* УБИРАЕМ ЛИШНИЕ ОТСТУПЫ */
 }
 
 /* Адаптивность для широких экранов */
@@ -740,6 +722,12 @@ footer p {
     
     .description {
         font-size: 1rem;
+    }
+    
+    /* ДОБАВЬ ЭТОТ БЛОК ДЛЯ SELECTED WORK */
+    .works h2 {
+        font-size: 2.5rem; /* Адаптивный размер для мобильных */
+        margin-bottom: 2rem; /* Меньший отступ на мобильных */
     }
     
     .works-grid {
