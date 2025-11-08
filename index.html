@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julia Byukliy - Motion Designer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <nav>
+            <div class="logo">Julia Byukliy - Motion Designer</div>
+            <div class="nav-links">
+                <a href="#works">Работы</a>
+                <a href="#about">Обо мне</a>
+                <a href="#contact">Контакты</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Привет, я Юлия</h1>
+            <p class="tagline">Motion Designer & 3D Artist</p>
+            <p class="description">Создаю крутые анимации и визуальные эффекты</p>
+            <button class="cta-button">Смотреть работы</button>
+        </div>
+    </section>
+
+    <!-- Работы -->
+    <section id="works" class="works">
+        <h2>Мои работы</h2>
+        <div class="works-grid">
+            <div class="work-item">
+    <div class="video-container">
+        <video autoplay muted loop playsinline class="autoplay">
+            <source src="videos/pink.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео
+        </video>
+    </div>
+    <h3>3D Анимация</h3>
+    <p>Создание персонажной анимации</p>
+</div>
+
+<div class="work-item">
+    <div class="video-container">
+        <video autoplay muted loop playsinline class="autoplay">
+            <source src="videos/abathur.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео
+        </video>
+    </div>
+    <h3>Моушн графика</h3>
+    <p>Анимация для бренда</p>
+</div>
+
+<div class="work-item">
+    <div class="video-container">
+        <video autoplay muted loop playsinline class="autoplay">
+            <source src="videos/solar.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео
+        </video>
+    </div>
+    <h3>Моушн графика</h3>
+    <p>Анимация для бренда</p>
+</div>
+
+<div class="work-item">
+    <div class="video-container">
+        <video autoplay muted loop playsinline class="autoplay">
+            <source src="videos/slurry.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео
+        </video>
+    </div>
+    <h3>Визуальные эффекты</h3>
+    <p>VFX для рекламного ролика</p>
+</div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about" class="about">
+        <h2>Обо мне</h2>
+        <div class="about-content">
+            <p>Занимаюсь motion design более года. Специализируюсь на 3D анимации и визуальных эффектах.</p>
+            <p>Работала с такими программами как: After Effects, Cinema 4D, Figma</p>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <h2>Контакты</h2>
+        <div class="contact-links">
+            <a href="t.me/yulyabyukliu">📧 Telegram</a>
+            <a href="https://instagram.com/jbyuk">📱 Instagram</a>
+            <a href="https://ru.pinterest.com/julia_sufle/">🎨 Pinterest</a>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>© 2025 Julia Byukliy. Все права защищены.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+<script>
+    // Плавная прокрутка для кнопки
+    document.querySelector('.cta-button').addEventListener('click', function() {
+        document.querySelector('#works').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
+    });
+
+    // Плавная прокрутка для меню
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            document.querySelector(targetId).scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    });
+
+    // Анимация появления элементов при скролле
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Наблюдаем за карточками работ
+    document.querySelectorAll('.work-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s ease';
+        observer.observe(item);
+    });
+</script>
+
+</html>
