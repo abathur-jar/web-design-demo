@@ -318,15 +318,16 @@ nav {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Видео контейнеры - ПОЛНОЕ ВИДЕО БЕЗ ОБРЕЗКИ */
+/* Видео контейнеры - ПОЛНОЕ ВИДЕО БЕЗ ОБРЕЗКИ С БЕЛЫМ ФОНОМ */
 .video-container {
     position: relative;
     width: 100%;
     height: 0;
     padding-bottom: 56.25%; /* 16:9 соотношение */
-    background: #000000;
+    background: #ffffff; /* БЕЛЫЙ ФОН вместо черного */
     overflow: hidden;
     margin-bottom: 1.5rem;
+    border: 1px solid #f0f0f0; /* Легкая граница для разделения */
 }
 
 .video-container video {
@@ -682,6 +683,10 @@ footer p {
 
 /* Мобильная адаптивность */
 @media (max-width: 768px) {
+    .video-container {
+        background: #ffffff; /* Белый фон и на мобильных */
+    }
+    
     .hero {
         padding: 0 1.5rem;
         margin-top: 60px;
@@ -749,99 +754,4 @@ footer p {
     .video-container {
         padding-bottom: 75%;
     }
-
-    /* Контакты */
-.contact {
-    padding: 8rem 3rem;
-    background: #000000;
-    text-align: center;
-    position: relative;
-}
-
-.contact::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #ff6b00, transparent);
-}
-
-.contact h2 {
-    font-size: 1.2rem;
-    margin-bottom: 4rem;
-    color: #ffffff;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.8;
-}
-
-.contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.contact-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 16px 32px;
-    background: transparent;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 0;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 1px solid #333333;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact-links a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #ff6b00;
-    transition: left 0.3s ease;
-    z-index: -1;
-}
-
-.contact-links a:hover::before {
-    left: 0;
-}
-
-.contact-links a:hover {
-    color: #000000;
-    border-color: #ff6b00;
-    transform: translateY(-2px);
-}
-
-/* Специальные стили для иконок контактов */
-.contact-links a[href*="vimeo.com"]::before {
-    content: '🎬';
-}
-
-.contact-links a[href*="instagram.com"]::before {
-    content: '📸';
-}
-
-.contact-links a[href*="pinterest.com"]::before {
-    content: '📌';
-}
-
-.contact-links a[href*="t.me"]::before {
-    content: '✈️';
-}
 }
