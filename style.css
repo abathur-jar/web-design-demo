@@ -311,6 +311,8 @@ nav {
     transition: all 0.4s ease;
     position: relative;
     border: 1px solid #f0f0f0;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .work-item:hover {
@@ -333,19 +335,21 @@ nav {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
     transition: all 0.4s ease;
+    border-radius: 8px;
 }
 
 .work-item:hover .video-container video {
-    transform: translate(-50%, -50%) scale(1.02);
+    transform: translate(-50%, -50%) scale(1.05);
+    width: 92%;
+    height: 92%;
 }
 
 .work-content {
-    padding: 0 1rem 2rem 1rem;
+    padding: 0 1.5rem 2rem 1.5rem;
 }
 
 .work-item h3 {
@@ -368,7 +372,7 @@ nav {
 
 /* Обо мне с пиксельными декорациями */
 .about {
-    padding: 10rem 3rem;
+    padding: 8rem 3rem;
     background: transparent;
     text-align: center;
     position: relative;
@@ -684,12 +688,19 @@ footer p {
         display: none;
     }
     
-    /* Исправляем видео для мобильных */
+    /* Видео для мобильных */
     .video-container {
-        padding-bottom: 75%; /* Более квадратное соотношение для мобильных */
+        padding-bottom: 75%;
     }
     
     .video-container video {
-        object-fit: cover; /* Заполняем контейнер без черных полос */
+        width: 95%;
+        height: 95%;
+    }
+    
+    .work-item:hover .video-container video {
+        width: 96%;
+        height: 96%;
+        transform: translate(-50%, -50%) scale(1.02);
     }
 }
