@@ -244,40 +244,215 @@ nav {
     opacity: 0.8;
 }
 
-/* Обо мне */
+/* Обо мне - креативный блок */
 .about {
-    padding: 8rem 3rem;
-    background: #f8f8f8;
+    padding: 10rem 3rem;
+    background: #ffffff;
     text-align: center;
-    border-top: 1px solid #eeeeee;
+    position: relative;
+    overflow: hidden;
 }
 
-.about h2 {
-    font-size: 1.2rem;
-    margin-bottom: 4rem;
-    color: #000000;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.8;
+/* Анимированный фон с floating shapes */
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 107, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 107, 0, 0.03) 0%, transparent 50%);
+    animation: float 6s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
 }
 
 .about-content {
     max-width: 900px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
-.about-content p {
-    font-size: 1.3rem;
-    line-height: 1.7;
+.about h2 {
+    font-size: 4rem;
+    margin-bottom: 3rem;
     color: #000000;
-    margin-bottom: 2rem;
-    font-weight: 400;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    position: relative;
+    display: inline-block;
 }
 
-.about-content p strong {
-    color: #ff6b00;
-    font-weight: 600;
+.about h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #ff6b00;
+    animation: linePulse 2s ease-in-out infinite;
+}
+
+@keyframes linePulse {
+    0%, 100% { width: 80px; opacity: 1; }
+    50% { width: 120px; opacity: 0.8; }
+}
+
+.about-text {
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: #000000;
+    margin-bottom: 3rem;
+    font-weight: 500;
+    position: relative;
+}
+
+.about-text p {
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.about-text p:nth-child(1) { animation-delay: 0.2s; }
+.about-text p:nth-child(2) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Пиксельные декоративные элементы */
+.pixel-decoration {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff6b00;
+    animation: pixelFloat 4s ease-in-out infinite;
+}
+
+.pixel-decoration:nth-child(1) {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.pixel-decoration:nth-child(2) {
+    top: 60%;
+    right: 15%;
+    animation-delay: 1s;
+}
+
+.pixel-decoration:nth-child(3) {
+    bottom: 30%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+@keyframes pixelFloat {
+    0%, 100% { 
+        transform: translateY(0px) scale(1);
+        opacity: 0.7;
+    }
+    50% { 
+        transform: translateY(-15px) scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Навыки в стиле motion design */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 0.6s forwards;
+}
+
+.skill-item {
+    background: #ffffff;
+    padding: 2rem 1.5rem;
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.skill-item:hover::before {
+    left: 100%;
+}
+
+.skill-item:hover {
+    transform: translateY(-5px);
+    border-color: #ff6b00;
+    box-shadow: 0 10px 30px rgba(255, 107, 0, 0.1);
+}
+
+.skill-item h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.skill-item p {
+    font-size: 0.9rem;
+    color: #666666;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .about {
+        padding: 6rem 1.5rem;
+    }
+    
+    .about h2 {
+        font-size: 2.5rem;
+    }
+    
+    .about-text {
+        font-size: 1.1rem;
+    }
+    
+    .skills-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .pixel-decoration {
+        display: none;
+    }
 }
 
 /* Контакты */
