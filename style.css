@@ -24,6 +24,49 @@ body {
     position: relative;
 }
 
+/* ===== ПЕРЕЛИВАЮЩИЕСЯ ЦВЕТА ===== */
+:root {
+    --primary-orange: #ff6b00;
+    --primary-pink: #ff4d8d;
+}
+
+@keyframes colorFlow {
+    0%, 100% {
+        color: var(--primary-orange);
+        background-color: var(--primary-orange);
+        border-color: var(--primary-orange);
+    }
+    50% {
+        color: var(--primary-pink);
+        background-color: var(--primary-pink);
+        border-color: var(--primary-pink);
+    }
+}
+
+@keyframes gradientFlow {
+    0%, 100% {
+        background: var(--primary-orange);
+    }
+    25% {
+        background: #ff8c00;
+    }
+    50% {
+        background: var(--primary-pink);
+    }
+    75% {
+        background: #ff1493;
+    }
+}
+
+@keyframes borderColorFlow {
+    0%, 100% {
+        border-color: var(--primary-orange);
+    }
+    50% {
+        border-color: var(--primary-pink);
+    }
+}
+
 /* ===== ФОН И АНИМАЦИИ ===== */
 /* Анимированный фон для всего сайта */
 body::before {
@@ -59,7 +102,9 @@ body::before {
     position: fixed;
     background: rgba(255, 107, 0, 0.1);
     border-radius: 50%;
-    animation: particleFloat 6s ease-in-out infinite;
+    animation: 
+        particleFloat 6s ease-in-out infinite,
+        colorFlow 8s ease-in-out infinite;
     z-index: -1;
     pointer-events: none;
 }
@@ -69,7 +114,7 @@ body::before {
     height: 4px;
     top: 20%;
     left: 10%;
-    animation-delay: 0s;
+    animation-delay: 0s, 0s;
 }
 
 .floating-particle:nth-child(2) {
@@ -77,7 +122,7 @@ body::before {
     height: 6px;
     top: 60%;
     right: 15%;
-    animation-delay: 2s;
+    animation-delay: 2s, 1s;
 }
 
 .floating-particle:nth-child(3) {
@@ -85,7 +130,7 @@ body::before {
     height: 3px;
     bottom: 30%;
     left: 20%;
-    animation-delay: 4s;
+    animation-delay: 4s, 2s;
 }
 
 .floating-particle:nth-child(4) {
@@ -93,7 +138,7 @@ body::before {
     height: 5px;
     top: 80%;
     left: 80%;
-    animation-delay: 1s;
+    animation-delay: 1s, 3s;
 }
 
 .floating-particle:nth-child(5) {
@@ -101,7 +146,7 @@ body::before {
     height: 4px;
     top: 40%;
     right: 5%;
-    animation-delay: 3s;
+    animation-delay: 3s, 4s;
 }
 
 @keyframes particleFloat {
@@ -164,7 +209,9 @@ nav {
     display: block;
     flex-shrink: 0;
     position: relative;
-    animation: logoDoubleSquare 3s ease-in-out infinite;
+    animation: 
+        logoDoubleSquare 3s ease-in-out infinite,
+        borderColorFlow 4s ease-in-out infinite;
 }
 
 .logo::after {
@@ -173,10 +220,12 @@ nav {
     height: 12px;
     background: #ff6b00;
     position: absolute;
-    left: 16px; /* Отступ от левого края */
+    left: 16px;
     top: 50%;
     transform: translateY(-50%);
-    animation: logoInnerSquare 3s ease-in-out infinite;
+    animation: 
+        logoInnerSquare 3s ease-in-out infinite,
+        gradientFlow 5s ease-in-out infinite;
 }
 
 @keyframes logoDoubleSquare {
@@ -210,7 +259,7 @@ nav {
 }
 
 .nav-links a:hover {
-    color: #ff6b00;
+    animation: colorFlow 3s ease-in-out infinite;
 }
 
 .nav-links a::after {
@@ -222,6 +271,7 @@ nav {
     height: 2px;
     background: #ff6b00;
     transition: width 0.3s ease;
+    animation: gradientFlow 4s ease-in-out infinite;
 }
 
 .nav-links a:hover::after {
@@ -261,7 +311,9 @@ nav {
     letter-spacing: 1px;
     text-transform: uppercase;
     opacity: 0;
-    animation: fadeInUp 1s ease 0.4s forwards;
+    animation: 
+        fadeInUp 1s ease 0.4s forwards,
+        colorFlow 6s ease-in-out infinite;
 }
 
 .description {
@@ -305,6 +357,7 @@ nav {
     background: #ff6b00;
     transition: left 0.3s ease;
     z-index: -1;
+    animation: gradientFlow 5s ease-in-out infinite;
 }
 
 .cta-button:hover::before {
@@ -314,6 +367,7 @@ nav {
 .cta-button:hover {
     color: #000000;
     transform: translateY(-2px);
+    animation: colorFlow 3s ease-in-out infinite;
 }
 
 @keyframes fadeInUp {
@@ -333,7 +387,9 @@ nav {
     width: 6px;
     height: 6px;
     background: #ff6b00;
-    animation: heroPixelFloat 5s ease-in-out infinite;
+    animation: 
+        heroPixelFloat 5s ease-in-out infinite,
+        gradientFlow 4s ease-in-out infinite;
     z-index: 1;
     opacity: 0.6;
 }
@@ -341,43 +397,43 @@ nav {
 .hero-pixel:nth-child(1) {
     top: 25%;
     left: 15%;
-    animation-delay: 0s;
+    animation-delay: 0s, 0s;
 }
 
 .hero-pixel:nth-child(2) {
     top: 65%;
     right: 20%;
-    animation-delay: 1.5s;
+    animation-delay: 1.5s, 1s;
 }
 
 .hero-pixel:nth-child(3) {
     bottom: 35%;
     left: 25%;
-    animation-delay: 3s;
+    animation-delay: 3s, 2s;
 }
 
 .hero-pixel:nth-child(4) {
     top: 45%;
     right: 12%;
-    animation-delay: 2s;
+    animation-delay: 2s, 3s;
 }
 
 .hero-pixel:nth-child(5) {
     bottom: 25%;
     right: 30%;
-    animation-delay: 0.5s;
+    animation-delay: 0.5s, 4s;
 }
 
 .hero-pixel:nth-child(6) {
     top: 15%;
     left: 80%;
-    animation-delay: 2.5s;
+    animation-delay: 2.5s, 5s;
 }
 
 .hero-pixel:nth-child(7) {
     bottom: 15%;
     left: 10%;
-    animation-delay: 1s;
+    animation-delay: 1s, 6s;
 }
 
 @keyframes heroPixelFloat {
@@ -464,6 +520,7 @@ nav {
     width: 100px;
     height: 3px;
     background: #ff6b00;
+    animation: gradientFlow 4s ease-in-out infinite;
 }
 
 .gallery-carousel {
@@ -501,7 +558,7 @@ nav {
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
-    cursor: pointer; /* Добавляем курсор указатель для клика */
+    cursor: pointer;
 }
 
 .gallery-item:hover img {
@@ -556,12 +613,14 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: borderColorFlow 5s ease-in-out infinite;
 }
 
 .carousel-btn:hover {
     background: #ff6b00;
     color: white;
     transform: scale(1.1);
+    animation: gradientFlow 3s ease-in-out infinite;
 }
 
 /* ===== РАБОТЫ (WORKS) ===== */
@@ -595,7 +654,9 @@ nav {
     width: 80px;
     height: 3px;
     background: #ff6b00;
-    animation: linePulse 2s ease-in-out infinite;
+    animation: 
+        linePulse 2s ease-in-out infinite,
+        gradientFlow 4s ease-in-out infinite;
 }
 
 @keyframes linePulse {
@@ -627,12 +688,12 @@ nav {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Видео контейнеры - ПОЛНОЕ ВИДЕО БЕЗ ОБРЕЗКИ С БЕЛЫМ ФОНОМ */
+/* Видео контейнеры */
 .video-container {
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 соотношение */
+    padding-bottom: 56.25%;
     background: #ffffff;
     overflow: hidden;
     margin-bottom: 1.5rem;
@@ -645,7 +706,7 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* ВАЖНО: contain вместо cover - видео полностью видно */
+    object-fit: contain;
 }
 
 .work-content {
@@ -685,38 +746,40 @@ nav {
     width: 8px;
     height: 8px;
     background: #ff6b00;
-    animation: pixelFloat 4s ease-in-out infinite;
+    animation: 
+        pixelFloat 4s ease-in-out infinite,
+        gradientFlow 3s ease-in-out infinite;
     z-index: 1;
 }
 
 .pixel-decoration:nth-child(1) {
     top: 20%;
     left: 10%;
-    animation-delay: 0s;
+    animation-delay: 0s, 0s;
 }
 
 .pixel-decoration:nth-child(2) {
     top: 60%;
     right: 15%;
-    animation-delay: 1s;
+    animation-delay: 1s, 1s;
 }
 
 .pixel-decoration:nth-child(3) {
     bottom: 30%;
     left: 20%;
-    animation-delay: 2s;
+    animation-delay: 2s, 2s;
 }
 
 .pixel-decoration:nth-child(4) {
     top: 40%;
     right: 8%;
-    animation-delay: 3s;
+    animation-delay: 3s, 3s;
 }
 
 .pixel-decoration:nth-child(5) {
     bottom: 20%;
     right: 25%;
-    animation-delay: 1.5s;
+    animation-delay: 1.5s, 4s;
 }
 
 @keyframes pixelFloat {
@@ -757,7 +820,9 @@ nav {
     width: 80px;
     height: 3px;
     background: #ff6b00;
-    animation: linePulse 2s ease-in-out infinite;
+    animation: 
+        linePulse 2s ease-in-out infinite,
+        gradientFlow 4s ease-in-out infinite;
 }
 
 .about-text {
@@ -793,6 +858,7 @@ nav {
     right: 0;
     height: 1px;
     background: linear-gradient(90deg, transparent, #ff6b00, transparent);
+    animation: gradientFlow 6s ease-in-out infinite;
 }
 
 .contact h2 {
@@ -831,6 +897,7 @@ nav {
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
+    animation: borderColorFlow 5s ease-in-out infinite;
 }
 
 .contact-links a::before {
@@ -843,6 +910,7 @@ nav {
     background: #ff6b00;
     transition: left 0.3s ease;
     z-index: -1;
+    animation: gradientFlow 4s ease-in-out infinite;
 }
 
 .contact-links a:hover::before {
@@ -916,7 +984,7 @@ footer p {
 }
 
 .modal-close:hover {
-    color: #ff6b00;
+    animation: colorFlow 2s ease-in-out infinite;
 }
 
 .modal-caption {
@@ -984,7 +1052,7 @@ footer p {
     }
 }
 
-/* ===== МОБИЛЬНАЯ АДАПТИВНОСТЬ (ВСЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ ВНУТРИ ЭТОГО МЕДИА-ЗАПРОСА) ===== */
+/* ===== МОБИЛЬНАЯ АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
     .video-container {
         background: #ffffff;
@@ -1063,7 +1131,24 @@ footer p {
         padding-bottom: 75%;
     }
     
-    /* Адаптивность для модального окна на мобильных */
+    /* Логотип на мобильных */
+    .logo {
+        font-size: 1.1rem;
+        gap: 8px;
+    }
+    
+    .logo::before {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .logo::after {
+        width: 8px;
+        height: 8px;
+        left: 12px;
+    }
+    
+    /* Модальное окно на мобильных */
     .modal-content {
         max-width: 95%;
         max-height: 70%;
