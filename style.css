@@ -983,17 +983,21 @@ footer p {
 .modal-content {
     display: block;
     max-width: 95%;
-    max-height: 95%;
-    margin: 1% auto;
+    max-height: 95vh; /* ← ИЗМЕНИТЬ: было 95%, стало 95vh (viewport height) */
+    margin: 0 auto;   /* ← ИЗМЕНИТЬ: было 1%, стало 0 (убираем отступы) */
     object-fit: contain;
     animation: zoomIn 0.3s ease;
     border-radius: 10px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;         /* ← ДОБАВИТЬ: центрирование по вертикали */
+    left: 50%;        /* ← ДОБАВИТЬ: центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* ← ДОБАВИТЬ: точное центрирование */
 }
 
 @keyframes zoomIn {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }
 
 .modal-close {
@@ -1046,36 +1050,42 @@ footer p {
 
 /* ===== МОБИЛЬНАЯ АДАПТИВНОСТЬ ===== */
 @media (max-width: 768px) {
-    /* Модальное окно на мобильных - увеличенные размеры */
+    /* Модальное окно на мобильных - МАКСИМАЛЬНЫЕ размеры */
     .modal-content {
         max-width: 98%;
-        max-height: 85%;
-        margin: 5% auto;
+        max-height: 95vh; /* ← ИЗМЕНИТЬ: было 85%, стало 95vh */
+        margin: 0 auto;   /* ← ИЗМЕНИТЬ: было 5%, стало 0 */
         border-radius: 8px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
     
     .modal-close {
-        top: 15px;
-        right: 20px;
-        font-size: 40px;
-        width: 45px;
-        height: 45px;
+        top: 10px;
+        right: 15px;  /* ← ИЗМЕНИТЬ: было 20px, стало 15px */
+        font-size: 35px; /* ← ИЗМЕНИТЬ: было 40px, стало 35px */
+        width: 40px;  /* ← ИЗМЕНИТЬ: было 45px, стало 40px */
+        height: 40px; /* ← ИЗМЕНИТЬ: было 45px, стало 40px */
         background: rgba(0, 0, 0, 0.7);
     }
     
     .modal-caption {
-        bottom: 25px;
-        padding: 0 20px;
+        bottom: 15px;
+        padding: 0 15px; /* ← ИЗМЕНИТЬ: было 20px, стало 15px */
     }
     
     .modal-title {
-        font-size: 1.5rem;
-        margin-bottom: 0.6rem;
+        font-size: 1.3rem; /* ← ИЗМЕНИТЬ: было 1.5rem, стало 1.3rem */
+        margin-bottom: 0.5rem; /* ← ИЗМЕНИТЬ: было 0.6rem, стало 0.5rem */
     }
     
     .modal-description {
-        font-size: 1.1rem;
+        font-size: 1rem; /* ← ИЗМЕНИТЬ: было 1.1rem, стало 1rem */
     }
+
+    /* Остальные мобильные стили... */
 
     /* Бургер-меню */
     .menu-toggle {
