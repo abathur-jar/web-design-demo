@@ -471,30 +471,33 @@ nav {
 
 .gallery-section h2 {
     text-align: center;
-    font-size: 3rem;
+    font-size: 4rem; /* ← ИЗМЕНИТЬ: было 3rem, стало 4rem */
     margin-bottom: 4rem;
     color: #000000;
     font-weight: 800;
     letter-spacing: -0.02em;
     text-transform: uppercase;
     position: relative;
+    display: inline-block; /* ← ДОБАВИТЬ */
+    left: 50%; /* ← ДОБАВИТЬ */
+    transform: translateX(-50%); /* ← ДОБАВИТЬ */
 }
 
 .gallery-section h2::after {
     content: '';
     position: absolute;
-    bottom: -15px;
+    bottom: -10px; /* ← ИЗМЕНИТЬ: было -15px, стало -10px */
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
+    width: 80px; /* ← ИЗМЕНИТЬ: было 100px, стало 80px */
     height: 3px;
     background: #00ff88;
     animation: linePulse 2s ease-in-out infinite;
 }
 
 @keyframes linePulse {
-    0%, 100% { width: 100px; opacity: 1; }
-    50% { width: 150px; opacity: 0.8; }
+    0%, 100% { width: 80px; opacity: 1; }
+    50% { width: 120px; opacity: 0.8; }
 }
 
 /* Контейнер для галереи с вешалкой */
