@@ -989,6 +989,8 @@ footer p {
         font-size: 1rem;
         font-weight: 600;
         border-bottom: 1px solid #f0f0f0;
+        width: 100%;
+        display: block;
     }
     
     .nav-links a:last-child {
@@ -1033,6 +1035,7 @@ footer p {
         height: 8px;
         left: 12px;
     }
+
     
     /* Остальные стили остаются без изменений */
     .video-container {
