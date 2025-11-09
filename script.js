@@ -22,7 +22,6 @@ window.addEventListener('scroll', function() {
     elements.forEach(element => {
         const position = element.getBoundingClientRect();
         
-        // Если элемент в зоне видимости
         if(position.top < window.innerHeight - 100) {
             element.style.opacity = '1';
             element.style.transform = 'translateY(0)';
@@ -37,60 +36,142 @@ document.querySelectorAll('.work-item').forEach(item => {
     item.style.transition = 'all 0.6s ease';
 });
 
-// === ВИДЕО ПРЕВЬЮ И МОДАЛЬНОЕ ОКНО ===
-const videoModal = document.getElementById('videoModal');
-const modalVideo = document.getElementById('modalVideo');
-const videoModalTitle = document.getElementById('videoModalTitle');
-const videoModalDescription = document.getElementById('videoModalDescription');
+// === ВИДЕО СИСТЕМА КАК НА PINTEREST ===
+let currentlyPlaying = null;
 
-// Функция открытия видео модалки
-function openVideoModal(videoSrc, title, description) {
-    videoModal.style.display = 'block';
-    modalVideo.src = videoSrc;
-    videoModalTitle.textContent = title;
-    videoModalDescription.textContent = description;
-    document.body.style.overflow = 'hidden';
-    
-    // Автозапуск видео при открытии
-    modalVideo.play().catch(e => {
-        console.log('Автовоспроизведение заблокировано браузером - пользователь запустит вручную');
-    });
-}
-
-// Функция закрытия видео модалки
-function closeVideoModal() {
-    videoModal.style.display = 'none';
-    modalVideo.pause();
-    modalVideo.currentTime = 0;
-    document.body.style.overflow = 'auto';
-}
-
-// Закрытие по клику вне видео
-videoModal.addEventListener('click', function(e) {
-    if (e.target === videoModal) {
-        closeVideoModal();
-    }
-});
-
-// Закрытие по Escape
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && videoModal.style.display === 'block') {
-        closeVideoModal();
-    }
-});
-
-// Инициализация видео превью
-function initVideoPreviews() {
-    document.querySelectorAll('.video-container video').forEach(video => {
-        // Устанавливаем видео на начало и приостанавливаем
+function initVideoSystem() {
+    document.querySelectorAll('.work-item').forEach(item => {
+        const video = item.querySelector('video');
+        const videoSrc = item.getAttribute('data-video');
+        
+        // Загружаем правильное видео
+        if (videoSrc) {
+            video.innerHTML = `<source src="${videoSrc}" type="video/mp4">`;
+        }
+        
+        // Устанавливаем превью (первый кадр)
         video.currentTime = 0.1;
-        video.play().then(() => {
-            video.pause();
-        }).catch(e => {
-            // Игнорируем ошибки автовоспроизведения
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+        
+        // Клик по видео
+        item.addEventListener('click', function(e) {
+            // Если кликнули на кнопки управления - игнорируем
+            if (e.target.closest('.control-btn')) return;
+            
+            if (currentlyPlaying === this) {
+                pauseVideo(this);
+            } else {
+                if (currentlyPlaying) {
+                    pauseVideo(currentlyPlaying);
+                }
+                playVideo(this);
+            }
         });
+        
+        // Создаем контролы
+        createVideoControls(item, video);
     });
 }
+
+function playVideo(item) {
+    const video = item.querySelector('video');
+    const preview = item.querySelector('.video-preview');
+    
+    // Останавливаем текущее видео
+    if (currentlyPlaying && currentlyPlaying !== item) {
+        pauseVideo(currentlyPlaying);
+    }
+    
+    // Запускаем новое
+    video.muted = false;
+    video.play().then(() => {
+        item.classList.add('playing');
+        currentlyPlaying = item;
+        
+        // Прокручиваем к видео если оно не в зоне видимости
+        const rect = item.getBoundingClientRect();
+        if (rect.top < 100 || rect.bottom > window.innerHeight - 100) {
+            item.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+        }
+    }).catch(e => {
+        console.log('Ошибка воспроизведения:', e);
+    });
+}
+
+function pauseVideo(item) {
+    const video = item.querySelector('video');
+    video.pause();
+    video.currentTime = 0;
+    video.muted = true;
+    item.classList.remove('playing');
+    
+    if (currentlyPlaying === item) {
+        currentlyPlaying = null;
+    }
+}
+
+function createVideoControls(item, video) {
+    const controls = document.createElement('div');
+    controls.className = 'video-controls';
+    
+    controls.innerHTML = `
+        <button class="control-btn play-pause">⏸</button>
+        <button class="control-btn restart">↺</button>
+        <span class="video-time">0:00</span>
+    `;
+    
+    item.querySelector('.video-preview').appendChild(controls);
+    
+    // Обработчики контролов
+    controls.querySelector('.play-pause').addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (video.paused) {
+            playVideo(item);
+        } else {
+            pauseVideo(item);
+        }
+    });
+    
+    controls.querySelector('.restart').addEventListener('click', function(e) {
+        e.stopPropagation();
+        video.currentTime = 0;
+        if (video.paused) {
+            playVideo(item);
+        }
+    });
+    
+    // Обновление времени
+    video.addEventListener('timeupdate', function() {
+        const minutes = Math.floor(video.currentTime / 60);
+        const seconds = Math.floor(video.currentTime % 60);
+        controls.querySelector('.video-time').textContent = 
+            `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    });
+    
+    // Обновление иконки паузы/воспроизведения
+    video.addEventListener('play', function() {
+        controls.querySelector('.play-pause').textContent = '⏸';
+    });
+    
+    video.addEventListener('pause', function() {
+        controls.querySelector('.play-pause').textContent = '▶';
+    });
+}
+
+// Останавливаем видео при скролле далеко от него
+window.addEventListener('scroll', function() {
+    if (currentlyPlaying) {
+        const rect = currentlyPlaying.getBoundingClientRect();
+        if (rect.top < -200 || rect.bottom > window.innerHeight + 200) {
+            pauseVideo(currentlyPlaying);
+        }
+    }
+});
 
 // === МОДАЛЬНОЕ ОКНО ДЛЯ ИЗОБРАЖЕНИЙ ===
 const modal = document.getElementById('imageModal');
@@ -99,7 +180,6 @@ const modalTitle = document.getElementById('modalTitle');
 const modalDescription = document.getElementById('modalDescription');
 const closeBtn = document.querySelector('.modal-close');
 
-// Функция открытия модального окна
 function openModal(imgSrc, title, description) {
     modal.style.display = 'block';
     modalImg.src = imgSrc;
@@ -108,13 +188,11 @@ function openModal(imgSrc, title, description) {
     document.body.style.overflow = 'hidden';
 }
 
-// Функция закрытия модального окна
 function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
-// Добавляем обработчики кликов на изображения в галерее
 document.querySelectorAll('.gallery-item img').forEach(img => {
     img.style.cursor = 'pointer';
     img.addEventListener('click', function() {
@@ -125,25 +203,17 @@ document.querySelectorAll('.gallery-item img').forEach(img => {
     });
 });
 
-// Закрытие по клику на крестик
 closeBtn.addEventListener('click', closeModal);
 
-// Закрытие по клику вне изображения
 modal.addEventListener('click', function(e) {
     if (e.target === modal) {
         closeModal();
     }
 });
 
-// Закрытие по клавише Escape
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        if (modal.style.display === 'block') {
-            closeModal();
-        }
-        if (videoModal.style.display === 'block') {
-            closeVideoModal();
-        }
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
     }
 });
 
@@ -162,15 +232,12 @@ function initBurgerMenu() {
     const navLinks = document.querySelector('.nav-links');
     
     if (menuToggle && navLinks) {
-        console.log('Бургер-меню инициализировано');
-        
         menuToggle.addEventListener('click', function(e) {
             e.stopPropagation();
             navLinks.classList.toggle('active');
             this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
         });
         
-        // Закрываем меню при клике на ссылку
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', function() {
                 navLinks.classList.remove('active');
@@ -178,7 +245,6 @@ function initBurgerMenu() {
             });
         });
         
-        // Закрываем меню при клике вне его области
         document.addEventListener('click', function(e) {
             if (!e.target.closest('nav') && navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
@@ -188,13 +254,9 @@ function initBurgerMenu() {
     }
 }
 
-// === ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ ===
+// === ИНИЦИАЛИЗАЦИЯ ===
 document.addEventListener('DOMContentLoaded', function() {
-    // Инициализируем видео превью
-    initVideoPreviews();
-    
-    // Инициализируем бургер-меню
+    initVideoSystem();
     initBurgerMenu();
-    
-    console.log('Сайт загружен! Видеоплеер и модальные окна готовы.');
+    console.log('Сайт загружен! Pinterest-стиль видео готов.');
 });
