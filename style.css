@@ -1146,7 +1146,7 @@ footer p {
         font-size: 1.1rem;
     }
 
-    /* Остальные мобильные стили */
+    /* Бургер-меню */
     .menu-toggle {
         display: block;
         background: none;
@@ -1348,63 +1348,6 @@ footer p {
         padding-bottom: 75%;
     }
 }
-
-    /* Работы */
-    .works h2 {
-        font-size: 2.5rem;
-        margin-bottom: 2rem;
-    }
-    
-    .works-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 0 0.5rem;
-    }
-    
-    .works,
-    .about,
-    .contact {
-        padding: 5rem 1rem;
-    }
-    
-    .contact-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .contact-links a {
-        width: 100%;
-        max-width: 280px;
-        justify-content: center;
-    }
-    
-    .work-item h3 {
-        font-size: 1.2rem;
-    }
-    
-    .work-item p {
-        font-size: 1rem;
-    }
-    
-    .about h2 {
-        font-size: 2.5rem;
-    }
-    
-    .about-text {
-        font-size: 1.1rem;
-    }
-    
-    .floating-particle {
-        display: none;
-    }
-    
-    .pixel-decoration {
-        display: none;
-    }
-    
-    .video-container {
-        padding-bottom: 75%;
-    }
     
     /* Модальное окно на мобильных */
     .modal-content {
@@ -1425,4 +1368,3 @@ footer p {
     .modal-description {
         font-size: 1rem;
     }
-}
