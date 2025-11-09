@@ -15,7 +15,6 @@
     <div class="floating-particle"></div>
     <div class="floating-particle"></div>
     <div class="floating-particle"></div>
-    
 
     <!-- Шапка -->
     <header>
@@ -30,82 +29,103 @@
         </nav>
     </header>
 
-<!-- Главный экран -->
-<section class="hero">
-    <!-- Пиксельные анимации для Hero -->
-    <div class="hero-pixel"></div>
-    <div class="hero-pixel"></div>
-    <div class="hero-pixel"></div>
-    <div class="hero-pixel"></div>
-    <div class="hero-pixel"></div>
-    <div class="hero-pixel"></div>
-    <div class="hero-pixel"></div>
-    
-    <div class="hero-content">
-        <h1>MOTION DESIGNER & 3D ARTIST</h1>
-        <p class="tagline">Creating compelling visual experiences</p>
-        <p class="description">Specializing in 3D animation, motion graphics and visual effects</p>
-        <button class="cta-button">VIEW WORKS</button>
-    </div>
-</section>
-
-<!-- Галерея работ -->
-<section class="gallery-section">
-    <h2>STUDIO SHOTS</h2>
-    <div class="gallery-carousel" id="galleryCarousel">
-
-        <div class="gallery-item">
-            <img src="images/cupid2.png" alt="Figma Design">
-            <div class="gallery-overlay">
-                <div class="gallery-title">Poster Cupid</div>
-                <div class="gallery-description">Figma Design</div>
-            </div>
+    <!-- Главный экран -->
+    <section class="hero">
+        <!-- Фоновые элементы -->
+        <div class="section-bg"></div>
+        <div class="hero-pixels">
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
         </div>
-
-        <div class="gallery-item">
-            <img src="images/cupid.png" alt="Figma Design">
-            <div class="gallery-overlay">
-                <div class="gallery-title">Poster Cupid Red</div>
-                <div class="gallery-description">Figma Design</div>
-            </div>
+        
+        <div class="hero-content">
+            <h1>MOTION DESIGNER & 3D ARTIST</h1>
+            <p class="tagline">Creating compelling visual experiences</p>
+            <p class="description">Specializing in 3D animation, motion graphics and visual effects</p>
+            <button class="cta-button">VIEW WORKS</button>
         </div>
+    </section>
+
+    <!-- Галерея работ -->
+    <section class="gallery-section">
+        <div class="section-bg"></div>
+        <div class="gallery-pixels">
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+        </div>
+        
+        <h2>STUDIO SHOTS</h2>
+        <div class="gallery-container">
+            <div class="gallery-hanger"></div>
+            <div class="gallery-carousel" id="galleryCarousel">
+                <div class="gallery-item">
+                    <img src="images/cupid2.png" alt="Figma Design">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Poster Cupid</div>
+                        <div class="gallery-description">Figma Design</div>
+                    </div>
+                </div>
 
                 <div class="gallery-item">
-            <img src="images/Flower.png" alt="Cinema 4D">
-            <div class="gallery-overlay">
-                <div class="gallery-title">Alien Flower</div>
-                <div class="gallery-description">Cinema 4D</div>
-            </div>
-        </div>
+                    <img src="images/cupid.png" alt="Figma Design">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Poster Cupid Red</div>
+                        <div class="gallery-description">Figma Design</div>
+                    </div>
+                </div>
 
                 <div class="gallery-item">
-            <img src="images/pink.jpg" alt="Cinema 4D">
-            <div class="gallery-overlay">
-                <div class="gallery-title">Lipgloss</div>
-                <div class="gallery-description">Cinema 4D</div>
+                    <img src="images/Flower.png" alt="Cinema 4D">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Alien Flower</div>
+                        <div class="gallery-description">Cinema 4D</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/pink.jpg" alt="Cinema 4D">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Lipgloss</div>
+                        <div class="gallery-description">Cinema 4D</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/pinkFlower.png" alt="Adobe Illustrator">
+                    <div class="gallery-overlay">
+                        <div class="gallery-title">Beauty</div>
+                        <div class="gallery-description">Adobe Illustrator</div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="gallery-item">
-            <img src="images/pinkFlower.png" alt="Adobe Illustrator">
-            <div class="gallery-overlay">
-                <div class="gallery-title">Beauty</div>
-                <div class="gallery-description">Adobe Illustrator</div>
-            </div>
+        <div class="carousel-nav">
+            <button class="carousel-btn" onclick="scrollGallery(-300)">❮</button>
+            <button class="carousel-btn" onclick="scrollGallery(300)">❯</button>
         </div>
-
-    </div>
-    <div class="carousel-nav">
-        <button class="carousel-btn" onclick="scrollGallery(-300)">❮</button>
-        <button class="carousel-btn" onclick="scrollGallery(300)">❯</button>
-    </div>
-</section>
+    </section>
 
     <!-- Работы -->
     <section id="works" class="works">
+        <div class="section-bg"></div>
+        <div class="works-pixels">
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+        </div>
+        
         <h2>SELECTED WORKS</h2>
         <div class="works-grid">
-
             <!-- Pink Lipgloss -->
             <div class="work-item">
                 <div class="video-container">
@@ -134,7 +154,7 @@
                 </div>
             </div>
 
-                                    <!-- Abathur -->
+            <!-- Abathur -->
             <div class="work-item">
                 <div class="video-container">
                     <video autoplay muted loop playsinline>
@@ -162,7 +182,7 @@
                 </div>
             </div>
 
-                        <!-- Slurry -->
+            <!-- Slurry -->
             <div class="work-item">
                 <div class="video-container">
                     <video autoplay muted loop playsinline>
@@ -176,7 +196,7 @@
                 </div>
             </div>
 
-                        <!-- ZheeShe -->
+            <!-- ZheeShe -->
             <div class="work-item">
                 <div class="video-container">
                     <video autoplay muted loop playsinline>
@@ -190,7 +210,7 @@
                 </div>
             </div>
             
-                         <!-- Solar System -->
+            <!-- Solar System -->
             <div class="work-item">
                 <div class="video-container">
                     <video autoplay muted loop playsinline>
@@ -203,33 +223,32 @@
                     <p>3D Animation for YouTube</p>
                 </div>
             </div>
-
         </div>
     </section>
 
-            <!-- Обо мне -->
+    <!-- Обо мне -->
     <section id="about" class="about">
-        <!-- Летающие пиксели -->
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
+        <div class="section-bg"></div>
+        <div class="about-pixels">
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+        </div>
         
         <!-- Геометрические элементы -->
-        <div class="about-geometry">
-            <div class="geometry-item"></div>
-            <div class="geometry-item"></div>
-            <div class="geometry-item"></div>
+        <div class="section-geometry">
+            <div class="geometry-shape"></div>
+            <div class="geometry-shape"></div>
+            <div class="geometry-shape"></div>
         </div>
         
         <div class="about-content">
             <h2>ABOUT ME</h2>  
-
             <div class="about-text">
                 <p>👩‍💻 Привет! Я <span class="about-highlight">Юля</span> - motion-дизайнер</p>
                 <p>Работаю в <span class="about-highlight">Cinema 4D + Redshift</span>, <span class="about-highlight">Adobe After Effects</span>, <span class="about-highlight">Adobe Illustrator</span>, <span class="about-highlight">Figma</span>. Изучаю <span class="about-highlight">Unreal Engine</span></p>
-                
                 <p>🎬 Специализируюсь на <span class="about-highlight">3D анимации</span>, <span class="about-highlight">моушн-графике</span> и <span class="about-highlight">визуальных эффектах</span></p>
             </div>
         </div>
@@ -237,6 +256,14 @@
 
     <!-- Контакты -->
     <section id="contact" class="contact">
+        <div class="section-bg"></div>
+        <div class="contact-pixels">
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+            <div class="pixel"></div>
+        </div>
+        
         <h2>CONTACTS</h2>
         <div class="contact-links">
             <a href="https://vimeo.com/yourprofile">🎬 Vimeo</a>
@@ -247,11 +274,11 @@
 
     <!-- Подвал -->
     <footer>
+        <div class="section-bg"></div>
         <p>© 2025 Yulia Byukliy. Все права защищены.</p>
     </footer>
 
-
-        <!-- Модальное окно для просмотра изображений -->
+    <!-- Модальное окно для просмотра изображений -->
     <div id="imageModal" class="modal">
         <span class="modal-close">&times;</span>
         <img class="modal-content" id="modalImage">
@@ -262,6 +289,5 @@
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>

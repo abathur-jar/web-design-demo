@@ -29,6 +29,49 @@ body {
     display: none;
 }
 
+/* ===== ОБЩИЕ ФОНОВЫЕ СТИЛИ ДЛЯ ВСЕХ СЕКЦИЙ ===== */
+.section-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.02) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.01) 0%, transparent 60%);
+    animation: backgroundFloat 8s ease-in-out infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Общие стили для плавающих пикселей */
+.pixel {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #00ff88;
+    animation: pixelFloat 6s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+/* Геометрические элементы для секций */
+.section-geometry {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.geometry-shape {
+    position: absolute;
+    border: 2px solid rgba(0, 255, 136, 0.1);
+    animation: geometryFloat 8s ease-in-out infinite;
+}
+
 /* ===== ФОН И АНИМАЦИИ ===== */
 body::before {
     content: '';
@@ -124,6 +167,42 @@ body::before {
     75% { 
         transform: translateY(10px) translateX(5px) scale(1.05);
         opacity: 0.5;
+    }
+}
+
+/* Универсальная анимация для пикселей */
+@keyframes pixelFloat {
+    0%, 100% { 
+        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg);
+        opacity: 0.4;
+    }
+    25% { 
+        transform: translateY(-20px) translateX(10px) scale(1.2) rotate(90deg);
+        opacity: 0.7;
+    }
+    50% { 
+        transform: translateY(-10px) translateX(-5px) scale(0.9) rotate(180deg);
+        opacity: 0.5;
+    }
+    75% { 
+        transform: translateY(10px) translateX(5px) scale(1.1) rotate(270deg);
+        opacity: 0.6;
+    }
+}
+
+/* Анимация для геометрических фигур */
+@keyframes geometryFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    33% { 
+        transform: translateY(-15px) rotate(120deg) scale(1.1);
+        opacity: 0.5;
+    }
+    66% { 
+        transform: translateY(10px) rotate(240deg) scale(0.9);
+        opacity: 0.4;
     }
 }
 
@@ -244,7 +323,42 @@ nav {
     padding: 0 3rem;
     margin-top: 80px;
     position: relative;
+    overflow: hidden;
 }
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 136, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 136, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 136, 0.02) 0%, transparent 60%);
+    animation: backgroundFloat 8s ease-in-out infinite;
+    z-index: -1;
+}
+
+.hero-pixels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Расположение пикселей для Hero */
+.hero-pixels .pixel:nth-child(1) { top: 25%; left: 15%; animation-delay: 0s; }
+.hero-pixels .pixel:nth-child(2) { top: 65%; right: 20%; animation-delay: 1.5s; }
+.hero-pixels .pixel:nth-child(3) { bottom: 35%; left: 25%; animation-delay: 3s; }
+.hero-pixels .pixel:nth-child(4) { top: 45%; right: 12%; animation-delay: 2s; }
+.hero-pixels .pixel:nth-child(5) { bottom: 25%; right: 30%; animation-delay: 0.5s; }
+.hero-pixels .pixel:nth-child(6) { top: 15%; left: 80%; animation-delay: 2.5s; }
+.hero-pixels .pixel:nth-child(7) { bottom: 15%; left: 10%; animation-delay: 1s; }
 
 .hero-content h1 {
     font-size: 5rem;
@@ -264,8 +378,6 @@ nav {
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
-    
-    /* Новая анимация растягивания */
     opacity: 0;
     transform: scaleX(0.8) translateY(20px);
     animation: stretchIn 1.2s ease 0.4s forwards;
@@ -352,78 +464,6 @@ nav {
     }
 }
 
-/* Пиксельные анимации для Hero */
-.hero-pixel {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #00ff88;
-    animation: heroPixelFloat 5s ease-in-out infinite;
-    z-index: 1;
-    opacity: 0.6;
-}
-
-.hero-pixel:nth-child(1) {
-    top: 25%;
-    left: 15%;
-    animation-delay: 0s;
-}
-
-.hero-pixel:nth-child(2) {
-    top: 65%;
-    right: 20%;
-    animation-delay: 1.5s;
-}
-
-.hero-pixel:nth-child(3) {
-    bottom: 35%;
-    left: 25%;
-    animation-delay: 3s;
-}
-
-.hero-pixel:nth-child(4) {
-    top: 45%;
-    right: 12%;
-    animation-delay: 2s;
-}
-
-.hero-pixel:nth-child(5) {
-    bottom: 25%;
-    right: 30%;
-    animation-delay: 0.5s;
-}
-
-.hero-pixel:nth-child(6) {
-    top: 15%;
-    left: 80%;
-    animation-delay: 2.5s;
-}
-
-.hero-pixel:nth-child(7) {
-    bottom: 15%;
-    left: 10%;
-    animation-delay: 1s;
-}
-
-@keyframes heroPixelFloat {
-    0%, 100% { 
-        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg);
-        opacity: 0.4;
-    }
-    25% { 
-        transform: translateY(-25px) translateX(15px) scale(1.3) rotate(90deg);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: translateY(-10px) translateX(-10px) scale(0.9) rotate(180deg);
-        opacity: 0.6;
-    }
-    75% { 
-        transform: translateY(15px) translateX(8px) scale(1.1) rotate(270deg);
-        opacity: 0.7;
-    }
-}
-
 /* Солнышко */
 .sun-emoji {
     position: absolute;
@@ -469,27 +509,58 @@ nav {
     overflow: hidden;
 }
 
+.gallery-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 255, 136, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(0, 255, 136, 0.02) 0%, transparent 50%);
+    animation: backgroundFloat 10s ease-in-out infinite;
+    z-index: 1;
+}
+
+.gallery-pixels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Расположение пикселей для галереи */
+.gallery-pixels .pixel:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.gallery-pixels .pixel:nth-child(2) { top: 70%; right: 15%; animation-delay: 2s; }
+.gallery-pixels .pixel:nth-child(3) { bottom: 40%; left: 20%; animation-delay: 4s; }
+.gallery-pixels .pixel:nth-child(4) { top: 50%; right: 25%; animation-delay: 1s; }
+.gallery-pixels .pixel:nth-child(5) { bottom: 20%; right: 10%; animation-delay: 3s; }
+
 .gallery-section h2 {
     text-align: center;
-    font-size: 4rem; /* ← ИЗМЕНИТЬ: было 3rem, стало 4rem */
+    font-size: 4rem;
     margin-bottom: 4rem;
     color: #000000;
     font-weight: 800;
     letter-spacing: -0.02em;
     text-transform: uppercase;
     position: relative;
-    display: inline-block; /* ← ДОБАВИТЬ */
-    left: 50%; /* ← ДОБАВИТЬ */
-    transform: translateX(-50%); /* ← ДОБАВИТЬ */
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .gallery-section h2::after {
     content: '';
     position: absolute;
-    bottom: -10px; /* ← ИЗМЕНИТЬ: было -15px, стало -10px */
+    bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px; /* ← ИЗМЕНИТЬ: было 100px, стало 80px */
+    width: 80px;
     height: 3px;
     background: #00ff88;
     animation: linePulse 2s ease-in-out infinite;
@@ -568,7 +639,7 @@ nav {
 /* Элементы галереи с эффектом подвешивания */
 .gallery-item {
     flex: 0 0 320px;
-    height: 550px; /* ← ИЗМЕНИТЬ: было 450px, стало 550px (+100px) */
+    height: 550px;
     background: #ffffff;
     border-radius: 15px;
     overflow: hidden;
@@ -690,7 +761,39 @@ nav {
     padding: 8rem 3rem;
     background: transparent;
     position: relative;
+    overflow: hidden;
 }
+
+.works::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(0, 255, 136, 0.03) 0%, transparent 45%),
+        radial-gradient(circle at 70% 60%, rgba(0, 255, 136, 0.02) 0%, transparent 45%);
+    animation: backgroundFloat 12s ease-in-out infinite;
+    z-index: -1;
+}
+
+.works-pixels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Расположение пикселей для Works */
+.works-pixels .pixel:nth-child(1) { top: 15%; left: 5%; animation-delay: 0s; }
+.works-pixels .pixel:nth-child(2) { top: 75%; right: 10%; animation-delay: 1.5s; }
+.works-pixels .pixel:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 3s; }
+.works-pixels .pixel:nth-child(4) { top: 35%; right: 8%; animation-delay: 2s; }
+.works-pixels .pixel:nth-child(5) { bottom: 15%; right: 20%; animation-delay: 0.5s; }
 
 .works h2 {
     text-align: center;
@@ -717,11 +820,6 @@ nav {
     height: 3px;
     background: #00ff88;
     animation: linePulse 2s ease-in-out infinite;
-}
-
-@keyframes linePulse {
-    0%, 100% { width: 80px; opacity: 1; }
-    50% { width: 120px; opacity: 0.8; }
 }
 
 .works-grid {
@@ -827,68 +925,7 @@ nav {
     }
 }
 
-/* Летающие пиксели как в Hero */
-.about-pixel {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: #00ff88;
-    animation: aboutPixelFloat 6s ease-in-out infinite;
-    z-index: 1;
-    opacity: 0.6;
-}
-
-.about-pixel:nth-child(1) {
-    top: 20%;
-    left: 15%;
-    animation-delay: 0s;
-}
-
-.about-pixel:nth-child(2) {
-    top: 65%;
-    right: 20%;
-    animation-delay: 1.5s;
-}
-
-.about-pixel:nth-child(3) {
-    bottom: 35%;
-    left: 25%;
-    animation-delay: 3s;
-}
-
-.about-pixel:nth-child(4) {
-    top: 45%;
-    right: 12%;
-    animation-delay: 2s;
-}
-
-.about-pixel:nth-child(5) {
-    bottom: 25%;
-    right: 30%;
-    animation-delay: 0.5s;
-}
-
-@keyframes aboutPixelFloat {
-    0%, 100% { 
-        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg);
-        opacity: 0.4;
-    }
-    25% { 
-        transform: translateY(-25px) translateX(15px) scale(1.3) rotate(90deg);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: translateY(-10px) translateX(-10px) scale(0.9) rotate(180deg);
-        opacity: 0.6;
-    }
-    75% { 
-        transform: translateY(15px) translateX(8px) scale(1.1) rotate(270deg);
-        opacity: 0.7;
-    }
-}
-
-/* Геометрические элементы фона */
-.about-geometry {
+.about-pixels {
     position: absolute;
     top: 0;
     left: 0;
@@ -898,13 +935,15 @@ nav {
     pointer-events: none;
 }
 
-.geometry-item {
-    position: absolute;
-    border: 2px solid rgba(0, 255, 136, 0.1);
-    animation: geometryFloat 8s ease-in-out infinite;
-}
+/* Расположение пикселей для About */
+.about-pixels .pixel:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+.about-pixels .pixel:nth-child(2) { top: 65%; right: 20%; animation-delay: 1.5s; }
+.about-pixels .pixel:nth-child(3) { bottom: 35%; left: 25%; animation-delay: 3s; }
+.about-pixels .pixel:nth-child(4) { top: 45%; right: 12%; animation-delay: 2s; }
+.about-pixels .pixel:nth-child(5) { bottom: 25%; right: 30%; animation-delay: 0.5s; }
 
-.geometry-item:nth-child(1) {
+/* Геометрические элементы фона */
+.about .section-geometry .geometry-shape:nth-child(1) {
     top: 10%;
     left: 10%;
     width: 100px;
@@ -912,7 +951,7 @@ nav {
     animation-delay: 0s;
 }
 
-.geometry-item:nth-child(2) {
+.about .section-geometry .geometry-shape:nth-child(2) {
     top: 60%;
     right: 15%;
     width: 150px;
@@ -921,24 +960,13 @@ nav {
     animation-delay: 2s;
 }
 
-.geometry-item:nth-child(3) {
+.about .section-geometry .geometry-shape:nth-child(3) {
     bottom: 20%;
     left: 20%;
     width: 80px;
     height: 80px;
     transform: rotate(45deg);
     animation-delay: 4s;
-}
-
-@keyframes geometryFloat {
-    0%, 100% { 
-        transform: translateY(0px) rotate(0deg);
-        opacity: 0.3;
-    }
-    50% { 
-        transform: translateY(-20px) rotate(180deg);
-        opacity: 0.6;
-    }
 }
 
 .about-content {
@@ -1007,6 +1035,7 @@ nav {
     background: #000000;
     text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .contact::before {
@@ -1014,10 +1043,30 @@ nav {
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #00ff88, transparent);
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 25% 75%, rgba(0, 255, 136, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 75% 25%, rgba(0, 255, 136, 0.05) 0%, transparent 40%);
+    animation: backgroundFloat 9s ease-in-out infinite;
+    z-index: 1;
 }
+
+.contact-pixels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Расположение пикселей для контактов */
+.contact-pixels .pixel:nth-child(1) { top: 30%; left: 20%; animation-delay: 0s; }
+.contact-pixels .pixel:nth-child(2) { top: 60%; right: 25%; animation-delay: 2s; }
+.contact-pixels .pixel:nth-child(3) { bottom: 40%; left: 30%; animation-delay: 4s; }
+.contact-pixels .pixel:nth-child(4) { top: 45%; right: 15%; animation-delay: 1s; }
 
 .contact h2 {
     font-size: 1.2rem;
@@ -1087,12 +1136,29 @@ footer {
     padding: 4rem 2rem;
     font-size: 0.9rem;
     border-top: 1px solid #333333;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 50% 0%, rgba(0, 255, 136, 0.03) 0%, transparent 60%);
+    animation: backgroundFloat 15s ease-in-out infinite;
+    z-index: 1;
 }
 
 footer p {
     opacity: 0.7;
     margin: 0;
     line-height: 1.5;
+    position: relative;
+    z-index: 2;
 }
 
 /* ===== МОДАЛЬНОЕ ОКНО ДЛЯ ИЗОБРАЖЕНИЙ ===== */
@@ -1356,11 +1422,9 @@ footer p {
         font-size: 1.1rem;
     }
     
-    .floating-particle {
-        display: none;
-    }
-    
-    .pixel-decoration {
+    .floating-particle,
+    .pixel,
+    .geometry-shape {
         display: none;
     }
     
