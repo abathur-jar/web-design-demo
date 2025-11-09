@@ -37,16 +37,57 @@ document.querySelectorAll('.work-item').forEach(item => {
     item.style.transition = 'all 0.6s ease';
 });
 
-// === АВТОЗАПУСК ФОНОВЫХ ВИДЕО ===
-function initBackgroundVideos() {
+// === ВИДЕО ПРЕВЬЮ И МОДАЛЬНОЕ ОКНО ===
+const videoModal = document.getElementById('videoModal');
+const modalVideo = document.getElementById('modalVideo');
+const videoModalTitle = document.getElementById('videoModalTitle');
+const videoModalDescription = document.getElementById('videoModalDescription');
+
+// Функция открытия видео модалки
+function openVideoModal(videoSrc, title, description) {
+    videoModal.style.display = 'block';
+    modalVideo.src = videoSrc;
+    videoModalTitle.textContent = title;
+    videoModalDescription.textContent = description;
+    document.body.style.overflow = 'hidden';
+    
+    // Автозапуск видео при открытии
+    modalVideo.play().catch(e => {
+        console.log('Автовоспроизведение заблокировано браузером - пользователь запустит вручную');
+    });
+}
+
+// Функция закрытия видео модалки
+function closeVideoModal() {
+    videoModal.style.display = 'none';
+    modalVideo.pause();
+    modalVideo.currentTime = 0;
+    document.body.style.overflow = 'auto';
+}
+
+// Закрытие по клику вне видео
+videoModal.addEventListener('click', function(e) {
+    if (e.target === videoModal) {
+        closeVideoModal();
+    }
+});
+
+// Закрытие по Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && videoModal.style.display === 'block') {
+        closeVideoModal();
+    }
+});
+
+// Инициализация видео превью
+function initVideoPreviews() {
     document.querySelectorAll('.video-container video').forEach(video => {
-        video.muted = true;
-        video.loop = true;
-        video.playsInline = true;
-        
-        // Пытаемся запустить воспроизведение
-        video.play().catch(error => {
-            // Игнорируем ошибки автовоспроизведения - это нормально
+        // Устанавливаем видео на начало и приостанавливаем
+        video.currentTime = 0.1;
+        video.play().then(() => {
+            video.pause();
+        }).catch(e => {
+            // Игнорируем ошибки автовоспроизведения
         });
     });
 }
@@ -64,18 +105,18 @@ function openModal(imgSrc, title, description) {
     modalImg.src = imgSrc;
     modalTitle.textContent = title;
     modalDescription.textContent = description;
-    document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+    document.body.style.overflow = 'hidden';
 }
 
 // Функция закрытия модального окна
 function closeModal() {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+    document.body.style.overflow = 'auto';
 }
 
 // Добавляем обработчики кликов на изображения в галерее
 document.querySelectorAll('.gallery-item img').forEach(img => {
-    img.style.cursor = 'pointer'; // Меняем курсор на указатель
+    img.style.cursor = 'pointer';
     img.addEventListener('click', function() {
         const galleryItem = this.closest('.gallery-item');
         const title = galleryItem.querySelector('.gallery-title').textContent;
@@ -96,8 +137,13 @@ modal.addEventListener('click', function(e) {
 
 // Закрытие по клавише Escape
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && modal.style.display === 'block') {
-        closeModal();
+    if (e.key === 'Escape') {
+        if (modal.style.display === 'block') {
+            closeModal();
+        }
+        if (videoModal.style.display === 'block') {
+            closeVideoModal();
+        }
     }
 });
 
@@ -116,12 +162,11 @@ function initBurgerMenu() {
     const navLinks = document.querySelector('.nav-links');
     
     if (menuToggle && navLinks) {
-        console.log('Бургер-меню инициализировано'); // Для отладки
+        console.log('Бургер-меню инициализировано');
         
         menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation(); // Предотвращаем всплытие
+            e.stopPropagation();
             navLinks.classList.toggle('active');
-            // Меняем иконку бургера на крестик и обратно
             this.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
         });
         
@@ -140,35 +185,16 @@ function initBurgerMenu() {
                 menuToggle.textContent = '☰';
             }
         });
-    } else {
-        console.log('Элементы бургер-меню не найдены'); // Для отладки
     }
 }
 
 // === ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ ===
 document.addEventListener('DOMContentLoaded', function() {
-    // Запускаем фоновые видео
-    initBackgroundVideos();
+    // Инициализируем видео превью
+    initVideoPreviews();
     
     // Инициализируем бургер-меню
     initBurgerMenu();
     
-    console.log('Сайт загружен! Модальное окно и бургер-меню готовы к работе.');
+    console.log('Сайт загружен! Видеоплеер и модальные окна готовы.');
 });
-
-// Автопрокрутка галереи (опционально)
-function initGalleryAutoScroll() {
-    const carousel = document.getElementById('galleryCarousel');
-    let scrollAmount = 0;
-    
-    setInterval(() => {
-        scrollAmount += 300;
-        if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-            scrollAmount = 0;
-        }
-        carousel.scrollTo({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    }, 4000);
-}
