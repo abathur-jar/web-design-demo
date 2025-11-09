@@ -51,39 +51,41 @@ function initBackgroundVideos() {
     });
 }
 
-// === ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ ===
-document.addEventListener('DOMContentLoaded', function() {
-    // Запускаем фоновые видео
-    initBackgroundVideos();
-    
-    console.log('Сайт загружен! Видео показываются полностью без обрезки.');
+// === МОДАЛЬНОЕ ОКНО ДЛЯ ИЗОБРАЖЕНИЙ ===
+const modal = document.getElementById('imageModal');
+const modalImg = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const closeBtn = document.querySelector('.modal-close');
+
+// Функция открытия модального окна
+function openModal(imgSrc, title, description) {
+    modal.style.display = 'block';
+    modalImg.src = imgSrc;
+    modalTitle.textContent = title;
+    modalDescription.textContent = description;
+    document.body.style.overflow = 'hidden'; // Блокируем прокрутку фона
+}
+
+// Функция закрытия модального окна
+function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Возвращаем прокрутку
+}
+
+// Добавляем обработчики кликов на изображения в галерее
+document.querySelectorAll('.gallery-item img').forEach(img => {
+    img.style.cursor = 'pointer'; // Меняем курсор на указатель
+    img.addEventListener('click', function() {
+        const galleryItem = this.closest('.gallery-item');
+        const title = galleryItem.querySelector('.gallery-title').textContent;
+        const description = galleryItem.querySelector('.gallery-description').textContent;
+        openModal(this.src, title, description);
+    });
 });
 
-// Прокрутка галереи
-function scrollGallery(direction) {
-    const carousel = document.getElementById('galleryCarousel');
-    carousel.scrollBy({
-        left: direction,
-        behavior: 'smooth'
-    });
-}
+// Закрытие по клику на крестик
+closeBtn.addEventListener('click', closeModal);
 
-// Автопрокрутка галереи (опционально)
-function initGalleryAutoScroll() {
-    const carousel = document.getElementById('galleryCarousel');
-    let scrollAmount = 0;
-    
-    setInterval(() => {
-        scrollAmount += 300;
-        if (scrollAmount >= carousel.scrollWidth - carousel.clientWidth) {
-            scrollAmount = 0;
-        }
-        carousel.scrollTo({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-    }, 4000);
-}
-
-// Добавь в DOMContentLoaded:
-// initGalleryAutoScroll(); // Раскомментируй если хочешь автопрокрутку
+// Закрытие по клику вне изображения
+modal.addEventListener
