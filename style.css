@@ -468,6 +468,12 @@ nav {
     width: 100px;
     height: 3px;
     background: #00ff88;
+    animation: linePulse 2s ease-in-out infinite;
+}
+
+@keyframes linePulse {
+    0%, 100% { width: 100px; opacity: 1; }
+    50% { width: 150px; opacity: 0.8; }
 }
 
 /* Контейнер для галереи с вешалкой */
