@@ -107,15 +107,13 @@
     <div class="works-grid">
 
         <!-- Pink Lipgloss -->
-        <div class="work-item" data-video="videos/Lipgloss.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/Lipgloss.mp4', 'Lipgloss', '3D Animation for Brand')">
+                <video muted playsinline>
                     <source src="videos/Lipgloss.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>Lipgloss</h3>
@@ -124,15 +122,13 @@
         </div>
         
         <!-- Comp -->
-        <div class="work-item" data-video="videos/Comp.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/Comp.mp4', 'Comp', '3D Animation for Brand')">
+                <video muted playsinline>
                     <source src="videos/Comp.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>Comp</h3>
@@ -141,15 +137,13 @@
         </div>
 
         <!-- Abathur -->
-        <div class="work-item" data-video="videos/abathur.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/abathur.mp4', 'Abathur Beats', '3D Animation for YouTube')">
+                <video muted playsinline>
                     <source src="videos/abathur.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>Abathur Beats</h3>
@@ -158,15 +152,13 @@
         </div>
 
         <!-- Ring -->
-        <div class="work-item" data-video="videos/Ring.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/Ring.mp4', 'Ring', '3D Animation for Brand')">
+                <video muted playsinline>
                     <source src="videos/Ring.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>Ring</h3>
@@ -175,15 +167,13 @@
         </div>
 
         <!-- Slurry -->
-        <div class="work-item" data-video="videos/Slurry.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/Slurry.mp4', 'Slurry', '3D Animation for Instagram Profile')">
+                <video muted playsinline>
                     <source src="videos/Slurry.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>Slurry</h3>
@@ -192,15 +182,13 @@
         </div>
 
         <!-- ZheeShe -->
-        <div class="work-item" data-video="videos/ZheeShe.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/ZheeShe.mp4', 'ZheeShe', '3D Animation Bang Bang Education for ZheeShe')">
+                <video muted playsinline>
                     <source src="videos/ZheeShe.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>ZheeShe</h3>
@@ -209,15 +197,13 @@
         </div>
         
         <!-- Solar System -->
-        <div class="work-item" data-video="videos/solar.mp4">
-            <div class="video-preview">
-                <video muted playsinline loop>
+        <div class="work-item">
+            <div class="video-container" onclick="openVideoModal('videos/solar.mp4', 'Solar System', '3D Animation for YouTube')">
+                <video muted playsinline>
                     <source src="videos/solar.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео
                 </video>
-                <div class="play-indicator">
-                    <div class="play-icon">▶</div>
-                    <span>Click to play</span>
-                </div>
+                <div class="play-button">▶</div>
             </div>
             <div class="work-content">
                 <h3>Solar System</h3>
@@ -282,19 +268,7 @@
         </div>
     </div>
 
-    <!-- Модальное окно для видео -->
-<div id="videoModal" class="modal video-modal">
-    <span class="modal-close" onclick="closeVideoModal()">&times;</span>
-    <div class="video-modal-content">
-        <video id="modalVideo" controls>
-            Ваш браузер не поддерживает видео
-        </video>
-        <div class="video-modal-caption">
-            <div id="videoModalTitle" class="modal-title"></div>
-            <div id="videoModalDescription" class="modal-description"></div>
-        </div>
-    </div>
-</div>
+    
 
     <script src="script.js"></script>
 
