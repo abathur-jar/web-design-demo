@@ -1428,11 +1428,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    
-    .floating-particle:nth-child(1) {
-        display: none;
-    }
-
 
     /* Бургер-меню */
     .menu-toggle {
