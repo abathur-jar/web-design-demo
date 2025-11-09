@@ -173,3 +173,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('Сайт загружен! Модальное окно и бургер-меню готовы к работе.');
 });
+
+// В функции DOMContentLoaded добавь:
+document.addEventListener('DOMContentLoaded', function() {
+    // Запускаем фоновые видео
+    initBackgroundVideos();
+    initBurgerMenu(); // Добавляем инициализацию бургер-меню
+    
+    console.log('Сайт загружен! Модальное окно и бургер-меню готовы к работе.');
+});
