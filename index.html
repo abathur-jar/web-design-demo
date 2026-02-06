@@ -3,297 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Юля Бюкли | Motion Designer & 3D Artist</title>
-    <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- GSAP для продвинутых анимаций -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Наши стили -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Иконки -->
+    <title>Julia Byukliy - Motion Designer</title>
+    <link href="https://fonts.cdnfonts.com/css/neue-machina" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Тёмный фон с эффектом звёзд/космоса -->
-    <div class="space-background"></div>
+    <!-- Плавающие частицы фона -->
+    <div class="floating-particle"></div>
+    <div class="floating-particle"></div>
+    <div class="floating-particle"></div>
+    <div class="floating-particle"></div>
+    <div class="floating-particle"></div>
 
-    <!-- Основной контейнер-холст -->
-    <main class="monolith-canvas">
-        
-        <!-- Навигация - стилизованная под "рисованные" иконки -->
-        <nav class="hand-drawn-nav">
-            <a href="#start" class="nav-dot active" data-tooltip="Главная"></a>
-            <a href="#works" class="nav-dot" data-tooltip="Работы"></a>
-            <a href="#about" class="nav-dot" data-tooltip="Обо мне"></a>
-            <a href="#contact" class="nav-dot" data-tooltip="Контакты"></a>
-            <div class="nav-line"></div>
+    <!-- Шапка как у Matheus Didier -->
+    <header>
+        <nav>
+            <!-- Левая часть - меню -->
+            <div class="nav-left">
+                <a href="#works">WORK</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            
+            <!-- Центр - логотип -->
+            <div class="logo">YULIA BYUKLIY</div>
+            
+            <!-- Правая часть - соцсети -->
+            <div class="nav-right">
+                <a href="https://t.me/yulyabyukliu" class="social-icon">
+                    <i class="fab fa-telegram"></i>
+                </a>
+                <a href="https://instagram.com/jbyuk" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://ru.pinterest.com/julia_sufle" class="social-icon">
+                    <i class="fab fa-pinterest"></i>
+                </a>
+            </div>
+
+            <!-- Бургер меню для мобильных -->
+            <button class="menu-toggle">☰</button>
         </nav>
+    </header>
 
-        <!-- Секция 1: Герой - свободно расположенный текст -->
-        <section id="start" class="canvas-section" style="--x: 5%; --y: 10vh;">
-            <div class="hand-drawn-badge">MOTION DESIGN & 3D ART</div>
-            
-            <h1 class="glitch-title">
-                <span class="line" style="--delay: 0">СОЗДАЮ</span>
-                <span class="line" style="--delay: 0.1">
-                    <span class="highlight-word">ЯРКИЕ</span>
-                    <svg class="hand-drawn-underline" width="180" height="12">
-                        <path d="M5,8 C30,2 80,10 120,5 C160,0 175,8 180,7" 
-                              fill="none" stroke="#FFD012" stroke-width="2" 
-                              stroke-linecap="round"/>
-                    </svg>
-                </span>
-                <span class="line" style="--delay: 0.2">ВИЗУАЛЬНЫЕ</span>
-                <span class="line" style="--delay: 0.3">ИСТОРИИ</span>
-            </h1>
-            
-            <div class="vibe-text-block" style="--x: 8%; --y: 55vh; max-width: 500px;">
-                <p>Специализируюсь на <span class="glow-text">3D анимации</span>, 
-                <span class="glow-text">моушн-графике</span> и <span class="glow-text">визуальных эффектах</span>.</p>
-                <p>Работаю с атмосферой, светом и движением, создавая работы в духе «Тайны третьей планеты».</p>
-            </div>
-            
-            <!-- "Рисованные" стрелки-указатели -->
-            <div class="hand-drawn-arrow" style="--x: 85%; --y: 75vh;">
-                <svg width="60" height="60" viewBox="0 0 60 60">
-                    <path d="M10,30 L50,30 M40,20 L50,30 L40,40" 
-                          stroke="#FFD012" stroke-width="2" fill="none" 
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="30" cy="30" r="28" stroke="rgba(255,208,18,0.2)" 
-                            stroke-width="1" fill="none" stroke-dasharray="5,5"/>
-                </svg>
-                <span class="arrow-label">листай</span>
-            </div>
-        </section>
+    <!-- Главный экран -->
+    <section class="hero">
+        <!-- Пиксельные анимации для Hero -->
+        <div class="hero-pixel"></div>
+        <div class="hero-pixel"></div>
+        <div class="hero-pixel"></div>
+        <div class="hero-pixel"></div>
+        <div class="hero-pixel"></div>
+        <div class="hero-pixel"></div>
+        <div class="hero-pixel"></div>
+        
+        <div class="hero-content">
+            <h1>MOTION DESIGNER & 3D ARTIST</h1>
+            <p class="tagline">Creating compelling visual experiences</p>
+            <p class="description">Specializing in 3D animation, motion graphics and visual effects</p>
+            <button class="cta-button">VIEW WORKS</button>
+        </div>
+    </section>
 
-        <!-- Секция 2: Работы - свободная сетка -->
-        <section id="works" class="canvas-section" style="--x: 60%; --y: 120vh;">
-            <div class="section-label">
-                <span class="label-number">01</span>
-                <span class="label-text">РАБОТЫ</span>
-                <div class="label-line"></div>
-            </div>
-            
-            <h2 class="section-title">ИЗБРАННЫЕ <br>ПРОЕКТЫ</h2>
-            
-            <div class="free-grid">
-                <!-- Работа 1 -->
-                <div class="project-item" style="--grid-x: 0; --grid-y: 0; --rotation: -1deg;">
-                    <div class="project-media">
-                        <div class="media-placeholder" style="background: linear-gradient(45deg, #1a1a2e, #16213e);">
-                            <div class="media-label">3D</div>
-                            <div class="play-indicator">▶</div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-header">
-                            <h3>Collage Intro</h3>
-                            <span class="project-year">2024</span>
-                        </div>
-                        <p>Динамичный моушн для YouTube-канала с объёмной типографикой.</p>
-                        <div class="project-tags">
-                            <span class="tag">After Effects</span>
-                            <span class="tag">Cinema 4D</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Работа 2 -->
-                <div class="project-item" style="--grid-x: 1; --grid-y: 1; --rotation: 2deg;">
-                    <div class="project-media">
-                        <div class="media-placeholder" style="background: linear-gradient(45deg, #2d0b3d, #4a1b5d);">
-                            <div class="media-label">VFX</div>
-                            <div class="play-indicator">▶</div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-header">
-                            <h3>Lipgloss Loop</h3>
-                            <span class="project-year">2024</span>
-                        </div>
-                        <p>Бесконечная 3D-анимация косметического продукта.</p>
-                        <div class="project-tags">
-                            <span class="tag">Redshift</span>
-                            <span class="tag">Octane</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Работа 3 -->
-                <div class="project-item" style="--grid-x: 0; --grid-y: 2; --rotation: 1deg;">
-                    <div class="project-media">
-                        <div class="media-placeholder" style="background: linear-gradient(45deg, #0b3d2d, #1b5d4a);">
-                            <div class="media-label">MOTION</div>
-                            <div class="play-indicator">▶</div>
-                        </div>
-                    </div>
-                    <div class="project-info">
-                        <div class="project-header">
-                            <h3>Abathur VFX</h3>
-                            <span class="project-year">2023</span>
-                        </div>
-                        <p>Системы частиц и эффекты для игрового персонажа.</p>
-                        <div class="project-tags">
-                            <span class="tag">Houdini</span>
-                            <span class="tag">VFX</span>
-                        </div>
-                    </div>
+    <!-- Галерея работ -->
+    <section class="gallery-section">
+        <h2>STUDIO SHOTS</h2>
+        <div class="gallery-carousel" id="galleryCarousel">
+            <div class="gallery-item">
+                <img src="images/cupid2.png" alt="Figma Design">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Poster Cupid</div>
+                    <div class="gallery-description">Figma Design</div>
                 </div>
             </div>
-        </section>
 
-        <!-- Секция 3: Обо мне - текст с рисованными элементами -->
-        <section id="about" class="canvas-section" style="--x: 10%; --y: 220vh;">
-            <div class="section-label">
-                <span class="label-number">02</span>
-                <span class="label-text">ОБО МНЕ</span>
-                <div class="label-line"></div>
-            </div>
-            
-            <div class="about-content">
-                <h2 class="handwritten-title">
-                    ПРИВЕТ, Я <span class="name-highlight">ЮЛЯ</span>
-                    <svg class="title-underline" width="300" height="12">
-                        <path d="M0,8 Q50,2 100,8 T200,5 T300,10" 
-                              fill="none" stroke="#FFD012" stroke-width="2" 
-                              stroke-linecap="round" stroke-dasharray="10,5"/>
-                    </svg>
-                </h2>
-                
-                <div class="about-text">
-                    <p>Motion-дизайнер и 3D-художник из Москвы. Создаю визуальные решения, которые <span class="glow-text">цепляют внимание</span> и рассказывают истории.</p>
-                    <p>В работе сочетаю <span class="glow-text">художественный взгляд</span> и <span class="glow-text">технические навыки</span>. Исследую границы между цифровым и рукотворным.</p>
-                </div>
-                
-                <!-- "Рисованные" навыки -->
-                <div class="skills-doodle">
-                    <div class="skill-item">
-                        <div class="skill-name">Cinema 4D</div>
-                        <div class="skill-track">
-                            <div class="skill-progress" style="width: 95%"></div>
-                            <div class="skill-dots">
-                                <span></span><span></span><span></span><span></span><span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">After Effects</div>
-                        <div class="skill-track">
-                            <div class="skill-progress" style="width: 90%"></div>
-                            <div class="skill-dots">
-                                <span></span><span></span><span></span><span></span><span></span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="gallery-item">
+                <img src="images/cupid.png" alt="Figma Design">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Poster Cupid Red</div>
+                    <div class="gallery-description">Figma Design</div>
                 </div>
             </div>
-            
-            <!-- Декоративный рисованный элемент -->
-            <div class="doodle-element" style="--x: 70%; --y: 30%;">
-                <svg width="120" height="120" viewBox="0 0 120 120">
-                    <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(255,208,18,0.1)" stroke-width="1"/>
-                    <path d="M30,60 Q60,30 90,60 T150,60" stroke="rgba(255,208,18,0.3)" stroke-width="1" fill="none" transform="translate(-30, 0)"/>
-                    <circle cx="60" cy="60" r="8" fill="#FFD012" opacity="0.7"/>
-                </svg>
-            </div>
-        </section>
 
-        <!-- Секция 4: Контакты с "рисованной" формой -->
-        <section id="contact" class="canvas-section" style="--x: 60%; --y: 320vh;">
-            <div class="section-label">
-                <span class="label-number">03</span>
-                <span class="label-text">КОНТАКТЫ</span>
-                <div class="label-line"></div>
-            </div>
-            
-            <h2 class="section-title">ГОТОВА К <br>НОВЫМ ПРОЕКТАМ</h2>
-            
-            <div class="contact-wrapper">
-                <!-- Контактная информация -->
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-paper-plane"></i>
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-label">Telegram</div>
-                            <a href="https://t.me/yulyabyukliu" class="contact-link">@yulyabyukliu</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-label">Email</div>
-                            <a href="mailto:hello@yuliabyukliy.com" class="contact-link">hello@yuliabyukliy.com</a>
-                        </div>
-                    </div>
+            <div class="gallery-item">
+                <img src="images/Flower.png" alt="Cinema 4D">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Alien Flower</div>
+                    <div class="gallery-description">Cinema 4D</div>
                 </div>
-                
-                <!-- "Рисованная" форма -->
-                <form class="hand-drawn-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" class="hand-drawn-input" id="name" name="name" required>
-                        <label for="name" class="hand-drawn-label">Ваше имя</label>
-                        <div class="input-line"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="email" class="hand-drawn-input" id="email" name="email" required>
-                        <label for="email" class="hand-drawn-label">Email</label>
-                        <div class="input-line"></div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <textarea class="hand-drawn-textarea" id="message" name="message" rows="3" required></textarea>
-                        <label for="message" class="hand-drawn-label">Расскажите о проекте</label>
-                        <div class="textarea-line"></div>
-                    </div>
-                    
-                    <button type="submit" class="hand-drawn-button">
-                        <span class="button-text">ОТПРАВИТЬ</span>
-                        <svg class="button-arrow" width="20" height="20" viewBox="0 0 20 20">
-                            <path d="M4,10 L16,10 M12,6 L16,10 L12,14" 
-                                  stroke="currentColor" stroke-width="2" 
-                                  fill="none" stroke-linecap="round"/>
-                        </svg>
-                    </button>
-                </form>
             </div>
-        </section>
 
-        <!-- Футер -->
-        <footer class="hand-drawn-footer" style="--x: 50%; --y: 420vh;">
-            <div class="footer-content">
-                <div class="footer-logo">YULIA BYUKLIY</div>
-                <div class="footer-copyright">© 2024. Motion & 3D Art</div>
-                <div class="footer-social">
-                    <a href="#" class="social-link" aria-label="Telegram">
-                        <i class="fab fa-telegram"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link" aria-label="Behance">
-                        <i class="fab fa-behance"></i>
-                    </a>
+            <div class="gallery-item">
+                <img src="images/pink.jpg" alt="Cinema 4D">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Lipgloss</div>
+                    <div class="gallery-description">Cinema 4D</div>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/pinkFlower.png" alt="Adobe Illustrator">
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Beauty</div>
+                    <div class="gallery-description">Adobe Illustrator</div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-btn" onclick="scrollGallery(-300)">❮</button>
+            <button class="carousel-btn" onclick="scrollGallery(300)">❯</button>
+        </div>
+    </section>
+
+    <!-- Работы -->
+    <section id="works" class="works">
+        <h2>SELECTED WORKS</h2>
+        <div class="works-grid">
+            <!-- Murad -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/Murad.mp4', 'Collage', 'Intro for Youtube')">
+                    <video muted playsinline poster="videos/previews/Murad-preview.jpg?v=2">
+                        <source src="videos/Murad.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Collage</h3>
+                    <p>Intro for Youtube</p>
                 </div>
             </div>
             
-            <!-- Декоративная линия внизу -->
-            <div class="footer-line">
-                <svg width="100%" height="20">
-                    <path d="M0,10 Q10,5 20,10 T40,10 T60,10 T80,10 T100,10" 
-                          fill="none" stroke="rgba(255,208,18,0.3)" stroke-width="1"
-                          stroke-dasharray="5,5"/>
-                </svg>
+            <!-- Pink Lipgloss -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/Lipgloss.mp4', 'Lipgloss', '3D Animation for Brand')">
+                    <video muted playsinline poster="videos/previews/Lipgloss-preview.jpg?v=2">
+                        <source src="videos/Lipgloss.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Lipgloss</h3>
+                    <p>3D Animation for Brand</p>
+                </div>
             </div>
-        </footer>
-    </main>
+            
+            <!-- Comp -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/Comp.mp4', 'Comp', '3D Animation for Brand')">
+                    <video muted playsinline poster="videos/previews/Comp-preview.jpg?v=2">
+                        <source src="videos/Comp.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Comp</h3>
+                    <p>3D Animation for Brand</p>
+                </div>
+            </div>
 
-    <!-- Скрипты -->
+            <!-- Abathur -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/abathur.mp4', 'Abathur Beats', '3D Animation for YouTube')">
+                    <video muted playsinline poster="videos/previews/abathur-preview.jpg?v=2">
+                        <source src="videos/abathur.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Abathur Beats</h3>
+                    <p>3D Animation for YouTube</p>
+                </div>
+            </div>
+
+            <!-- Ring -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/Ring.mp4', 'Ring', '3D Animation for Brand')">
+                    <video muted playsinline poster="videos/previews/Ring-preview.jpg?v=2">
+                        <source src="videos/Ring.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Ring</h3>
+                    <p>3D Animation for Brand</p>
+                </div>
+            </div>
+
+            <!-- Slurry -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/Slurry.mp4', 'Slurry', '3D Animation for Instagram Profile')">
+                    <video muted playsinline poster="videos/previews/Slurry-preview.jpg?v=2">
+                        <source src="videos/Slurry.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Slurry</h3>
+                    <p>3D Animation for Instagram Profile</p>
+                </div>
+            </div>
+
+            <!-- ZheeShe -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/ZheeShe.mp4', 'ZheeShe', '3D Animation Bang Bang Education for ZheeShe')">
+                    <video muted playsinline poster="videos/previews/ZheeShe-preview.jpg?v=2">
+                        <source src="videos/ZheeShe.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>ZheeShe</h3>
+                    <p>3D Animation Bang Bang Education for ZheeShe</p>
+                </div>
+            </div>
+            
+            <!-- Solar System -->
+            <div class="work-item">
+                <div class="video-container" onclick="openVideoModal('videos/solar.mp4', 'Solar System', '3D Animation for YouTube')">
+                    <video muted playsinline poster="videos/previews/solar-preview.jpg?v=2">
+                        <source src="videos/solar.mp4" type="video/mp4">
+                    </video>
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="work-content">
+                    <h3>Solar System</h3>
+                    <p>3D Animation for YouTube</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Обо мне -->
+    <section id="about" class="about">
+        <!-- Летающие пиксели -->
+        <div class="about-pixel"></div>
+        <div class="about-pixel"></div>
+        <div class="about-pixel"></div>
+        <div class="about-pixel"></div>
+        <div class="about-pixel"></div>
+        
+        <!-- Геометрические элементы -->
+        <div class="about-geometry">
+            <div class="geometry-item"></div>
+            <div class="geometry-item"></div>
+            <div class="geometry-item"></div>
+        </div>
+        
+        <div class="about-content">
+            <h2>ABOUT</h2>  
+            <div class="about-text">
+                <p>👩‍💻 Привет! Я <span class="about-highlight">Юля</span> - motion-дизайнер</p>
+                <p>Работаю в <span class="about-highlight">Cinema 4D + Redshift</span>, <span class="about-highlight">Adobe After Effects</span>, <span class="about-highlight">Adobe Illustrator</span>, <span class="about-highlight">Figma</span>. Изучаю <span class="about-highlight">Unreal Engine</span></p>
+                <p>🎬 Специализируюсь на <span class="about-highlight">3D анимации</span>, <span class="about-highlight">моушн-графике</span> и <span class="about-highlight">визуальных эффектах</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="contact">
+        <h2>CONTACT</h2>
+        <div class="contact-links">
+            <a href="https://t.me/yulyabyukliu">
+                <i class="fab fa-telegram"></i>
+                Telegram
+            </a>
+            <a href="https://instagram.com/jbyuk">
+                <i class="fab fa-instagram"></i>
+                Instagram
+            </a>
+            <a href="https://ru.pinterest.com/julia_sufle">
+                <i class="fab fa-pinterest"></i>
+                Pinterest
+            </a>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>© 2025 Yulia Byukliy. Все права защищены.</p>
+    </footer>
+
+    <!-- Модальные окна -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-caption">
+            <div id="modalTitle" class="modal-title"></div>
+            <div id="modalDescription" class="modal-description"></div>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal video-modal">
+        <span class="modal-close" onclick="closeVideoModal()">&times;</span>
+        <div class="video-modal-content">
+            <video id="modalVideo" controls>
+                Ваш браузер не поддерживает видео
+            </video>
+            <div class="video-modal-caption">
+                <div id="videoModalTitle" class="modal-title"></div>
+                <div id="videoModalDescription" class="modal-description"></div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
