@@ -1,693 +1,467 @@
-class DrawnPortfolio {
+class MonolithPortfolio {
     constructor() {
         this.init();
     }
 
     init() {
-        console.log('🎨 Детский рисованный портфолио запущен!');
+        console.log('🚀 Monolith Portfolio — Yellow Yeti Style');
         
-        this.initPreloader();
-        this.initDoodleAnimations();
-        this.initScribbleEffects();
-        this.initWobbleElements();
-        this.initFormDrawing();
-        this.initPlayfulInteractions();
-        this.initStickerEffect();
+        this.initScrollAnimations();
+        this.initNavigation();
+        this.initForm();
+        this.initProjectInteractions();
+        this.initParallax();
+        this.initGlitchEffect();
     }
 
-    initPreloader() {
-        const preloader = document.querySelector('.preloader');
-        if (!preloader) return;
+    // ===== SCROLL-АНИМАЦИИ ДЛЯ ЭФФЕКТА "МОНОЛИТА" =====
+    initScrollAnimations() {
+        // Используем GSAP ScrollTrigger для продвинутых анимаций
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Анимация появления секций
+            gsap.utils.toArray('.canvas-section').forEach((section, i) => {
+                gsap.from(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    delay: i * 0.2,
+                    ease: 'power3.out'
+                });
+            });
+            
+            // Анимация элементов в секциях
+            gsap.utils.toArray('.project-item').forEach((item, i) => {
+                gsap.from(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    },
+                    opacity: 0,
+                    y: 30,
+                    rotate: () => Math.random() * 10 - 5,
+                    duration: 0.8,
+                    delay: i * 0.1,
+                    ease: 'back.out(1.7)'
+                });
+            });
+            
+            // Анимация рисованных линий
+            const lines = document.querySelectorAll('.hand-drawn-underline, .title-underline');
+            lines.forEach(line => {
+                const path = line.querySelector('path');
+                if (path) {
+                    const length = path.getTotalLength();
+                    
+                    gsap.set(path, {
+                        strokeDasharray: length,
+                        strokeDashoffset: length
+                    });
+                    
+                    gsap.to(path, {
+                        scrollTrigger: {
+                            trigger: line,
+                            start: 'top 80%',
+                            toggleActions: 'play none none none'
+                        },
+                        strokeDashoffset: 0,
+                        duration: 2,
+                        ease: 'power2.out'
+                    });
+                }
+            });
+        } else {
+            // Fallback на Intersection Observer если GSAP не загрузился
+            this.initScrollObserver();
+        }
+    }
 
-        window.addEventListener('load', () => {
-            // Рисуем линию перед исчезновением
-            const pencil = document.querySelector('.pencil');
-            if (pencil) {
-                pencil.style.animation = 'drawLine 1s ease-out forwards';
-            }
+    initScrollObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Добавляем случайное смещение для "рисованного" эффекта
+                    if (entry.target.classList.contains('project-item')) {
+                        const randomX = Math.random() * 20 - 10;
+                        const randomY = Math.random() * 20 - 10;
+                        entry.target.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                        
+                        setTimeout(() => {
+                            entry.target.style.transform = '';
+                        }, 300);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.canvas-section, .project-item, .vibe-text-block').forEach(el => {
+            observer.observe(el);
+        });
+    }
 
-            setTimeout(() => {
-                preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
+    // ===== НАВИГАЦИЯ =====
+    initNavigation() {
+        const navDots = document.querySelectorAll('.nav-dot');
+        const sections = document.querySelectorAll('.canvas-section');
+        
+        // Активная точка при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navDots.forEach(dot => {
+                        dot.classList.toggle('active', 
+                            dot.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        sections.forEach(section => observer.observe(section));
+        
+        // Клик по точкам
+        navDots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = dot.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
                 
-                // Запускаем начальные анимации
-                this.startEntranceAnimations();
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    }
+
+    // ===== ПАРАЛЛАКС ДЛЯ ГЛУБИНЫ =====
+    initParallax() {
+        // Лёгкий параллакс для заднего фона
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const spaceBg = document.querySelector('.space-background');
+            
+            if (spaceBg) {
+                spaceBg.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+            
+            // Микро-движение для декоративных элементов
+            const doodles = document.querySelectorAll('.doodle-element');
+            doodles.forEach(doodle => {
+                const speed = 0.1;
+                const yOffset = scrolled * speed;
+                doodle.style.transform = `translateY(${yOffset}px)`;
+            });
+        });
+    }
+
+    // ===== ГЛИТЧ-ЭФФЕКТ ДЛЯ ЗАГОЛОВКОВ =====
+    initGlitchEffect() {
+        const glitchTitles = document.querySelectorAll('.glitch-title');
+        
+        glitchTitles.forEach(title => {
+            // Создаём клон для эффекта глитча
+            const clone = title.cloneNode(true);
+            clone.classList.add('glitch-clone');
+            title.parentNode.appendChild(clone);
+            
+            // Случайные глитчи
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    this.triggerGlitch(title);
+                }
+            }, 3000);
+        });
+    }
+
+    triggerGlitch(element) {
+        element.style.animation = 'none';
+        
+        setTimeout(() => {
+            element.style.animation = 'glitchLine 0.3s';
+            
+            // Случайное смещение
+            const shiftX = Math.random() * 10 - 5;
+            const shiftY = Math.random() * 5 - 2.5;
+            
+            gsap.to(element, {
+                x: shiftX,
+                y: shiftY,
+                duration: 0.05,
+                repeat: 3,
+                yoyo: true,
+                onComplete: () => {
+                    gsap.to(element, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.1
+                    });
+                }
+            });
+        }, 10);
+    }
+
+    // ===== ФОРМА =====
+    initForm() {
+        const contactForm = document.getElementById('contactForm');
+        
+        if (!contactForm) return;
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData);
+            
+            // Валидация
+            if (!data.name || !data.email || !data.message) {
+                this.showFormMessage('Заполните все поля', 'error');
+                return;
+            }
+            
+            // Эффект отправки
+            const submitBtn = contactForm.querySelector('.hand-drawn-button');
+            const originalText = submitBtn.querySelector('.button-text').textContent;
+            
+            submitBtn.querySelector('.button-text').textContent = 'ОТПРАВЛЯЕТСЯ...';
+            submitBtn.disabled = true;
+            
+            // Имитация отправки
+            setTimeout(() => {
+                this.showFormMessage('Сообщение отправлено!', 'success');
+                contactForm.reset();
+                
+                submitBtn.querySelector('.button-text').textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Анимация успеха
+                gsap.to(submitBtn, {
+                    scale: 1.1,
+                    duration: 0.2,
+                    yoyo: true,
+                    repeat: 1
+                });
             }, 1500);
         });
-    }
-
-    initDoodleAnimations() {
-        // Анимируем все рисованные элементы
-        const doodles = document.querySelectorAll('.doodle, .drawn-border');
         
-        doodles.forEach((doodle, index) => {
-            // Случайное движение для каждого элемента
-            const randomDelay = Math.random() * 2;
-            const randomDuration = 3 + Math.random() * 2;
-            
-            doodle.style.animationDelay = `${randomDelay}s`;
-            doodle.style.animationDuration = `${randomDuration}s`;
-            
-            // Случайный угол наклона
-            const randomRotate = -2 + Math.random() * 4;
-            doodle.style.transform += ` rotate(${randomRotate}deg)`;
-        });
-
-        // Интерактивные каракули
-        document.addEventListener('mousemove', (e) => {
-            const doodlesNearCursor = document.querySelectorAll('.doodle');
-            doodlesNearCursor.forEach(doodle => {
-                const rect = doodle.getBoundingClientRect();
-                const distance = Math.sqrt(
-                    Math.pow(e.clientX - (rect.left + rect.width/2), 2) +
-                    Math.pow(e.clientY - (rect.top + rect.height/2), 2)
-                );
-                
-                if (distance < 100) {
-                    this.pushDoodleAway(doodle, e.clientX, e.clientY);
-                }
-            });
-        });
-    }
-
-    pushDoodleAway(doodle, mouseX, mouseY) {
-        const rect = doodle.getBoundingClientRect();
-        const centerX = rect.left + rect.width/2;
-        const centerY = rect.top + rect.height/2;
-        
-        const dx = centerX - mouseX;
-        const dy = centerY - mouseY;
-        const distance = Math.sqrt(dx*dx + dy*dy);
-        
-        if (distance < 100) {
-            const force = (100 - distance) / 100 * 10;
-            const angle = Math.atan2(dy, dx);
-            
-            doodle.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px)`;
-            
-            setTimeout(() => {
-                doodle.style.transform = '';
-            }, 300);
-        }
-    }
-
-    initScribbleEffects() {
-        // Эффект рисования для заголовков
-        const titles = document.querySelectorAll('.hero-title, .section-title');
-        
-        titles.forEach(title => {
-            // Создаем SVG для эффекта подчеркивания
-            this.createScribbleUnderline(title);
-            
-            // Эффект появления буква за буквой
-            if (title.classList.contains('hero-title')) {
-                this.typewriterEffect(title);
-            }
-        });
-    }
-
-    createScribbleUnderline(element) {
-        const underline = document.createElement('div');
-        underline.className = 'scribble-underline';
-        underline.style.cssText = `
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, 
-                var(--crayon-red) 0%, 
-                var(--crayon-yellow) 25%, 
-                var(--crayon-blue) 50%, 
-                var(--crayon-green) 75%, 
-                var(--crayon-red) 100%);
-            margin-top: 10px;
-            border-radius: 2px;
-            opacity: 0.7;
-            position: relative;
-            overflow: hidden;
-        `;
-        
-        const scribble = document.createElement('div');
-        scribble.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, white, transparent);
-            animation: scribbleMove 2s linear infinite;
-        `;
-        
-        underline.appendChild(scribble);
-        element.parentNode.insertBefore(underline, element.nextSibling);
-        
-        // Добавляем стили для анимации
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes scribbleMove {
-                0% { left: -100%; }
-                100% { left: 100%; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    typewriterEffect(element) {
-        const text = element.textContent;
-        element.textContent = '';
-        
-        let i = 0;
-        const type = () => {
-            if (i < text.length) {
-                // Случайная задержка для эффекта "неуверенного" написания
-                const delay = 50 + Math.random() * 100;
-                
-                setTimeout(() => {
-                    element.textContent += text.charAt(i);
-                    i++;
-                    type();
-                    
-                    // Случайный звук печатания (опционально)
-                    if (Math.random() > 0.7) {
-                        this.playTypeSound();
-                    }
-                }, delay);
-            }
-        };
-        
-        // Начинаем с небольшой задержки
-        setTimeout(type, 500);
-    }
-
-    playTypeSound() {
-        // Простые звуки пишущей машинки через Web Audio API
-        try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.setValueAtTime(800 + Math.random() * 400, audioContext.currentTime);
-            oscillator.type = 'square';
-            
-            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-            
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.1);
-        } catch (e) {
-            // Если Web Audio API не доступен, игнорируем
-        }
-    }
-
-    initWobbleElements() {
-        // Элементы, которые будут качаться при наведении
-        const wobbleElements = document.querySelectorAll('.btn, .nav-link, .work-card, .gallery-item');
-        
-        wobbleElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                this.wobbleElement(el);
-            });
-            
-            el.addEventListener('click', () => {
-                this.bounceElement(el);
-            });
-        });
-    }
-
-    wobbleElement(element) {
-        element.style.animation = 'wobble 0.5s ease';
-        setTimeout(() => {
-            element.style.animation = '';
-        }, 500);
-    }
-
-    bounceElement(element) {
-        element.style.animation = 'bounce 0.5s ease';
-        setTimeout(() => {
-            element.style.animation = '';
-        }, 500);
-        
-        // Создаем частицы при клике
-        this.createClickParticles(element);
-    }
-
-    createClickParticles(element) {
-        const rect = element.getBoundingClientRect();
-        const colors = ['#FFD012', '#4A90E2', '#FF6B6B', '#51D88A'];
-        
-        for (let i = 0; i < 8; i++) {
-            const particle = document.createElement('div');
-            const color = colors[Math.floor(Math.random() * colors.length)];
-            
-            particle.style.cssText = `
-                position: fixed;
-                width: 10px;
-                height: 10px;
-                background: ${color};
-                border-radius: 50%;
-                left: ${rect.left + rect.width/2}px;
-                top: ${rect.top + rect.height/2}px;
-                pointer-events: none;
-                z-index: 10000;
-            `;
-            
-            document.body.appendChild(particle);
-            
-            // Анимация частицы
-            const angle = Math.random() * Math.PI * 2;
-            const distance = 20 + Math.random() * 30;
-            const duration = 400 + Math.random() * 300;
-            
-            particle.animate([
-                {
-                    transform: `translate(0, 0) scale(1)`,
-                    opacity: 1
-                },
-                {
-                    transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
-                    opacity: 0
-                }
-            ], {
-                duration: duration,
-                easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
-            });
-            
-            // Удаляем частицу после анимации
-            setTimeout(() => {
-                particle.remove();
-            }, duration);
-        }
-    }
-
-    initFormDrawing() {
-        const formInputs = document.querySelectorAll('.form-input, .form-textarea');
-        
+        // Интерактивность полей формы
+        const formInputs = contactForm.querySelectorAll('.hand-drawn-input, .hand-drawn-textarea');
         formInputs.forEach(input => {
-            // Эффект рисования при фокусе
             input.addEventListener('focus', () => {
-                this.drawAroundElement(input);
-            });
-            
-            // Случайные подсказки
-            input.addEventListener('input', (e) => {
-                if (Math.random() > 0.95 && e.target.value.length > 3) {
-                    this.showFunnyComment(e.target);
-                }
-            });
-        });
-    }
-
-    drawAroundElement(element) {
-        const rect = element.getBoundingClientRect();
-        const highlight = document.createElement('div');
-        
-        highlight.className = 'drawing-highlight';
-        highlight.style.cssText = `
-            position: fixed;
-            border: 2px dashed var(--crayon-yellow);
-            border-radius: 10px;
-            pointer-events: none;
-            z-index: 1000;
-            left: ${rect.left - 10}px;
-            top: ${rect.top - 10}px;
-            width: ${rect.width + 20}px;
-            height: ${rect.height + 20}px;
-            opacity: 0;
-            animation: drawBox 1s ease-out forwards;
-        `;
-        
-        document.body.appendChild(highlight);
-        
-        // Добавляем стили для анимации
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes drawBox {
-                0% {
-                    opacity: 0;
-                    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%);
-                }
-                100% {
-                    opacity: 1;
-                    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Удаляем через 2 секунды
-        setTimeout(() => {
-            highlight.remove();
-            style.remove();
-        }, 2000);
-    }
-
-    showFunnyComment(element) {
-        const comments = [
-            "Отлично! ✨",
-            "Так держать! 🚀",
-            "Круто придумал! 💡",
-            "Интересно! 🤔",
-            "Продолжай в том же духе! 💪",
-            "Гениально! 🎯"
-        ];
-        
-        const comment = comments[Math.floor(Math.random() * comments.length)];
-        const tooltip = document.createElement('div');
-        
-        tooltip.className = 'funny-tooltip';
-        tooltip.textContent = comment;
-        tooltip.style.cssText = `
-            position: absolute;
-            background: var(--crayon-yellow);
-            color: var(--pencil-gray);
-            padding: 5px 10px;
-            border-radius: 10px;
-            font-family: var(--font-scribble);
-            font-size: 0.9rem;
-            white-space: nowrap;
-            z-index: 1000;
-            transform: translateY(-100%) rotate(-3deg);
-            animation: floatUp 2s ease-out forwards;
-            border: 2px solid var(--pencil-gray);
-        `;
-        
-        const rect = element.getBoundingClientRect();
-        tooltip.style.left = `${rect.left + rect.width/2}px`;
-        tooltip.style.top = `${rect.top}px`;
-        
-        document.body.appendChild(tooltip);
-        
-        // Удаляем через 2 секунды
-        setTimeout(() => {
-            tooltip.remove();
-        }, 2000);
-        
-        // Добавляем стили для анимации
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes floatUp {
-                0% {
-                    opacity: 0;
-                    transform: translateY(0) rotate(-3deg);
-                }
-                20% {
-                    opacity: 1;
-                    transform: translateY(-30px) rotate(-3deg);
-                }
-                80% {
-                    opacity: 1;
-                    transform: translateY(-50px) rotate(-3deg);
-                }
-                100% {
-                    opacity: 0;
-                    transform: translateY(-70px) rotate(-3deg);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        setTimeout(() => style.remove(), 2000);
-    }
-
-    initPlayfulInteractions() {
-        // Случайные звуки при взаимодействии
-        document.addEventListener('click', (e) => {
-            if (Math.random() > 0.7 && !e.target.matches('input, textarea')) {
-                this.playClickSound();
-            }
-        });
-        
-        // Эффект дрожания при прокрутке
-        let lastScroll = 0;
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            // Легкое дрожание при быстрой прокрутке
-            if (Math.abs(currentScroll - lastScroll) > 50) {
-                document.body.style.transform = `translateX(${Math.random() * 2 - 1}px)`;
+                const group = input.closest('.form-group');
+                group.classList.add('focused');
                 
-                setTimeout(() => {
-                    document.body.style.transform = '';
-                }, 100);
-            }
+                // Анимация линии
+                const line = group.querySelector('.input-line, .textarea-line');
+                if (line) {
+                    gsap.to(line, {
+                        width: '100%',
+                        duration: 0.3,
+                        ease: 'power2.out'
+                    });
+                }
+            });
             
-            lastScroll = currentScroll;
+            input.addEventListener('blur', () => {
+                const group = input.closest('.form-group');
+                if (!input.value) {
+                    group.classList.remove('focused');
+                    
+                    const line = group.querySelector('.input-line, .textarea-line');
+                    if (line) {
+                        gsap.to(line, {
+                            width: 0,
+                            duration: 0.3,
+                            ease: 'power2.out'
+                        });
+                    }
+                }
+            });
         });
+    }
+
+    showFormMessage(text, type) {
+        // Удаляем старые сообщения
+        const oldMessage = document.querySelector('.form-message');
+        if (oldMessage) oldMessage.remove();
         
-        // Случайное появление рисованных элементов
-        setInterval(() => {
-            if (Math.random() > 0.7) {
-                this.createRandomDoodle();
-            }
+        // Создаём новое
+        const message = document.createElement('div');
+        message.className = `form-message ${type}`;
+        message.textContent = text;
+        message.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: ${type === 'error' ? '#ff4444' : '#00C851'};
+            color: white;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+        `;
+        
+        document.body.appendChild(message);
+        
+        // Удаляем через 5 секунд
+        setTimeout(() => {
+            message.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => message.remove(), 300);
         }, 5000);
     }
 
-    playClickSound() {
-        // Простой звук клика
-        try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
-            oscillator.type = 'sine';
-            
-            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-            
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.1);
-        } catch (e) {
-            // Игнорируем если Web Audio API не доступен
-        }
-    }
-
-    createRandomDoodle() {
-        const doodle = document.createElement('div');
-        const shapes = ['circle', 'square', 'triangle', 'star'];
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
-        const colors = ['#FFD012', '#4A90E2', '#FF6B6B', '#51D88A', '#9B51E0'];
-        const color = colors[Math.floor(Math.random() * colors.length)];
+    // ===== ВЗАИМОДЕЙСТВИЯ С ПРОЕКТАМИ =====
+    initProjectInteractions() {
+        const projects = document.querySelectorAll('.project-item');
         
-        doodle.className = 'random-doodle';
-        doodle.style.cssText = `
-            position: fixed;
-            opacity: 0.3;
-            z-index: -1;
-            animation: randomFloat 10s ease-in-out forwards;
-            pointer-events: none;
-        `;
-        
-        let shapeCSS = '';
-        switch(shape) {
-            case 'circle':
-                shapeCSS = `
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 50%;
-                    background: ${color};
-                `;
-                break;
-            case 'square':
-                shapeCSS = `
-                    width: 40px;
-                    height: 40px;
-                    background: ${color};
-                    transform: rotate(45deg);
-                `;
-                break;
-            case 'triangle':
-                shapeCSS = `
-                    width: 0;
-                    height: 0;
-                    border-left: 20px solid transparent;
-                    border-right: 20px solid transparent;
-                    border-bottom: 40px solid ${color};
-                `;
-                break;
-            case 'star':
-                shapeCSS = `
-                    width: 40px;
-                    height: 40px;
-                    background: ${color};
-                    clip-path: polygon(
-                        50% 0%, 61% 35%, 98% 35%, 68% 57%,
-                        79% 91%, 50% 70%, 21% 91%, 32% 57%,
-                        2% 35%, 39% 35%
-                    );
-                `;
-                break;
-        }
-        
-        doodle.style.cssText += shapeCSS;
-        
-        // Случайная позиция
-        const startX = Math.random() * window.innerWidth;
-        const startY = window.innerHeight + 50;
-        
-        doodle.style.left = `${startX}px`;
-        doodle.style.top = `${startY}px`;
-        
-        document.body.appendChild(doodle);
-        
-        // Анимация всплытия
-        const animation = doodle.animate([
-            {
-                transform: `translate(0, 0) rotate(0deg)`,
-                opacity: 0.3
-            },
-            {
-                transform: `translate(${Math.random() * 100 - 50}px, -${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`,
-                opacity: 0
-            }
-        ], {
-            duration: 10000,
-            easing: 'linear'
-        });
-        
-        // Удаляем после анимации
-        animation.onfinish = () => doodle.remove();
-    }
-
-    initStickerEffect() {
-        // Эффект наклейки для карточек работ
-        const workCards = document.querySelectorAll('.work-card');
-        
-        workCards.forEach(card => {
-            // Случайный угол наклона
-            const rotation = -5 + Math.random() * 10;
-            card.style.transform = `rotate(${rotation}deg)`;
-            
-            // Создаем эффект загнутых уголков
-            this.createFoldEffect(card);
-        });
-    }
-
-    createFoldEffect(element) {
-        // Верхний правый загнутый уголок
-        const fold = document.createElement('div');
-        fold.className = 'paper-fold';
-        fold.style.cssText = `
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(225deg, transparent 50%, rgba(0,0,0,0.1) 50%);
-            border-bottom-left-radius: 5px;
-            z-index: 2;
-        `;
-        
-        element.style.position = 'relative';
-        element.appendChild(fold);
-        
-        // Тень от загнутого уголка
-        const shadow = document.createElement('div');
-        shadow.className = 'fold-shadow';
-        shadow.style.cssText = `
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 30px;
-            height: 30px;
-            background: rgba(0,0,0,0.05);
-            filter: blur(2px);
-            z-index: 1;
-        `;
-        
-        element.appendChild(shadow);
-    }
-
-    startEntranceAnimations() {
-        // Последовательное появление элементов
-        const elements = [
-            ...document.querySelectorAll('.doodle'),
-            ...document.querySelectorAll('.hero-title'),
-            ...document.querySelectorAll('.hero-subtitle'),
-            ...document.querySelectorAll('.btn'),
-            ...document.querySelectorAll('.work-card'),
-            ...document.querySelectorAll('.gallery-item')
-        ];
-        
-        elements.forEach((el, index) => {
-            el.style.opacity = '0';
-            el.style.transform += ' translateY(20px)';
-            
-            setTimeout(() => {
-                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                el.style.opacity = '1';
-                el.style.transform = el.style.transform.replace(' translateY(20px)', '');
+        projects.forEach(project => {
+            // Эффект наведения
+            project.addEventListener('mouseenter', () => {
+                const media = project.querySelector('.project-media');
+                const year = project.querySelector('.project-year');
                 
-                // Случайный звук появления
-                if (Math.random() > 0.5) {
-                    this.playAppearSound();
+                gsap.to(media, {
+                    y: -10,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+                
+                gsap.to(year, {
+                    scale: 1.2,
+                    duration: 0.2,
+                    ease: 'back.out(1.7)'
+                });
+                
+                // Случайное вращение возвращается к 0
+                gsap.to(project, {
+                    rotate: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            project.addEventListener('mouseleave', () => {
+                const media = project.querySelector('.project-media');
+                const year = project.querySelector('.project-year');
+                const originalRotation = getComputedStyle(project).getPropertyValue('--rotation') || '0deg';
+                
+                gsap.to(media, {
+                    y: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+                
+                gsap.to(year, {
+                    scale: 1,
+                    duration: 0.2
+                });
+                
+                gsap.to(project, {
+                    rotate: originalRotation,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            // Клик по проекту (открытие модального окна или ссылка)
+            project.addEventListener('click', (e) => {
+                if (!e.target.closest('.play-indicator')) {
+                    // Здесь можно добавить открытие детальной страницы проекта
+                    console.log('Открыть проект:', 
+                        project.querySelector('h3').textContent);
                 }
-            }, 100 + index * 100);
+            });
+            
+            // Клик по кнопке play
+            const playBtn = project.querySelector('.play-indicator');
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    
+                    // Эффект нажатия
+                    gsap.to(playBtn, {
+                        scale: 0.9,
+                        duration: 0.1,
+                        yoyo: true,
+                        repeat: 1
+                    });
+                    
+                    // Здесь можно добавить открытие видео
+                    console.log('Воспроизвести видео проекта');
+                });
+            }
         });
     }
 
-    playAppearSound() {
-        try {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
-            oscillator.type = 'sine';
-            
-            gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.2);
-            
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.2);
-        } catch (e) {
-            // Игнорируем если Web Audio API не доступен
-        }
+    // ===== ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ =====
+    initAdditionalEffects() {
+        // Случайное мерцание звёзд
+        setInterval(() => {
+            const stars = document.querySelectorAll('.space-background::before');
+            // Этот эффект сложно реализовать без изменения DOM,
+            // можно добавить отдельные элементы звёзд
+        }, 1000);
+        
+        // Эффект "дыхания" для некоторых элементов
+        const breathingElements = document.querySelectorAll('.hand-drawn-badge, .nav-dot.active');
+        breathingElements.forEach(el => {
+            gsap.to(el, {
+                opacity: 0.7,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+            });
+        });
     }
 }
 
-// Запускаем когда DOM загружен
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    new DrawnPortfolio();
+    const portfolio = new MonolithPortfolio();
+    
+    // Добавляем CSS для анимаций
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        
+        .visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        
+        .glitch-clone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+    `;
+    document.head.appendChild(style);
 });
 
-// Случайные весёлые сообщения в консоли
-const funMessages = [
-    "🎨 Твоё портфолио выглядит отлично!",
-    "✏️ Кто тут рисует такие крутые штуки?",
-    "🖍️ Ого, какой креативный дизайн!",
-    "📌 Выглядит как настоящая детская тетрадка!",
-    "✨ Магия рисования в действии!",
-    "🚀 Взлетаем на креативных волнах!"
-];
-
-console.log(funMessages[Math.floor(Math.random() * funMessages.length)]);
-console.log("%c 🎯 Совет: Попробуй покликать на разные элементы!", 
-    "color: #FF6B6B; font-size: 16px; font-weight: bold;");
-
-// Обработка ошибок изображений
-window.addEventListener('error', function(e) {
-    if (e.target.tagName === 'IMG') {
-        console.log('Картинка не загрузилась, но мы её нарисуем! 🖍️');
-        e.target.style.background = `
-            repeating-linear-gradient(
-                45deg,
-                var(--crayon-yellow),
-                var(--crayon-yellow) 10px,
-                var(--crayon-red) 10px,
-                var(--crayon-red) 20px
-            )
-        `;
-        e.target.style.border = '3px dashed var(--pencil-gray)';
-        e.target.alt = '🖼️ Картинка рисуется...';
-    }
-}, true);
+// Обработка ошибок
+window.addEventListener('error', (e) => {
+    console.warn('Ошибка загрузки:', e.target.src || e.target.href);
+});

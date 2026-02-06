@@ -3,264 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Юля Бюкли | Детский рисованный портфолио</title>
-    
-    <!-- Шрифты как детский почерк -->
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Comic+Neue:wght@400;700&family=Indie+Flower&display=swap" rel="stylesheet">
-    
-    <!-- Emoji и иконки -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Юля Бюкли | Motion Designer & 3D Artist</title>
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- GSAP для продвинутых анимаций -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Наши стили -->
     <link rel="stylesheet" href="style.css">
+    <!-- Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Прелоадер -->
-    <div class="preloader">
-        <div class="pencil-animation">
-            <div class="pencil"></div>
-            <div style="font-family: 'Caveat', cursive; margin-top: 20px; font-size: 1.5rem;">
-                Рисуем портфолио... ✏️
-            </div>
-        </div>
-    </div>
+    <!-- Тёмный фон с эффектом звёзд/космоса -->
+    <div class="space-background"></div>
 
-    <!-- Фигурки в углах -->
-    <div class="corner-doodle top-left"></div>
-    <div class="corner-doodle top-right"></div>
-    <div class="corner-doodle bottom-left"></div>
-    <div class="corner-doodle bottom-right"></div>
-
-    <!-- Шапка -->
-    <header class="header">
-        <nav class="nav">
-            <a href="#home" class="logo">Юля Бюкли</a>
-            <div class="nav-links">
-                <a href="#works" class="nav-link">Работы</a>
-                <a href="#about" class="nav-link">Обо мне</a>
-                <a href="#skills" class="nav-link">Навыки</a>
-                <a href="#contact" class="nav-link">Контакты</a>
-            </div>
-            <button class="mobile-menu-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+    <!-- Основной контейнер-холст -->
+    <main class="monolith-canvas">
+        
+        <!-- Навигация - стилизованная под "рисованные" иконки -->
+        <nav class="hand-drawn-nav">
+            <a href="#start" class="nav-dot active" data-tooltip="Главная"></a>
+            <a href="#works" class="nav-dot" data-tooltip="Работы"></a>
+            <a href="#about" class="nav-dot" data-tooltip="Обо мне"></a>
+            <a href="#contact" class="nav-dot" data-tooltip="Контакты"></a>
+            <div class="nav-line"></div>
         </nav>
-    </header>
 
-    <!-- Главный экран -->
-    <section id="home" class="hero">
-        <!-- Плавающие рисованные фигуры -->
-        <div class="doodle doodle-1"></div>
-        <div class="doodle doodle-2"></div>
-        <div class="doodle doodle-3"></div>
-        <div class="doodle doodle-4"></div>
-        
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Привет! Я <span class="highlight">Юля</span> 👋
+        <!-- Секция 1: Герой - свободно расположенный текст -->
+        <section id="start" class="canvas-section" style="--x: 5%; --y: 10vh;">
+            <div class="hand-drawn-badge">MOTION DESIGN & 3D ART</div>
+            
+            <h1 class="glitch-title">
+                <span class="line" style="--delay: 0">СОЗДАЮ</span>
+                <span class="line" style="--delay: 0.1">
+                    <span class="highlight-word">ЯРКИЕ</span>
+                    <svg class="hand-drawn-underline" width="180" height="12">
+                        <path d="M5,8 C30,2 80,10 120,5 C160,0 175,8 180,7" 
+                              fill="none" stroke="#FFD012" stroke-width="2" 
+                              stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <span class="line" style="--delay: 0.2">ВИЗУАЛЬНЫЕ</span>
+                <span class="line" style="--delay: 0.3">ИСТОРИИ</span>
             </h1>
-            <p class="hero-subtitle">
-                Motion-дизайнер и 3D-художник, который верит, 
-                что <span style="color: var(--crayon-red);">креативность</span> — это как детская 
-                <span style="color: var(--crayon-blue);">раскраска</span>: можно нарушать все правила!
-            </p>
             
-            <div class="hero-buttons">
-                <a href="#works" class="btn btn-primary">
-                    <span class="btn-icon">🎬</span>
-                    Смотреть работы
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <span class="btn-icon">💌</span>
-                    Написать мне
-                </a>
+            <div class="vibe-text-block" style="--x: 8%; --y: 55vh; max-width: 500px;">
+                <p>Специализируюсь на <span class="glow-text">3D анимации</span>, 
+                <span class="glow-text">моушн-графике</span> и <span class="glow-text">визуальных эффектах</span>.</p>
+                <p>Работаю с атмосферой, светом и движением, создавая работы в духе «Тайны третьей планеты».</p>
             </div>
             
-            <div style="margin-top: 40px; font-family: 'Indie Flower', cursive;">
-                <p>🎯 Создаю анимации, которые рассказывают истории</p>
-                <p>✨ Превращаю скучное в волшебное</p>
-                <p>🚀 Работаю в Cinema 4D, After Effects, Figma</p>
+            <!-- "Рисованные" стрелки-указатели -->
+            <div class="hand-drawn-arrow" style="--x: 85%; --y: 75vh;">
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                    <path d="M10,30 L50,30 M40,20 L50,30 L40,40" 
+                          stroke="#FFD012" stroke-width="2" fill="none" 
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="30" cy="30" r="28" stroke="rgba(255,208,18,0.2)" 
+                            stroke-width="1" fill="none" stroke-dasharray="5,5"/>
+                </svg>
+                <span class="arrow-label">листай</span>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Работы -->
-    <section id="works" class="works">
-        <h2 class="section-title">Мои работы 🎬</h2>
-        
-        <div class="work-grid">
-            <!-- Работа 1 -->
-            <div class="work-card">
-                <div class="work-media">
-                    <div class="play-overlay">▶️</div>
-                    <div style="width:100%; height:100%; background: #FFD012; display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 2rem;">
-                        Collage Project
+        <!-- Секция 2: Работы - свободная сетка -->
+        <section id="works" class="canvas-section" style="--x: 60%; --y: 120vh;">
+            <div class="section-label">
+                <span class="label-number">01</span>
+                <span class="label-text">РАБОТЫ</span>
+                <div class="label-line"></div>
+            </div>
+            
+            <h2 class="section-title">ИЗБРАННЫЕ <br>ПРОЕКТЫ</h2>
+            
+            <div class="free-grid">
+                <!-- Работа 1 -->
+                <div class="project-item" style="--grid-x: 0; --grid-y: 0; --rotation: -1deg;">
+                    <div class="project-media">
+                        <div class="media-placeholder" style="background: linear-gradient(45deg, #1a1a2e, #16213e);">
+                            <div class="media-label">3D</div>
+                            <div class="play-indicator">▶</div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <h3>Collage Intro</h3>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <p>Динамичный моушн для YouTube-канала с объёмной типографикой.</p>
+                        <div class="project-tags">
+                            <span class="tag">After Effects</span>
+                            <span class="tag">Cinema 4D</span>
+                        </div>
                     </div>
                 </div>
-                <h3>Collage Intro</h3>
-                <p>Яркая заставка для YouTube-канала с 3D-элементами</p>
-                <div class="work-tags">
-                    <span class="tag">After Effects</span>
-                    <span class="tag">3D</span>
-                    <span class="tag">Motion</span>
-                </div>
-            </div>
-            
-            <!-- Работа 2 -->
-            <div class="work-card">
-                <div class="work-media">
-                    <div class="play-overlay">▶️</div>
-                    <div style="width:100%; height:100%; background: #4A90E2; display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 2rem;">
-                        Lipgloss 3D
+                
+                <!-- Работа 2 -->
+                <div class="project-item" style="--grid-x: 1; --grid-y: 1; --rotation: 2deg;">
+                    <div class="project-media">
+                        <div class="media-placeholder" style="background: linear-gradient(45deg, #2d0b3d, #4a1b5d);">
+                            <div class="media-label">VFX</div>
+                            <div class="play-indicator">▶</div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <h3>Lipgloss Loop</h3>
+                            <span class="project-year">2024</span>
+                        </div>
+                        <p>Бесконечная 3D-анимация косметического продукта.</p>
+                        <div class="project-tags">
+                            <span class="tag">Redshift</span>
+                            <span class="tag">Octane</span>
+                        </div>
                     </div>
                 </div>
-                <h3>Lipgloss Animation</h3>
-                <p>3D-анимация косметического продукта с реалистичными материалами</p>
-                <div class="work-tags">
-                    <span class="tag">Cinema 4D</span>
-                    <span class="tag">Redshift</span>
-                    <span class="tag">Product</span>
-                </div>
-            </div>
-            
-            <!-- Работа 3 -->
-            <div class="work-card">
-                <div class="work-media">
-                    <div class="play-overlay">▶️</div>
-                    <div style="width:100%; height:100%; background: #FF6B6B; display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 2rem;">
-                        Character VFX
+                
+                <!-- Работа 3 -->
+                <div class="project-item" style="--grid-x: 0; --grid-y: 2; --rotation: 1deg;">
+                    <div class="project-media">
+                        <div class="media-placeholder" style="background: linear-gradient(45deg, #0b3d2d, #1b5d4a);">
+                            <div class="media-label">MOTION</div>
+                            <div class="play-indicator">▶</div>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <h3>Abathur VFX</h3>
+                            <span class="project-year">2023</span>
+                        </div>
+                        <p>Системы частиц и эффекты для игрового персонажа.</p>
+                        <div class="project-tags">
+                            <span class="tag">Houdini</span>
+                            <span class="tag">VFX</span>
+                        </div>
                     </div>
                 </div>
-                <h3>Abathur VFX</h3>
-                <p>Анимация персонажа с визуальными эффектами и частицами</p>
-                <div class="work-tags">
-                    <span class="tag">VFX</span>
-                    <span class="tag">Character</span>
-                    <span class="tag">Particles</span>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Галерея -->
-    <section class="gallery">
-        <h2 class="section-title">Галерея 🖼️</h2>
-        
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="images/cupid2.png" alt="Cupid Poster" class="gallery-image" onerror="this.style.display='none'">
-                <h3>Poster Cupid</h3>
-                <p>Дизайн в Figma</p>
+        <!-- Секция 3: Обо мне - текст с рисованными элементами -->
+        <section id="about" class="canvas-section" style="--x: 10%; --y: 220vh;">
+            <div class="section-label">
+                <span class="label-number">02</span>
+                <span class="label-text">ОБО МНЕ</span>
+                <div class="label-line"></div>
             </div>
             
-            <div class="gallery-item">
-                <img src="images/cupid.png" alt="Cupid Red" class="gallery-image" onerror="this.style.display='none'">
-                <h3>Poster Cupid Red</h3>
-                <p>Красная версия</p>
+            <div class="about-content">
+                <h2 class="handwritten-title">
+                    ПРИВЕТ, Я <span class="name-highlight">ЮЛЯ</span>
+                    <svg class="title-underline" width="300" height="12">
+                        <path d="M0,8 Q50,2 100,8 T200,5 T300,10" 
+                              fill="none" stroke="#FFD012" stroke-width="2" 
+                              stroke-linecap="round" stroke-dasharray="10,5"/>
+                    </svg>
+                </h2>
+                
+                <div class="about-text">
+                    <p>Motion-дизайнер и 3D-художник из Москвы. Создаю визуальные решения, которые <span class="glow-text">цепляют внимание</span> и рассказывают истории.</p>
+                    <p>В работе сочетаю <span class="glow-text">художественный взгляд</span> и <span class="glow-text">технические навыки</span>. Исследую границы между цифровым и рукотворным.</p>
+                </div>
+                
+                <!-- "Рисованные" навыки -->
+                <div class="skills-doodle">
+                    <div class="skill-item">
+                        <div class="skill-name">Cinema 4D</div>
+                        <div class="skill-track">
+                            <div class="skill-progress" style="width: 95%"></div>
+                            <div class="skill-dots">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">After Effects</div>
+                        <div class="skill-track">
+                            <div class="skill-progress" style="width: 90%"></div>
+                            <div class="skill-dots">
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="gallery-item">
-                <img src="images/player2.png" alt="Player Design" class="gallery-image" onerror="this.style.display='none'">
-                <h3>Player Design</h3>
-                <p>Дизайн интерфейса</p>
+            <!-- Декоративный рисованный элемент -->
+            <div class="doodle-element" style="--x: 70%; --y: 30%;">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(255,208,18,0.1)" stroke-width="1"/>
+                    <path d="M30,60 Q60,30 90,60 T150,60" stroke="rgba(255,208,18,0.3)" stroke-width="1" fill="none" transform="translate(-30, 0)"/>
+                    <circle cx="60" cy="60" r="8" fill="#FFD012" opacity="0.7"/>
+                </svg>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Навыки -->
-    <section id="skills" class="skills">
-        <h2 class="section-title">Мои навыки 🛠️</h2>
-        
-        <div class="drawn-border" style="max-width: 600px; margin: 0 auto; padding: 40px;">
-            <div class="skill-item">
-                <div class="skill-name">Cinema 4D</div>
-                <div class="skill-bar">
-                    <div class="skill-level" style="width: 95%"></div>
-                </div>
+        <!-- Секция 4: Контакты с "рисованной" формой -->
+        <section id="contact" class="canvas-section" style="--x: 60%; --y: 320vh;">
+            <div class="section-label">
+                <span class="label-number">03</span>
+                <span class="label-text">КОНТАКТЫ</span>
+                <div class="label-line"></div>
             </div>
             
-            <div class="skill-item">
-                <div class="skill-name">After Effects</div>
-                <div class="skill-bar">
-                    <div class="skill-level" style="width: 90%"></div>
-                </div>
-            </div>
+            <h2 class="section-title">ГОТОВА К <br>НОВЫМ ПРОЕКТАМ</h2>
             
-            <div class="skill-item">
-                <div class="skill-name">Figma & Illustrator</div>
-                <div class="skill-bar">
-                    <div class="skill-level" style="width: 85%"></div>
+            <div class="contact-wrapper">
+                <!-- Контактная информация -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Telegram</div>
+                            <a href="https://t.me/yulyabyukliu" class="contact-link">@yulyabyukliu</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Email</div>
+                            <a href="mailto:hello@yuliabyukliy.com" class="contact-link">hello@yuliabyukliy.com</a>
+                        </div>
+                    </div>
                 </div>
+                
+                <!-- "Рисованная" форма -->
+                <form class="hand-drawn-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" class="hand-drawn-input" id="name" name="name" required>
+                        <label for="name" class="hand-drawn-label">Ваше имя</label>
+                        <div class="input-line"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" class="hand-drawn-input" id="email" name="email" required>
+                        <label for="email" class="hand-drawn-label">Email</label>
+                        <div class="input-line"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea class="hand-drawn-textarea" id="message" name="message" rows="3" required></textarea>
+                        <label for="message" class="hand-drawn-label">Расскажите о проекте</label>
+                        <div class="textarea-line"></div>
+                    </div>
+                    
+                    <button type="submit" class="hand-drawn-button">
+                        <span class="button-text">ОТПРАВИТЬ</span>
+                        <svg class="button-arrow" width="20" height="20" viewBox="0 0 20 20">
+                            <path d="M4,10 L16,10 M12,6 L16,10 L12,14" 
+                                  stroke="currentColor" stroke-width="2" 
+                                  fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
-            
-            <div class="skill-item">
-                <div class="skill-name">Unreal Engine</div>
-                <div class="skill-bar">
-                    <div class="skill-level" style="width: 70%"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div style="text-align: center; margin-top: 40px; font-family: 'Comic Neue', cursive;">
-            <p>🎯 <strong>50+</strong> успешных проектов</p>
-            <p>✨ <strong>5 лет</strong> в motion-дизайне</p>
-            <p>🚀 Работала с <strong>15+</strong> брендами</p>
-        </div>
-    </section>
+        </section>
 
-    <!-- Контакты -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Давайте работать вместе! 💌</h2>
-        
-        <div class="contact-form">
-            <div class="form-group">
-                <label class="form-label">Ваше имя</label>
-                <input type="text" class="form-input" placeholder="Например: Алексей">
+        <!-- Футер -->
+        <footer class="hand-drawn-footer" style="--x: 50%; --y: 420vh;">
+            <div class="footer-content">
+                <div class="footer-logo">YULIA BYUKLIY</div>
+                <div class="footer-copyright">© 2024. Motion & 3D Art</div>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Telegram">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link" aria-label="Behance">
+                        <i class="fab fa-behance"></i>
+                    </a>
+                </div>
             </div>
             
-            <div class="form-group">
-                <label class="form-label">Ваш email</label>
-                <input type="email" class="form-input" placeholder="привет@пример.ру">
+            <!-- Декоративная линия внизу -->
+            <div class="footer-line">
+                <svg width="100%" height="20">
+                    <path d="M0,10 Q10,5 20,10 T40,10 T60,10 T80,10 T100,10" 
+                          fill="none" stroke="rgba(255,208,18,0.3)" stroke-width="1"
+                          stroke-dasharray="5,5"/>
+                </svg>
             </div>
-            
-            <div class="form-group">
-                <label class="form-label">Расскажите о проекте</label>
-                <textarea class="form-textarea" placeholder="Опишите вашу идею здесь..."></textarea>
-            </div>
-            
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-                <span class="btn-icon">✉️</span>
-                Отправить сообщение
-            </button>
-            
-            <div style="margin-top: 30px; text-align: center; font-family: 'Indie Flower', cursive;">
-                <p>Или напишите мне напрямую:</p>
-                <p>📧 hello@yuliabyukliy.com</p>
-                <p>📱 Telegram: @yulyabyukliu</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Подвал -->
-    <footer class="footer">
-        <div style="margin-bottom: 20px;">
-            <h3 style="font-family: 'Caveat', cursive; font-size: 2rem;">Юля Бюкли</h3>
-            <p style="font-family: 'Indie Flower', cursive;">Motion Designer & 3D Artist</p>
-        </div>
-        
-        <div class="social-links">
-            <a href="#" class="social-link">📱</a>
-            <a href="#" class="social-link">✉️</a>
-            <a href="#" class="social-link">🎬</a>
-            <a href="#" class="social-link">📌</a>
-        </div>
-        
-        <p style="margin-top: 20px; font-family: 'Comic Neue', cursive;">
-            © 2024 Нарисовано с ❤️ и большим количеством кофе
-        </p>
-    </footer>
+        </footer>
+    </main>
 
     <!-- Скрипты -->
     <script src="script.js"></script>
