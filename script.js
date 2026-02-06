@@ -12,6 +12,7 @@ class MonolithPortfolio {
         this.initProjectInteractions();
         this.initParallax();
         this.initGlitchEffect();
+        this.initAdditionalEffects();
     }
 
     // ===== SCROLL-АНИМАЦИИ ДЛЯ ЭФФЕКТА "МОНОЛИТА" =====
@@ -76,6 +77,24 @@ class MonolithPortfolio {
                         ease: 'power2.out'
                     });
                 }
+            });
+            
+            // Анимация прогресса навыков
+            const skillProgress = document.querySelectorAll('.skill-progress');
+            skillProgress.forEach(progress => {
+                const width = progress.style.width;
+                progress.style.width = '0%';
+                
+                gsap.to(progress, {
+                    scrollTrigger: {
+                        trigger: progress,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    },
+                    width: width,
+                    duration: 2,
+                    ease: 'power2.out'
+                });
             });
         } else {
             // Fallback на Intersection Observer если GSAP не загрузился
@@ -407,13 +426,6 @@ class MonolithPortfolio {
 
     // ===== ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ =====
     initAdditionalEffects() {
-        // Случайное мерцание звёзд
-        setInterval(() => {
-            const stars = document.querySelectorAll('.space-background::before');
-            // Этот эффект сложно реализовать без изменения DOM,
-            // можно добавить отдельные элементы звёзд
-        }, 1000);
-        
         // Эффект "дыхания" для некоторых элементов
         const breathingElements = document.querySelectorAll('.hand-drawn-badge, .nav-dot.active');
         breathingElements.forEach(el => {
@@ -425,41 +437,82 @@ class MonolithPortfolio {
                 ease: 'sine.inOut'
             });
         });
+        
+        // Добавляем звёзды
+        this.createStars();
+    }
+
+    createStars() {
+        const spaceBg = document.querySelector('.space-background');
+        if (!spaceBg) return;
+        
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 3}px;
+                height: ${Math.random() * 3}px;
+                background: white;
+                border-radius: 50%;
+                left: ${Math.random() * 100}%;
+                top: ${Math.random() * 100}%;
+                opacity: ${0.2 + Math.random() * 0.5};
+                animation: twinkleStar ${2 + Math.random() * 3}s infinite alternate;
+            `;
+            spaceBg.appendChild(star);
+        }
+        
+        // Добавляем анимацию для звёзд
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkleStar {
+                0%, 100% { opacity: 0.2; transform: scale(1); }
+                50% { opacity: 1; transform: scale(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
     }
 }
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    const portfolio = new MonolithPortfolio();
-    
-    // Добавляем CSS для анимаций
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-        
-        .visible {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-        
-        .glitch-clone {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            pointer-events: none;
-        }
-    `;
-    document.head.appendChild(style);
+    new MonolithPortfolio();
 });
+
+// Добавляем CSS для анимаций
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+    
+    .visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+    
+    .glitch-clone {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    @keyframes glitchLine {
+        0%, 95%, 100% { transform: translateX(0); }
+        96% { transform: translateX(-3px); }
+        97% { transform: translateX(3px); }
+        98% { transform: translateX(-2px); }
+    }
+`;
+document.head.appendChild(style);
 
 // Обработка ошибок
 window.addEventListener('error', (e) => {
