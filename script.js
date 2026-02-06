@@ -1,719 +1,693 @@
-/**
- * YULIA BYUKLIY PORTFOLIO
- * Yellow Yeti Inspired Website
- */
-
-class YellowYetiPortfolio {
+class DrawnPortfolio {
     constructor() {
-        this.state = {
-            isMenuOpen: false,
-            isModalOpen: false,
-            currentVideo: null,
-            scrollPosition: 0
-        };
-
         this.init();
     }
 
     init() {
-        console.log('🎨 YULIA BYUKLIY Portfolio — Yellow Yeti Style');
-
-        // Initialize all modules
+        console.log('🎨 Детский рисованный портфолио запущен!');
+        
         this.initPreloader();
-        this.initNavigation();
-        this.initSmoothScrolling();
-        this.initVideoPlayers();
-        this.initImageGallery();
-        this.initModals();
-        this.initContactForm();
-        this.initAnimations();
-        this.initIntersectionObserver();
-        this.initScrollProgress();
-
-        // Set body as loaded
-        setTimeout(() => {
-            document.body.classList.add('page-loaded');
-        }, 100);
+        this.initDoodleAnimations();
+        this.initScribbleEffects();
+        this.initWobbleElements();
+        this.initFormDrawing();
+        this.initPlayfulInteractions();
+        this.initStickerEffect();
     }
 
-    // ===== PRELOADER =====
     initPreloader() {
-        const preloader = document.getElementById('preloader');
-        
+        const preloader = document.querySelector('.preloader');
         if (!preloader) return;
 
         window.addEventListener('load', () => {
+            // Рисуем линию перед исчезновением
+            const pencil = document.querySelector('.pencil');
+            if (pencil) {
+                pencil.style.animation = 'drawLine 1s ease-out forwards';
+            }
+
             setTimeout(() => {
                 preloader.style.opacity = '0';
                 preloader.style.visibility = 'hidden';
                 
-                // Trigger initial animations
-                this.animateOnLoad();
-            }, 800);
+                // Запускаем начальные анимации
+                this.startEntranceAnimations();
+            }, 1500);
         });
     }
 
-    // ===== NAVIGATION =====
-    initNavigation() {
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileClose = document.getElementById('mobileClose');
-        const navLinks = document.querySelectorAll('.yy-nav-link, .yy-mobile-link');
-
-        // Menu toggle
-        if (menuToggle) {
-            menuToggle.addEventListener('click', () => this.toggleMenu());
-        }
-
-        // Mobile close button
-        if (mobileClose) {
-            mobileClose.addEventListener('click', () => this.closeMenu());
-        }
-
-        // Close menu on link click
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => this.closeMenu());
-        });
-
-        // Close menu on ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && this.state.isMenuOpen) {
-                this.closeMenu();
-            }
-        });
-
-        // Close menu on outside click
-        document.addEventListener('click', (e) => {
-            if (this.state.isMenuOpen && 
-                !mobileMenu.contains(e.target) && 
-                !menuToggle.contains(e.target)) {
-                this.closeMenu();
-            }
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('.yy-header');
-            const scrollY = window.scrollY;
+    initDoodleAnimations() {
+        // Анимируем все рисованные элементы
+        const doodles = document.querySelectorAll('.doodle, .drawn-border');
+        
+        doodles.forEach((doodle, index) => {
+            // Случайное движение для каждого элемента
+            const randomDelay = Math.random() * 2;
+            const randomDuration = 3 + Math.random() * 2;
             
-            if (scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            doodle.style.animationDelay = `${randomDelay}s`;
+            doodle.style.animationDuration = `${randomDuration}s`;
+            
+            // Случайный угол наклона
+            const randomRotate = -2 + Math.random() * 4;
+            doodle.style.transform += ` rotate(${randomRotate}deg)`;
+        });
+
+        // Интерактивные каракули
+        document.addEventListener('mousemove', (e) => {
+            const doodlesNearCursor = document.querySelectorAll('.doodle');
+            doodlesNearCursor.forEach(doodle => {
+                const rect = doodle.getBoundingClientRect();
+                const distance = Math.sqrt(
+                    Math.pow(e.clientX - (rect.left + rect.width/2), 2) +
+                    Math.pow(e.clientY - (rect.top + rect.height/2), 2)
+                );
+                
+                if (distance < 100) {
+                    this.pushDoodleAway(doodle, e.clientX, e.clientY);
+                }
+            });
+        });
+    }
+
+    pushDoodleAway(doodle, mouseX, mouseY) {
+        const rect = doodle.getBoundingClientRect();
+        const centerX = rect.left + rect.width/2;
+        const centerY = rect.top + rect.height/2;
+        
+        const dx = centerX - mouseX;
+        const dy = centerY - mouseY;
+        const distance = Math.sqrt(dx*dx + dy*dy);
+        
+        if (distance < 100) {
+            const force = (100 - distance) / 100 * 10;
+            const angle = Math.atan2(dy, dx);
+            
+            doodle.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px)`;
+            
+            setTimeout(() => {
+                doodle.style.transform = '';
+            }, 300);
+        }
+    }
+
+    initScribbleEffects() {
+        // Эффект рисования для заголовков
+        const titles = document.querySelectorAll('.hero-title, .section-title');
+        
+        titles.forEach(title => {
+            // Создаем SVG для эффекта подчеркивания
+            this.createScribbleUnderline(title);
+            
+            // Эффект появления буква за буквой
+            if (title.classList.contains('hero-title')) {
+                this.typewriterEffect(title);
             }
         });
     }
 
-    toggleMenu() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuToggle = document.getElementById('menuToggle');
+    createScribbleUnderline(element) {
+        const underline = document.createElement('div');
+        underline.className = 'scribble-underline';
+        underline.style.cssText = `
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--crayon-red) 0%, 
+                var(--crayon-yellow) 25%, 
+                var(--crayon-blue) 50%, 
+                var(--crayon-green) 75%, 
+                var(--crayon-red) 100%);
+            margin-top: 10px;
+            border-radius: 2px;
+            opacity: 0.7;
+            position: relative;
+            overflow: hidden;
+        `;
         
-        this.state.isMenuOpen = !this.state.isMenuOpen;
+        const scribble = document.createElement('div');
+        scribble.style.cssText = `
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, white, transparent);
+            animation: scribbleMove 2s linear infinite;
+        `;
         
-        if (mobileMenu) mobileMenu.classList.toggle('active', this.state.isMenuOpen);
-        if (menuToggle) menuToggle.classList.toggle('active', this.state.isMenuOpen);
+        underline.appendChild(scribble);
+        element.parentNode.insertBefore(underline, element.nextSibling);
         
-        // Toggle body scroll
-        document.body.style.overflow = this.state.isMenuOpen ? 'hidden' : '';
-        
-        // Update aria attributes
-        if (menuToggle) {
-            menuToggle.setAttribute('aria-expanded', this.state.isMenuOpen.toString());
-        }
+        // Добавляем стили для анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes scribbleMove {
+                0% { left: -100%; }
+                100% { left: 100%; }
+            }
+        `;
+        document.head.appendChild(style);
     }
 
-    closeMenu() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        const menuToggle = document.getElementById('menuToggle');
+    typewriterEffect(element) {
+        const text = element.textContent;
+        element.textContent = '';
         
-        this.state.isMenuOpen = false;
-        
-        if (mobileMenu) mobileMenu.classList.remove('active');
-        if (menuToggle) {
-            menuToggle.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        }
-        
-        document.body.style.overflow = '';
-    }
-
-    // ===== SMOOTH SCROLLING =====
-    initSmoothScrolling() {
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                const href = anchor.getAttribute('href');
+        let i = 0;
+        const type = () => {
+            if (i < text.length) {
+                // Случайная задержка для эффекта "неуверенного" написания
+                const delay = 50 + Math.random() * 100;
                 
-                // Skip if it's just "#" or has target="_blank"
-                if (href === '#' || anchor.getAttribute('target') === '_blank') return;
-                
-                e.preventDefault();
-                
-                const targetId = href.substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    // Close mobile menu if open
-                    if (this.state.isMenuOpen) {
-                        this.closeMenu();
+                setTimeout(() => {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    type();
+                    
+                    // Случайный звук печатания (опционально)
+                    if (Math.random() > 0.7) {
+                        this.playTypeSound();
                     }
-                    
-                    // Smooth scroll to target
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                    
-                    // Update URL without reload
-                    history.pushState(null, '', href);
-                }
-            });
-        });
+                }, delay);
+            }
+        };
+        
+        // Начинаем с небольшой задержки
+        setTimeout(type, 500);
+    }
 
-        // Back to top button
-        const backToTop = document.querySelector('.yy-back-to-top');
-        if (backToTop) {
-            backToTop.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+    playTypeSound() {
+        // Простые звуки пишущей машинки через Web Audio API
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(800 + Math.random() * 400, audioContext.currentTime);
+            oscillator.type = 'square';
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.1);
+        } catch (e) {
+            // Если Web Audio API не доступен, игнорируем
         }
     }
 
-    // ===== VIDEO PLAYERS =====
-    initVideoPlayers() {
-        const videoWrappers = document.querySelectorAll('.yy-video-wrapper');
+    initWobbleElements() {
+        // Элементы, которые будут качаться при наведении
+        const wobbleElements = document.querySelectorAll('.btn, .nav-link, .work-card, .gallery-item');
         
-        videoWrappers.forEach(wrapper => {
-            // Click to open modal
-            wrapper.addEventListener('click', () => {
-                const videoSrc = wrapper.getAttribute('data-video');
-                const title = wrapper.closest('.yy-work-card').querySelector('.yy-work-title').textContent;
-                const description = wrapper.closest('.yy-work-card').querySelector('.yy-work-description').textContent;
-                
-                this.openVideoModal(videoSrc, title, description);
+        wobbleElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                this.wobbleElement(el);
             });
             
-            // Keyboard accessibility
-            wrapper.setAttribute('tabindex', '0');
-            wrapper.setAttribute('role', 'button');
-            wrapper.setAttribute('aria-label', 'Открыть видео');
+            el.addEventListener('click', () => {
+                this.bounceElement(el);
+            });
+        });
+    }
+
+    wobbleElement(element) {
+        element.style.animation = 'wobble 0.5s ease';
+        setTimeout(() => {
+            element.style.animation = '';
+        }, 500);
+    }
+
+    bounceElement(element) {
+        element.style.animation = 'bounce 0.5s ease';
+        setTimeout(() => {
+            element.style.animation = '';
+        }, 500);
+        
+        // Создаем частицы при клике
+        this.createClickParticles(element);
+    }
+
+    createClickParticles(element) {
+        const rect = element.getBoundingClientRect();
+        const colors = ['#FFD012', '#4A90E2', '#FF6B6B', '#51D88A'];
+        
+        for (let i = 0; i < 8; i++) {
+            const particle = document.createElement('div');
+            const color = colors[Math.floor(Math.random() * colors.length)];
             
-            wrapper.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    wrapper.click();
+            particle.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${color};
+                border-radius: 50%;
+                left: ${rect.left + rect.width/2}px;
+                top: ${rect.top + rect.height/2}px;
+                pointer-events: none;
+                z-index: 10000;
+            `;
+            
+            document.body.appendChild(particle);
+            
+            // Анимация частицы
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 20 + Math.random() * 30;
+            const duration = 400 + Math.random() * 300;
+            
+            particle.animate([
+                {
+                    transform: `translate(0, 0) scale(1)`,
+                    opacity: 1
+                },
+                {
+                    transform: `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px) scale(0)`,
+                    opacity: 0
+                }
+            ], {
+                duration: duration,
+                easing: 'cubic-bezier(0.2, 0.8, 0.3, 1)'
+            });
+            
+            // Удаляем частицу после анимации
+            setTimeout(() => {
+                particle.remove();
+            }, duration);
+        }
+    }
+
+    initFormDrawing() {
+        const formInputs = document.querySelectorAll('.form-input, .form-textarea');
+        
+        formInputs.forEach(input => {
+            // Эффект рисования при фокусе
+            input.addEventListener('focus', () => {
+                this.drawAroundElement(input);
+            });
+            
+            // Случайные подсказки
+            input.addEventListener('input', (e) => {
+                if (Math.random() > 0.95 && e.target.value.length > 3) {
+                    this.showFunnyComment(e.target);
                 }
             });
-            
-            // Hover effect for preview
-            const preview = wrapper.querySelector('.yy-video-preview');
-            if (preview) {
-                wrapper.addEventListener('mouseenter', () => {
-                    preview.play().catch(() => {
-                        // Autoplay blocked, handle gracefully
-                    });
-                });
-                
-                wrapper.addEventListener('mouseleave', () => {
-                    preview.pause();
-                    preview.currentTime = 0;
-                });
+        });
+    }
+
+    drawAroundElement(element) {
+        const rect = element.getBoundingClientRect();
+        const highlight = document.createElement('div');
+        
+        highlight.className = 'drawing-highlight';
+        highlight.style.cssText = `
+            position: fixed;
+            border: 2px dashed var(--crayon-yellow);
+            border-radius: 10px;
+            pointer-events: none;
+            z-index: 1000;
+            left: ${rect.left - 10}px;
+            top: ${rect.top - 10}px;
+            width: ${rect.width + 20}px;
+            height: ${rect.height + 20}px;
+            opacity: 0;
+            animation: drawBox 1s ease-out forwards;
+        `;
+        
+        document.body.appendChild(highlight);
+        
+        // Добавляем стили для анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes drawBox {
+                0% {
+                    opacity: 0;
+                    clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%);
+                }
+                100% {
+                    opacity: 1;
+                    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Удаляем через 2 секунды
+        setTimeout(() => {
+            highlight.remove();
+            style.remove();
+        }, 2000);
+    }
+
+    showFunnyComment(element) {
+        const comments = [
+            "Отлично! ✨",
+            "Так держать! 🚀",
+            "Круто придумал! 💡",
+            "Интересно! 🤔",
+            "Продолжай в том же духе! 💪",
+            "Гениально! 🎯"
+        ];
+        
+        const comment = comments[Math.floor(Math.random() * comments.length)];
+        const tooltip = document.createElement('div');
+        
+        tooltip.className = 'funny-tooltip';
+        tooltip.textContent = comment;
+        tooltip.style.cssText = `
+            position: absolute;
+            background: var(--crayon-yellow);
+            color: var(--pencil-gray);
+            padding: 5px 10px;
+            border-radius: 10px;
+            font-family: var(--font-scribble);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            z-index: 1000;
+            transform: translateY(-100%) rotate(-3deg);
+            animation: floatUp 2s ease-out forwards;
+            border: 2px solid var(--pencil-gray);
+        `;
+        
+        const rect = element.getBoundingClientRect();
+        tooltip.style.left = `${rect.left + rect.width/2}px`;
+        tooltip.style.top = `${rect.top}px`;
+        
+        document.body.appendChild(tooltip);
+        
+        // Удаляем через 2 секунды
+        setTimeout(() => {
+            tooltip.remove();
+        }, 2000);
+        
+        // Добавляем стили для анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(0) rotate(-3deg);
+                }
+                20% {
+                    opacity: 1;
+                    transform: translateY(-30px) rotate(-3deg);
+                }
+                80% {
+                    opacity: 1;
+                    transform: translateY(-50px) rotate(-3deg);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translateY(-70px) rotate(-3deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        setTimeout(() => style.remove(), 2000);
+    }
+
+    initPlayfulInteractions() {
+        // Случайные звуки при взаимодействии
+        document.addEventListener('click', (e) => {
+            if (Math.random() > 0.7 && !e.target.matches('input, textarea')) {
+                this.playClickSound();
             }
         });
-    }
-
-    // ===== IMAGE GALLERY =====
-    initImageGallery() {
-        const viewButtons = document.querySelectorAll('.yy-gallery-view');
         
-        viewButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent triggering parent click
-                
-                const galleryItem = button.closest('.yy-gallery-item');
-                const imageSrc = galleryItem.querySelector('.yy-gallery-image').getAttribute('src');
-                const title = button.getAttribute('data-title');
-                const description = button.getAttribute('data-description');
-                
-                this.openImageModal(imageSrc, title, description);
-            });
-        });
-    }
-
-    // ===== MODALS =====
-    initModals() {
-        // Close buttons
-        const closeImageModal = document.getElementById('closeImageModal');
-        const closeVideoModal = document.getElementById('closeVideoModal');
-        const modalOverlays = document.querySelectorAll('.yy-modal-overlay');
-        
-        if (closeImageModal) {
-            closeImageModal.addEventListener('click', () => this.closeImageModal());
-        }
-        
-        if (closeVideoModal) {
-            closeVideoModal.addEventListener('click', () => this.closeVideoModal());
-        }
-        
-        // Close on overlay click
-        modalOverlays.forEach(overlay => {
-            overlay.addEventListener('click', () => {
-                if (document.getElementById('imageModal').classList.contains('active')) {
-                    this.closeImageModal();
-                }
-                if (document.getElementById('videoModal').classList.contains('active')) {
-                    this.closeVideoModal();
-                }
-            });
-        });
-        
-        // Close on ESC key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (document.getElementById('imageModal').classList.contains('active')) {
-                    this.closeImageModal();
-                }
-                if (document.getElementById('videoModal').classList.contains('active')) {
-                    this.closeVideoModal();
-                }
-            }
-        });
-    }
-
-    openImageModal(imageSrc, title, description) {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        const modalTitle = document.getElementById('modalImageTitle');
-        const modalDesc = document.getElementById('modalImageDesc');
-        
-        if (!modal || !modalImg) return;
-        
-        // Set content
-        modalImg.src = imageSrc;
-        modalImg.alt = title;
-        modalTitle.textContent = title;
-        modalDesc.textContent = description;
-        
-        // Show modal
-        modal.classList.add('active');
-        this.state.isModalOpen = true;
-        document.body.style.overflow = 'hidden';
-    }
-
-    closeImageModal() {
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-        
-        if (!modal) return;
-        
-        modal.classList.remove('active');
-        this.state.isModalOpen = false;
-        document.body.style.overflow = '';
-        
-        // Clear image src after animation
-        setTimeout(() => {
-            if (modalImg) modalImg.src = '';
-        }, 300);
-    }
-
-    openVideoModal(videoSrc, title, description) {
-        const modal = document.getElementById('videoModal');
-        const modalVideo = document.getElementById('modalVideo');
-        const modalTitle = document.getElementById('modalVideoTitle');
-        const modalDesc = document.getElementById('modalVideoDesc');
-        
-        if (!modal || !modalVideo) return;
-        
-        // Stop current video if playing
-        if (this.state.currentVideo) {
-            this.state.currentVideo.pause();
-            this.state.currentVideo.currentTime = 0;
-        }
-        
-        // Set content
-        modalVideo.src = videoSrc;
-        modalTitle.textContent = title;
-        modalDesc.textContent = description;
-        
-        // Show modal
-        modal.classList.add('active');
-        this.state.isModalOpen = true;
-        document.body.style.overflow = 'hidden';
-        
-        // Store reference to current video
-        this.state.currentVideo = modalVideo;
-        
-        // Try to play video
-        const playPromise = modalVideo.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(() => {
-                // Autoplay blocked, user can click to play
-            });
-        }
-    }
-
-    closeVideoModal() {
-        const modal = document.getElementById('videoModal');
-        const modalVideo = document.getElementById('modalVideo');
-        
-        if (!modal) return;
-        
-        modal.classList.remove('active');
-        this.state.isModalOpen = false;
-        document.body.style.overflow = '';
-        
-        // Stop video
-        if (modalVideo) {
-            modalVideo.pause();
-            modalVideo.currentTime = 0;
-        }
-        
-        this.state.currentVideo = null;
-    }
-
-    // ===== CONTACT FORM =====
-    initContactForm() {
-        const contactForm = document.getElementById('contactForm');
-        
-        if (!contactForm) return;
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        // Эффект дрожания при прокрутке
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
             
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
-            
-            // Simple validation
-            if (!data.name || !data.email || !data.message) {
-                this.showFormError('Пожалуйста, заполните все поля');
-                return;
+            // Легкое дрожание при быстрой прокрутке
+            if (Math.abs(currentScroll - lastScroll) > 50) {
+                document.body.style.transform = `translateX(${Math.random() * 2 - 1}px)`;
+                
+                setTimeout(() => {
+                    document.body.style.transform = '';
+                }, 100);
             }
             
-            // Simulate form submission
-            this.submitForm(data);
+            lastScroll = currentScroll;
         });
-    }
-
-    submitForm(data) {
-        // Show loading state
-        const submitBtn = document.querySelector('#contactForm .yy-btn');
-        const originalText = submitBtn.querySelector('.yy-btn-text').textContent;
         
-        submitBtn.querySelector('.yy-btn-text').textContent = 'ОТПРАВЛЯЕТСЯ...';
-        submitBtn.disabled = true;
-        
-        // Simulate API call
-        setTimeout(() => {
-            // Success message
-            this.showFormSuccess('Сообщение отправлено! Я свяжусь с вами в ближайшее время.');
-            
-            // Reset form
-            document.getElementById('contactForm').reset();
-            
-            // Reset button
-            submitBtn.querySelector('.yy-btn-text').textContent = originalText;
-            submitBtn.disabled = false;
-        }, 1500);
-    }
-
-    showFormError(message) {
-        // Create error message element
-        const errorEl = document.createElement('div');
-        errorEl.className = 'yy-form-error';
-        errorEl.textContent = message;
-        errorEl.style.color = '#ff4444';
-        errorEl.style.marginTop = '1rem';
-        errorEl.style.fontSize = '0.9rem';
-        
-        // Remove existing error
-        const existingError = document.querySelector('.yy-form-error');
-        if (existingError) existingError.remove();
-        
-        // Add new error
-        const contactForm = document.getElementById('contactForm');
-        contactForm.appendChild(errorEl);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            errorEl.remove();
+        // Случайное появление рисованных элементов
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                this.createRandomDoodle();
+            }
         }, 5000);
     }
 
-    showFormSuccess(message) {
-        // Create success message element
-        const successEl = document.createElement('div');
-        successEl.className = 'yy-form-success';
-        successEl.textContent = message;
-        successEl.style.color = '#00C851';
-        successEl.style.marginTop = '1rem';
-        successEl.style.fontSize = '0.9rem';
-        successEl.style.textAlign = 'center';
-        
-        // Remove existing messages
-        const existingMessage = document.querySelector('.yy-form-success');
-        if (existingMessage) existingMessage.remove();
-        
-        // Add new message
-        const contactForm = document.getElementById('contactForm');
-        contactForm.appendChild(successEl);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            successEl.remove();
-        }, 5000);
-    }
-
-    // ===== ANIMATIONS =====
-    initAnimations() {
-        // GSAP animations if available
-        if (typeof gsap !== 'undefined') {
-            this.initGSAPAnimations();
-        }
-        
-        // CSS animations
-        this.initCSSAnimations();
-    }
-
-    initGSAPAnimations() {
-        // Hero section animations
-        const heroTitle = document.querySelector('.yy-hero-title');
-        const heroDescription = document.querySelector('.yy-hero-description');
-        const heroActions = document.querySelector('.yy-hero-actions');
-        
-        if (heroTitle) {
-            gsap.from(heroTitle, {
-                duration: 1,
-                y: 50,
-                opacity: 0,
-                ease: 'power3.out'
-            });
-        }
-        
-        if (heroDescription) {
-            gsap.from(heroDescription, {
-                duration: 1,
-                y: 30,
-                opacity: 0,
-                delay: 0.3,
-                ease: 'power3.out'
-            });
-        }
-        
-        if (heroActions) {
-            gsap.from(heroActions, {
-                duration: 1,
-                y: 30,
-                opacity: 0,
-                delay: 0.6,
-                ease: 'power3.out'
-            });
-        }
-        
-        // ScrollTrigger animations for sections
-        if (typeof ScrollTrigger !== 'undefined') {
-            // Animate work cards on scroll
-            const workCards = document.querySelectorAll('.yy-work-card');
+    playClickSound() {
+        // Простой звук клика
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
             
-            workCards.forEach((card, i) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none'
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 0.8,
-                    delay: i * 0.1,
-                    ease: 'power3.out'
-                });
-            });
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
             
-            // Animate gallery items
-            const galleryItems = document.querySelectorAll('.yy-gallery-item');
+            oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+            oscillator.type = 'sine';
             
-            galleryItems.forEach((item, i) => {
-                gsap.from(item, {
-                    scrollTrigger: {
-                        trigger: item,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none'
-                    },
-                    y: 40,
-                    opacity: 0,
-                    duration: 0.7,
-                    delay: i * 0.1,
-                    ease: 'power3.out'
-                });
-            });
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
             
-            // Animate skills progress bars
-            const skillProgress = document.querySelectorAll('.yy-skill-progress');
-            
-            skillProgress.forEach(progress => {
-                gsap.from(progress, {
-                    scrollTrigger: {
-                        trigger: progress,
-                        start: 'top 90%',
-                        toggleActions: 'play none none none'
-                    },
-                    width: 0,
-                    duration: 1.5,
-                    ease: 'power2.out'
-                });
-            });
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.1);
+        } catch (e) {
+            // Игнорируем если Web Audio API не доступен
         }
     }
 
-    initCSSAnimations() {
-        // Add animation classes on load
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
+    createRandomDoodle() {
+        const doodle = document.createElement('div');
+        const shapes = ['circle', 'square', 'triangle', 'star'];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        const colors = ['#FFD012', '#4A90E2', '#FF6B6B', '#51D88A', '#9B51E0'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        doodle.className = 'random-doodle';
+        doodle.style.cssText = `
+            position: fixed;
+            opacity: 0.3;
+            z-index: -1;
+            animation: randomFloat 10s ease-in-out forwards;
+            pointer-events: none;
+        `;
+        
+        let shapeCSS = '';
+        switch(shape) {
+            case 'circle':
+                shapeCSS = `
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background: ${color};
+                `;
+                break;
+            case 'square':
+                shapeCSS = `
+                    width: 40px;
+                    height: 40px;
+                    background: ${color};
+                    transform: rotate(45deg);
+                `;
+                break;
+            case 'triangle':
+                shapeCSS = `
+                    width: 0;
+                    height: 0;
+                    border-left: 20px solid transparent;
+                    border-right: 20px solid transparent;
+                    border-bottom: 40px solid ${color};
+                `;
+                break;
+            case 'star':
+                shapeCSS = `
+                    width: 40px;
+                    height: 40px;
+                    background: ${color};
+                    clip-path: polygon(
+                        50% 0%, 61% 35%, 98% 35%, 68% 57%,
+                        79% 91%, 50% 70%, 21% 91%, 32% 57%,
+                        2% 35%, 39% 35%
+                    );
+                `;
+                break;
+        }
+        
+        doodle.style.cssText += shapeCSS;
+        
+        // Случайная позиция
+        const startX = Math.random() * window.innerWidth;
+        const startY = window.innerHeight + 50;
+        
+        doodle.style.left = `${startX}px`;
+        doodle.style.top = `${startY}px`;
+        
+        document.body.appendChild(doodle);
+        
+        // Анимация всплытия
+        const animation = doodle.animate([
+            {
+                transform: `translate(0, 0) rotate(0deg)`,
+                opacity: 0.3
+            },
+            {
+                transform: `translate(${Math.random() * 100 - 50}px, -${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`,
+                opacity: 0
+            }
+        ], {
+            duration: 10000,
+            easing: 'linear'
+        });
+        
+        // Удаляем после анимации
+        animation.onfinish = () => doodle.remove();
+    }
+
+    initStickerEffect() {
+        // Эффект наклейки для карточек работ
+        const workCards = document.querySelectorAll('.work-card');
+        
+        workCards.forEach(card => {
+            // Случайный угол наклона
+            const rotation = -5 + Math.random() * 10;
+            card.style.transform = `rotate(${rotation}deg)`;
+            
+            // Создаем эффект загнутых уголков
+            this.createFoldEffect(card);
         });
     }
 
-    animateOnLoad() {
-        // Add staggered animation to elements
-        const animatedElements = document.querySelectorAll('.yy-work-card, .yy-gallery-item, .yy-about-paragraph, .yy-skill');
+    createFoldEffect(element) {
+        // Верхний правый загнутый уголок
+        const fold = document.createElement('div');
+        fold.className = 'paper-fold';
+        fold.style.cssText = `
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(225deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+            border-bottom-left-radius: 5px;
+            z-index: 2;
+        `;
         
-        animatedElements.forEach((el, index) => {
+        element.style.position = 'relative';
+        element.appendChild(fold);
+        
+        // Тень от загнутого уголка
+        const shadow = document.createElement('div');
+        shadow.className = 'fold-shadow';
+        shadow.style.cssText = `
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            background: rgba(0,0,0,0.05);
+            filter: blur(2px);
+            z-index: 1;
+        `;
+        
+        element.appendChild(shadow);
+    }
+
+    startEntranceAnimations() {
+        // Последовательное появление элементов
+        const elements = [
+            ...document.querySelectorAll('.doodle'),
+            ...document.querySelectorAll('.hero-title'),
+            ...document.querySelectorAll('.hero-subtitle'),
+            ...document.querySelectorAll('.btn'),
+            ...document.querySelectorAll('.work-card'),
+            ...document.querySelectorAll('.gallery-item')
+        ];
+        
+        elements.forEach((el, index) => {
             el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
+            el.style.transform += ' translateY(20px)';
             
             setTimeout(() => {
                 el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }, 100 + (index * 100));
+                el.style.transform = el.style.transform.replace(' translateY(20px)', '');
+                
+                // Случайный звук появления
+                if (Math.random() > 0.5) {
+                    this.playAppearSound();
+                }
+            }, 100 + index * 100);
         });
     }
 
-    // ===== INTERSECTION OBSERVER =====
-    initIntersectionObserver() {
-        if ('IntersectionObserver' in window) {
-            // Lazy load images
-            const imageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                        }
-                        
-                        if (img.dataset.srcset) {
-                            img.srcset = img.dataset.srcset;
-                            img.removeAttribute('data-srcset');
-                        }
-                        
-                        imageObserver.unobserve(img);
-                    }
-                });
-            });
+    playAppearSound() {
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
             
-            // Observe all lazy images
-            document.querySelectorAll('img[data-src], img[data-srcset]').forEach(img => {
-                imageObserver.observe(img);
-            });
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
             
-            // Animate elements on scroll
-            const animationObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animated');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            });
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.1);
+            oscillator.type = 'sine';
             
-            // Observe elements to animate
-            document.querySelectorAll('.yy-stat, .yy-contact-item, .yy-form-group').forEach(el => {
-                animationObserver.observe(el);
-            });
+            gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.2);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.2);
+        } catch (e) {
+            // Игнорируем если Web Audio API не доступен
         }
-    }
-
-    // ===== SCROLL PROGRESS =====
-    initScrollProgress() {
-        const progressBar = document.createElement('div');
-        progressBar.className = 'yy-scroll-progress';
-        progressBar.style.position = 'fixed';
-        progressBar.style.top = '0';
-        progressBar.style.left = '0';
-        progressBar.style.width = '0%';
-        progressBar.style.height = '3px';
-        progressBar.style.backgroundColor = 'var(--yy-yellow)';
-        progressBar.style.zIndex = '999';
-        progressBar.style.transition = 'width 0.1s ease';
-        
-        document.body.appendChild(progressBar);
-        
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            
-            progressBar.style.width = scrolled + '%';
-        });
-    }
-
-    // ===== UTILITIES =====
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    throttle(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
     }
 }
 
-// Initialize portfolio when DOM is loaded
+// Запускаем когда DOM загружен
 document.addEventListener('DOMContentLoaded', () => {
-    new YellowYetiPortfolio();
+    new DrawnPortfolio();
 });
 
-// Error handling for images
-window.addEventListener('error', (e) => {
+// Случайные весёлые сообщения в консоли
+const funMessages = [
+    "🎨 Твоё портфолио выглядит отлично!",
+    "✏️ Кто тут рисует такие крутые штуки?",
+    "🖍️ Ого, какой креативный дизайн!",
+    "📌 Выглядит как настоящая детская тетрадка!",
+    "✨ Магия рисования в действии!",
+    "🚀 Взлетаем на креативных волнах!"
+];
+
+console.log(funMessages[Math.floor(Math.random() * funMessages.length)]);
+console.log("%c 🎯 Совет: Попробуй покликать на разные элементы!", 
+    "color: #FF6B6B; font-size: 16px; font-weight: bold;");
+
+// Обработка ошибок изображений
+window.addEventListener('error', function(e) {
     if (e.target.tagName === 'IMG') {
-        console.warn('Image failed to load:', e.target.src);
-        e.target.style.opacity = '0.5';
-        e.target.style.filter = 'grayscale(100%)';
+        console.log('Картинка не загрузилась, но мы её нарисуем! 🖍️');
+        e.target.style.background = `
+            repeating-linear-gradient(
+                45deg,
+                var(--crayon-yellow),
+                var(--crayon-yellow) 10px,
+                var(--crayon-red) 10px,
+                var(--crayon-red) 20px
+            )
+        `;
+        e.target.style.border = '3px dashed var(--pencil-gray)';
+        e.target.alt = '🖼️ Картинка рисуется...';
     }
 }, true);
-
-// Save scroll position
-window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('yy_scrollPosition', window.scrollY);
-});
-
-// Restore scroll position
-window.addEventListener('load', () => {
-    const savedPosition = sessionStorage.getItem('yy_scrollPosition');
-    if (savedPosition) {
-        window.scrollTo(0, parseInt(savedPosition));
-        sessionStorage.removeItem('yy_scrollPosition');
-    }
-});
