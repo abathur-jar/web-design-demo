@@ -28,8 +28,6 @@ class YellowYetiPortfolio {
         this.initContactForm();
         this.initAnimations();
         this.initIntersectionObserver();
-        this.initMouseEffects();
-        this.initParallax();
         this.initScrollProgress();
 
         // Set body as loaded
@@ -641,70 +639,6 @@ class YellowYetiPortfolio {
                 animationObserver.observe(el);
             });
         }
-    }
-
-    // ===== MOUSE EFFECTS =====
-    initMouseEffects() {
-        // Cursor trail effect
-        const cursorTrail = document.createElement('div');
-        cursorTrail.className = 'yy-cursor-trail';
-        document.body.appendChild(cursorTrail);
-        
-        let mouseX = 0;
-        let mouseY = 0;
-        let trailX = 0;
-        let trailY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        
-        function animateTrail() {
-            // Move trail towards mouse with delay
-            const dx = mouseX - trailX;
-            const dy = mouseY - trailY;
-            
-            trailX += dx * 0.1;
-            trailY += dy * 0.1;
-            
-            cursorTrail.style.left = trailX + 'px';
-            cursorTrail.style.top = trailY + 'px';
-            
-            requestAnimationFrame(animateTrail);
-        }
-        
-        animateTrail();
-        
-        // Add hover effects to interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .yy-video-wrapper, .yy-gallery-view');
-        
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorTrail.style.transform = 'scale(1.5)';
-                cursorTrail.style.backgroundColor = 'rgba(255, 208, 18, 0.5)';
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursorTrail.style.transform = 'scale(1)';
-                cursorTrail.style.backgroundColor = 'rgba(255, 208, 18, 0.2)';
-            });
-        });
-    }
-
-    // ===== PARALLAX EFFECTS =====
-    initParallax() {
-        const heroBgElements = document.querySelectorAll('.yy-hero-bg-element');
-        
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            
-            heroBgElements.forEach((el, index) => {
-                const speed = 0.2 + (index * 0.1);
-                const yPos = -(scrolled * speed);
-                el.style.transform = `translateY(${yPos}px) rotate(${index * 45}deg)`;
-            });
-        });
     }
 
     // ===== SCROLL PROGRESS =====

@@ -10,10 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Yellow Yeti style CSS -->
-    <link rel="stylesheet" href="css/yellowyeti.css">
+    <link rel="stylesheet" href="style.css">
     
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- GSAP для анимаций -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body class="yy-body" data-tilda="true">
     <!-- Preloader like Yellow Yeti -->
@@ -178,7 +179,7 @@
                     <div class="yy-work-card" data-category="3d motion">
                         <div class="yy-work-media">
                             <div class="yy-video-wrapper" data-video="videos/Murad.mp4">
-                                <video class="yy-video-preview" muted loop playsinline poster="videos/previews/Murad-preview.jpg">
+                                <video class="yy-video-preview" muted loop playsinline poster="images/preview1.jpg">
                                     <source src="videos/Murad.mp4" type="video/mp4">
                                 </video>
                                 
@@ -219,7 +220,7 @@
                     <div class="yy-work-card" data-category="3d product">
                         <div class="yy-work-media">
                             <div class="yy-video-wrapper" data-video="videos/Lipgloss.mp4">
-                                <video class="yy-video-preview" muted loop playsinline poster="videos/previews/Lipgloss-preview.jpg">
+                                <video class="yy-video-preview" muted loop playsinline poster="images/preview2.jpg">
                                     <source src="videos/Lipgloss.mp4" type="video/mp4">
                                 </video>
                                 
@@ -256,7 +257,46 @@
                         </div>
                     </div>
                     
-                    <!-- Add more work cards here -->
+                    <!-- Work 3 -->
+                    <div class="yy-work-card" data-category="3d motion">
+                        <div class="yy-work-media">
+                            <div class="yy-video-wrapper" data-video="videos/Comp.mp4">
+                                <video class="yy-video-preview" muted loop playsinline poster="images/preview3.jpg">
+                                    <source src="videos/Comp.mp4" type="video/mp4">
+                                </video>
+                                
+                                <div class="yy-video-overlay">
+                                    <div class="yy-play-button">
+                                        <div class="yy-play-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M8,5 L8,19 L19,12 L8,5 Z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <span class="yy-play-text">СМОТРЕТЬ</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="yy-media-badge">
+                                    <span class="yy-badge-text">VIDEO</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="yy-work-info">
+                            <div class="yy-work-header">
+                                <h3 class="yy-work-title">Abathur</h3>
+                                <span class="yy-work-year">2024</span>
+                            </div>
+                            
+                            <p class="yy-work-description">Character animation with visual effects and particle systems.</p>
+                            
+                            <div class="yy-work-tags">
+                                <span class="yy-tag">After Effects</span>
+                                <span class="yy-tag">3D Animation</span>
+                                <span class="yy-tag">VFX</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="yy-works-footer">
@@ -327,7 +367,43 @@
                         </div>
                     </div>
                     
-                    <!-- Add more gallery items here -->
+                    <!-- Image 3 -->
+                    <div class="yy-gallery-item">
+                        <div class="yy-gallery-media">
+                            <img src="images/3d-model.jpg" alt="3D Model" class="yy-gallery-image" data-image="images/3d-model.jpg">
+                            
+                            <div class="yy-gallery-overlay">
+                                <button class="yy-gallery-view" data-title="3D Character Model" data-description="Cinema 4D & ZBrush">
+                                    <span class="yy-view-text">ПОСМОТРЕТЬ</span>
+                                    <span class="yy-view-icon">+</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="yy-gallery-info">
+                            <h3 class="yy-gallery-title">3D Character</h3>
+                            <p class="yy-gallery-category">Cinema 4D & ZBrush</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Image 4 -->
+                    <div class="yy-gallery-item">
+                        <div class="yy-gallery-media">
+                            <img src="images/storyboard.jpg" alt="Storyboard" class="yy-gallery-image" data-image="images/storyboard.jpg">
+                            
+                            <div class="yy-gallery-overlay">
+                                <button class="yy-gallery-view" data-title="Storyboard Concept" data-description="Illustrator & Procreate">
+                                    <span class="yy-view-text">ПОСМОТРЕТЬ</span>
+                                    <span class="yy-view-icon">+</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="yy-gallery-info">
+                            <h3 class="yy-gallery-title">Storyboard</h3>
+                            <p class="yy-gallery-category">Illustrator & Procreate</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -490,15 +566,15 @@
                     <div class="yy-contact-form">
                         <form class="yy-form" id="contactForm">
                             <div class="yy-form-group">
-                                <input type="text" class="yy-form-input" placeholder="Ваше имя" required>
+                                <input type="text" class="yy-form-input" placeholder="Ваше имя" id="name" name="name" required>
                             </div>
                             
                             <div class="yy-form-group">
-                                <input type="email" class="yy-form-input" placeholder="Email" required>
+                                <input type="email" class="yy-form-input" placeholder="Email" id="email" name="email" required>
                             </div>
                             
                             <div class="yy-form-group">
-                                <textarea class="yy-form-textarea" placeholder="Расскажите о вашем проекте" rows="5" required></textarea>
+                                <textarea class="yy-form-textarea" placeholder="Расскажите о вашем проекте" rows="5" id="message" name="message" required></textarea>
                             </div>
                             
                             <button type="submit" class="yy-btn yy-btn-primary yy-btn-block">
@@ -517,21 +593,21 @@
             <div class="yy-footer-content">
                 <div class="yy-footer-left">
                     <div class="yy-footer-logo">YULIA BYUKLIY</div>
-                    <div class="yy-footer-copyright">© 2024. All rights reserved.</div>
+                    <div class="yy-footer-copyright">© 2024. Все права защищены.</div>
                 </div>
                 
                 <div class="yy-footer-center">
                     <div class="yy-footer-social">
-                        <a href="https://t.me/yulyabyukliu" class="yy-footer-social-link" target="_blank">
+                        <a href="https://t.me/yulyabyukliu" class="yy-footer-social-link" target="_blank" aria-label="Telegram">
                             <i class="fab fa-telegram"></i>
                         </a>
-                        <a href="https://instagram.com/jbyuk" class="yy-footer-social-link" target="_blank">
+                        <a href="https://instagram.com/jbyuk" class="yy-footer-social-link" target="_blank" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://ru.pinterest.com/julia_sufle" class="yy-footer-social-link" target="_blank">
+                        <a href="https://ru.pinterest.com/julia_sufle" class="yy-footer-social-link" target="_blank" aria-label="Pinterest">
                             <i class="fab fa-pinterest"></i>
                         </a>
-                        <a href="https://www.behance.net" class="yy-footer-social-link" target="_blank">
+                        <a href="https://www.behance.net" class="yy-footer-social-link" target="_blank" aria-label="Behance">
                             <i class="fab fa-behance"></i>
                         </a>
                     </div>
@@ -584,9 +660,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="js/yellowyeti.js"></script>
-    <script src="js/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
