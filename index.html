@@ -4,331 +4,589 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YULIA BYUKLIY — Motion Designer & 3D Artist</title>
-    <!-- Шрифты как на Yellow Yeti: жирный геометрический и моноширинный -->
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Fonts like Yellow Yeti -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Yellow Yeti style CSS -->
+    <link rel="stylesheet" href="css/yellowyeti.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="yy-body">
-    <!-- Фон с текстурой и "рисованными" линиями -->
-    <div class="yy-background">
-        <div class="yy-scribble yy-scribble-1"></div>
-        <div class="yy-scribble yy-scribble-2"></div>
-        <div class="yy-cross"></div>
-    </div>
-
-    <!-- Шапка сайта с "рисованной" нижней границей -->
-    <header class="yy-header">
-        <nav class="yy-nav">
-            <a href="#" class="yy-logo">
-                YULIA <span class="yy-logo-highlight">BYUKLIY</span>
-                <div class="yy-logo-underline"></div>
-            </a>
-            <div class="yy-nav-links">
-                <a href="#works" class="yy-nav-link"><span class="yy-nav-number">01</span>РАБОТЫ</a>
-                <a href="#about" class="yy-nav-link"><span class="yy-nav-number">02</span>ОБО МНЕ</a>
-                <a href="#contact" class="yy-nav-link"><span class="yy-nav-number">03</span>КОНТАКТЫ</a>
+<body class="yy-body" data-tilda="true">
+    <!-- Preloader like Yellow Yeti -->
+    <div class="yy-preloader" id="preloader">
+        <div class="yy-preloader-content">
+            <div class="yy-preloader-logo">
+                YULIA <span class="yy-accent">BYUKLIY</span>
             </div>
-            <button class="yy-menu-toggle" id="menuToggle" aria-label="Открыть меню">
-                <span class="yy-menu-line"></span>
-                <span class="yy-menu-line"></span>
-            </button>
-        </nav>
-        <!-- Нижняя "рисованная" граница шапки -->
-        <div class="yy-header-border"></div>
-    </header>
-
-    <!-- Мобильное меню (скрыто по умолчанию) -->
-    <div class="yy-mobile-menu" id="mobileMenu">
-        <a href="#works" class="yy-mobile-link"><span class="yy-nav-number">01</span>РАБОТЫ</a>
-        <a href="#about" class="yy-mobile-link"><span class="yy-nav-number">02</span>ОБО МНЕ</a>
-        <a href="#contact" class="yy-mobile-link"><span class="yy-nav-number">03</span>КОНТАКТЫ</a>
-        <div class="yy-mobile-social">
-            <a href="https://t.me/yulyabyukliu" class="yy-social-icon" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="https://instagram.com/jbyuk" class="yy-social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://ru.pinterest.com/julia_sufle" class="yy-social-icon" target="_blank"><i class="fab fa-pinterest"></i></a>
+            <div class="yy-preloader-progress">
+                <div class="yy-progress-bar"></div>
+            </div>
         </div>
     </div>
 
-    <!-- Основное содержимое -->
-    <main>
-        <!-- Герой-секция -->
-        <section class="yy-hero">
-            <div class="yy-hero-content">
-                <!-- Подзаголовок, имитирующий рукописный текст -->
-                <p class="yy-hero-label">
-                    <span class="yy-label-line"></span>
-                    MOTION DESIGNER & 3D ARTIST
-                </p>
-                <!-- Главный заголовок с эффектом "выделения маркером" -->
-                <h1 class="yy-hero-title">
-                    СОЗДАЮ
-                    <span class="yy-hero-highlight">
-                        ЯРКИЕ
-                        <svg class="yy-highlight-svg" viewBox="0 0 200 24">
-                            <path d="M2,12 Q50,5 100,12 T198,12" />
-                        </svg>
-                    </span>
-                    ВИЗУАЛЬНЫЕ<br>ИСТОРИИ
-                </h1>
-                <!-- Описание -->
-                <p class="yy-hero-description">
-                    Специализируюсь на <span class="yy-text-emphasis">3D анимации</span>, <span class="yy-text-emphasis">моушн-графике</span> и <span class="yy-text-emphasis">визуальных эффектах</span>. Работаю в Cinema 4D, After Effects, Illustrator.
-                </p>
-                <!-- Кнопка CTA -->
-                <a href="#works" class="yy-cta-button">
-                    СМОТРЕТЬ ПОРТФОЛИО
-                    <svg class="yy-arrow" width="20" height="20" viewBox="0 0 20 20">
-                        <path d="M10,0 L10,18 M1,9 L10,18 L19,9" />
-                    </svg>
+    <!-- Navigation like Yellow Yeti -->
+    <header class="yy-header" id="header">
+        <div class="yy-container">
+            <nav class="yy-nav">
+                <div class="yy-nav-left">
+                    <a href="#hero" class="yy-logo">
+                        <span class="yy-logo-text">YULIA <span class="yy-logo-accent">BYUKLIY</span></span>
+                        <div class="yy-logo-line"></div>
+                    </a>
+                </div>
+                
+                <div class="yy-nav-right">
+                    <div class="yy-nav-menu" id="navMenu">
+                        <a href="#works" class="yy-nav-link" data-number="01">
+                            <span class="yy-nav-number">01</span>
+                            <span class="yy-nav-text">РАБОТЫ</span>
+                        </a>
+                        <a href="#about" class="yy-nav-link" data-number="02">
+                            <span class="yy-nav-number">02</span>
+                            <span class="yy-nav-text">ОБО МНЕ</span>
+                        </a>
+                        <a href="#contact" class="yy-nav-link" data-number="03">
+                            <span class="yy-nav-number">03</span>
+                            <span class="yy-nav-text">КОНТАКТЫ</span>
+                        </a>
+                    </div>
+                    
+                    <button class="yy-menu-toggle" id="menuToggle" aria-label="Меню">
+                        <span class="yy-menu-line"></span>
+                        <span class="yy-menu-line"></span>
+                        <span class="yy-menu-line"></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="yy-mobile-menu" id="mobileMenu">
+        <div class="yy-mobile-menu-content">
+            <div class="yy-mobile-menu-header">
+                <div class="yy-mobile-logo">YULIA BYUKLIY</div>
+                <button class="yy-mobile-close" id="mobileClose">&times;</button>
+            </div>
+            
+            <div class="yy-mobile-links">
+                <a href="#works" class="yy-mobile-link">
+                    <span class="yy-mobile-number">01</span>
+                    РАБОТЫ
+                </a>
+                <a href="#about" class="yy-mobile-link">
+                    <span class="yy-mobile-number">02</span>
+                    ОБО МНЕ
+                </a>
+                <a href="#contact" class="yy-mobile-link">
+                    <span class="yy-mobile-number">03</span>
+                    КОНТАКТЫ
                 </a>
             </div>
-        </section>
-
-        <!-- Секция "Избранные работы" -->
-        <section class="yy-section" id="works">
-            <div class="yy-section-header">
-                <!-- Заголовок секции с декоративным элементом -->
-                <h2 class="yy-section-title">
-                    <span class="yy-title-decoration">✱</span>
-                    ИЗБРАННЫЕ РАБОТЫ
-                    <span class="yy-title-decoration">✱</span>
-                </h2>
-                <div class="yy-section-subtitle">Кликайте на видео для просмотра</div>
+            
+            <div class="yy-mobile-social">
+                <a href="https://t.me/yulyabyukliu" class="yy-social-link" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    Telegram
+                </a>
+                <a href="https://instagram.com/jbyuk" class="yy-social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    Instagram
+                </a>
+                <a href="https://ru.pinterest.com/julia_sufle" class="yy-social-link" target="_blank">
+                    <i class="fab fa-pinterest"></i>
+                    Pinterest
+                </a>
             </div>
+        </div>
+    </div>
 
-            <!-- Сетка с видео-работами -->
-            <div class="yy-works-grid">
-                <!-- Работа 1: Murad -->
-                <article class="yy-work-card">
-                    <div class="yy-video-container" data-video="videos/Murad.mp4" data-title="Collage" data-desc="Intro for Youtube">
-                        <video class="yy-video-preview" muted loop playsinline poster="videos/previews/Murad-preview.jpg">
-                            <source src="videos/Murad.mp4" type="video/mp4">
-                        </video>
-                        <div class="yy-play-overlay">
-                            <div class="yy-play-icon">▶</div>
-                            <div class="yy-play-text">СМОТРЕТЬ</div>
-                        </div>
-                        <div class="yy-video-label">VIDEO</div>
-                    </div>
-                    <div class="yy-work-info">
-                        <h3 class="yy-work-title">Collage</h3>
-                        <p class="yy-work-type">Intro for Youtube</p>
-                        <div class="yy-tech-tags">
-                            <span class="yy-tech-tag">After Effects</span>
-                            <span class="yy-tech-tag">3D</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Работа 2: Lipgloss -->
-                <article class="yy-work-card">
-                    <div class="yy-video-container" data-video="videos/Lipgloss.mp4" data-title="Lipgloss" data-desc="3D Animation for Brand">
-                        <video class="yy-video-preview" muted loop playsinline poster="videos/previews/Lipgloss-preview.jpg">
-                            <source src="videos/Lipgloss.mp4" type="video/mp4">
-                        </video>
-                        <div class="yy-play-overlay">
-                            <div class="yy-play-icon">▶</div>
-                            <div class="yy-play-text">СМОТРЕТЬ</div>
-                        </div>
-                        <div class="yy-video-label">VIDEO</div>
-                    </div>
-                    <div class="yy-work-info">
-                        <h3 class="yy-work-title">Lipgloss</h3>
-                        <p class="yy-work-type">3D Animation for Brand</p>
-                        <div class="yy-tech-tags">
-                            <span class="yy-tech-tag">Cinema 4D</span>
-                            <span class="yy-tech-tag">Redshift</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Остальные видео-работы (Comp, Abathur и т.д.) добавляются по аналогии -->
-                <!-- Для экономии места оставил 2 примера, вы добавите остальные -->
-
+    <!-- Main Content -->
+    <main class="yy-main">
+        <!-- Hero Section -->
+        <section class="yy-hero" id="hero">
+            <div class="yy-hero-background">
+                <div class="yy-hero-bg-element yy-bg-1"></div>
+                <div class="yy-hero-bg-element yy-bg-2"></div>
+                <div class="yy-hero-bg-element yy-bg-3"></div>
             </div>
-
-            <!-- Декоративный элемент в конце секции -->
-            <div class="yy-section-footer">
-                <div class="yy-dotted-line"></div>
-                <p class="yy-footer-note">и многое другое</p>
+            
+            <div class="yy-container">
+                <div class="yy-hero-content">
+                    <div class="yy-hero-label">
+                        <span class="yy-hero-label-line"></span>
+                        <span class="yy-hero-label-text">MOTION DESIGNER & 3D ARTIST</span>
+                    </div>
+                    
+                    <h1 class="yy-hero-title">
+                        СОЗДАЮ
+                        <span class="yy-hero-highlight">
+                            ЯРКИЕ
+                            <svg class="yy-highlight-svg" width="100%" height="12">
+                                <path d="M2,6 Q50,2 100,6 T198,6" stroke-width="3"/>
+                            </svg>
+                        </span>
+                        ВИЗУАЛЬНЫЕ<br>ИСТОРИИ
+                    </h1>
+                    
+                    <div class="yy-hero-description">
+                        <p>Специализируюсь на <span class="yy-text-accent">3D анимации</span>, <span class="yy-text-accent">моушн-графике</span> и <span class="yy-text-accent">визуальных эффектах</span>. Работаю в Cinema 4D, After Effects, Illustrator, Figma.</p>
+                    </div>
+                    
+                    <div class="yy-hero-actions">
+                        <a href="#works" class="yy-btn yy-btn-primary">
+                            <span class="yy-btn-text">СМОТРЕТЬ ПОРТФОЛИО</span>
+                            <span class="yy-btn-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20">
+                                    <path d="M10,0 L10,18 M1,9 L10,18 L19,9" stroke="currentColor" stroke-width="2" fill="none"/>
+                                </svg>
+                            </span>
+                        </a>
+                        
+                        <a href="#contact" class="yy-btn yy-btn-secondary">
+                            <span class="yy-btn-text">ОБСУДИТЬ ПРОЕКТ</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Секция "Галерея" (изображения) -->
-        <section class="yy-section yy-gallery-section">
-            <div class="yy-section-header">
-                <h2 class="yy-section-title">
-                    <span class="yy-title-decoration">⟢</span>
-                    ГАЛЕРЕЯ
-                    <span class="yy-title-decoration">⟣</span>
-                </h2>
-                <div class="yy-section-subtitle">Статичные работы и раскадровки</div>
-            </div>
-
-            <div class="yy-gallery-grid">
-                <!-- Изображение 1 -->
-                <figure class="yy-gallery-item">
-                    <img src="images/cupid2.png" alt="Poster Cupid - Figma Design" class="yy-gallery-img">
-                    <figcaption class="yy-gallery-caption">
-                        <h3>Poster Cupid</h3>
-                        <p>Figma Design</p>
-                    </figcaption>
-                    <div class="yy-gallery-overlay">
-                        <button class="yy-view-btn" data-img="images/cupid2.png" data-title="Poster Cupid" data-desc="Figma Design">УВЕЛИЧИТЬ</button>
+        <!-- Works Section -->
+        <section class="yy-section yy-works-section" id="works">
+            <div class="yy-container">
+                <div class="yy-section-header">
+                    <div class="yy-section-label">
+                        <span class="yy-section-number">01</span>
+                        <span class="yy-section-name">РАБОТЫ</span>
                     </div>
-                </figure>
-
-                <!-- Изображение 2 -->
-                <figure class="yy-gallery-item">
-                    <img src="images/cupid.png" alt="Poster Cupid Red - Figma Design" class="yy-gallery-img">
-                    <figcaption class="yy-gallery-caption">
-                        <h3>Poster Cupid Red</h3>
-                        <p>Figma Design</p>
-                    </figcaption>
-                    <div class="yy-gallery-overlay">
-                        <button class="yy-view-btn" data-img="images/cupid.png" data-title="Poster Cupid Red" data-desc="Figma Design">УВЕЛИЧИТЬ</button>
-                    </div>
-                </figure>
-
-                <!-- Остальные изображения добавляются по аналогии -->
-            </div>
-        </section>
-
-        <!-- Секция "Обо мне" -->
-        <section class="yy-section yy-about-section" id="about">
-            <div class="yy-about-content">
-                <div class="yy-about-text">
-                    <h2 class="yy-about-title">
-                        ПРИВЕТ, Я <span class="yy-name-highlight">ЮЛЯ</span>
-                        <div class="yy-title-underline"></div>
+                    
+                    <h2 class="yy-section-title">
+                        <span class="yy-title-line yy-line-left"></span>
+                        ИЗБРАННЫЕ ПРОЕКТЫ
+                        <span class="yy-title-line yy-line-right"></span>
                     </h2>
-                    <div class="yy-about-paragraphs">
-                        <p class="yy-about-p">Motion-дизайнер из [ваш город]. Создаю динамичные визуальные решения, которые цепляют внимание и рассказывают истории.</p>
-                        <p class="yy-about-p">В работе сочетаю <span class="yy-text-emphasis">художественный взгляд</span> и <span class="yy-text-emphasis">технические навыки</span>. Постоянно изучаю новые инструменты и подходы в 3D и моушн-дизайне.</p>
+                    
+                    <p class="yy-section-subtitle">Кликайте на видео для просмотра в полном размере</p>
+                </div>
+                
+                <div class="yy-works-grid">
+                    <!-- Work 1 -->
+                    <div class="yy-work-card" data-category="3d motion">
+                        <div class="yy-work-media">
+                            <div class="yy-video-wrapper" data-video="videos/Murad.mp4">
+                                <video class="yy-video-preview" muted loop playsinline poster="videos/previews/Murad-preview.jpg">
+                                    <source src="videos/Murad.mp4" type="video/mp4">
+                                </video>
+                                
+                                <div class="yy-video-overlay">
+                                    <div class="yy-play-button">
+                                        <div class="yy-play-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M8,5 L8,19 L19,12 L8,5 Z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <span class="yy-play-text">СМОТРЕТЬ</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="yy-media-badge">
+                                    <span class="yy-badge-text">VIDEO</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="yy-work-info">
+                            <div class="yy-work-header">
+                                <h3 class="yy-work-title">Collage</h3>
+                                <span class="yy-work-year">2024</span>
+                            </div>
+                            
+                            <p class="yy-work-description">Intro for Youtube channel. Dynamic motion graphics with 3D elements.</p>
+                            
+                            <div class="yy-work-tags">
+                                <span class="yy-tag">After Effects</span>
+                                <span class="yy-tag">3D Animation</span>
+                                <span class="yy-tag">Motion Graphics</span>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <!-- Work 2 -->
+                    <div class="yy-work-card" data-category="3d product">
+                        <div class="yy-work-media">
+                            <div class="yy-video-wrapper" data-video="videos/Lipgloss.mp4">
+                                <video class="yy-video-preview" muted loop playsinline poster="videos/previews/Lipgloss-preview.jpg">
+                                    <source src="videos/Lipgloss.mp4" type="video/mp4">
+                                </video>
+                                
+                                <div class="yy-video-overlay">
+                                    <div class="yy-play-button">
+                                        <div class="yy-play-icon">
+                                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                                <path d="M8,5 L8,19 L19,12 L8,5 Z" fill="currentColor"/>
+                                            </svg>
+                                        </div>
+                                        <span class="yy-play-text">СМОТРЕТЬ</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="yy-media-badge">
+                                    <span class="yy-badge-text">3D</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="yy-work-info">
+                            <div class="yy-work-header">
+                                <h3 class="yy-work-title">Lipgloss</h3>
+                                <span class="yy-work-year">2024</span>
+                            </div>
+                            
+                            <p class="yy-work-description">3D product animation for cosmetic brand. Realistic materials and lighting.</p>
+                            
+                            <div class="yy-work-tags">
+                                <span class="yy-tag">Cinema 4D</span>
+                                <span class="yy-tag">Redshift</span>
+                                <span class="yy-tag">Product Animation</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add more work cards here -->
+                </div>
+                
+                <div class="yy-works-footer">
+                    <div class="yy-divider">
+                        <span class="yy-divider-dot"></span>
+                        <span class="yy-divider-dot"></span>
+                        <span class="yy-divider-dot"></span>
+                    </div>
+                    <p class="yy-works-note">И ещё более 20 проектов в портфолио</p>
+                </div>
+            </div>
+        </section>
 
-                    <!-- Блок с инструментами в стиле "скетчей" -->
-                    <div class="yy-tools">
-                        <div class="yy-tool">
-                            <div class="yy-tool-icon">C4D</div>
-                            <div class="yy-tool-name">Cinema 4D</div>
+        <!-- Gallery Section -->
+        <section class="yy-section yy-gallery-section">
+            <div class="yy-container">
+                <div class="yy-section-header">
+                    <div class="yy-section-label">
+                        <span class="yy-section-number">02</span>
+                        <span class="yy-section-name">ГАЛЕРЕЯ</span>
+                    </div>
+                    
+                    <h2 class="yy-section-title">
+                        <span class="yy-title-line yy-line-left"></span>
+                        СТАТИЧНЫЕ РАБОТЫ
+                        <span class="yy-title-line yy-line-right"></span>
+                    </h2>
+                    
+                    <p class="yy-section-subtitle">Постеры, концепты и раскадровки</p>
+                </div>
+                
+                <div class="yy-gallery-grid">
+                    <!-- Image 1 -->
+                    <div class="yy-gallery-item">
+                        <div class="yy-gallery-media">
+                            <img src="images/cupid2.png" alt="Poster Cupid" class="yy-gallery-image" data-image="images/cupid2.png">
+                            
+                            <div class="yy-gallery-overlay">
+                                <button class="yy-gallery-view" data-title="Poster Cupid" data-description="Figma Design">
+                                    <span class="yy-view-text">ПОСМОТРЕТЬ</span>
+                                    <span class="yy-view-icon">+</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="yy-tool">
-                            <div class="yy-tool-icon">AE</div>
-                            <div class="yy-tool-name">After Effects</div>
+                        
+                        <div class="yy-gallery-info">
+                            <h3 class="yy-gallery-title">Poster Cupid</h3>
+                            <p class="yy-gallery-category">Figma Design</p>
                         </div>
-                        <div class="yy-tool">
-                            <div class="yy-tool-icon">AI</div>
-                            <div class="yy-tool-name">Illustrator</div>
+                    </div>
+                    
+                    <!-- Image 2 -->
+                    <div class="yy-gallery-item">
+                        <div class="yy-gallery-media">
+                            <img src="images/cupid.png" alt="Poster Cupid Red" class="yy-gallery-image" data-image="images/cupid.png">
+                            
+                            <div class="yy-gallery-overlay">
+                                <button class="yy-gallery-view" data-title="Poster Cupid Red" data-description="Figma Design">
+                                    <span class="yy-view-text">ПОСМОТРЕТЬ</span>
+                                    <span class="yy-view-icon">+</span>
+                                </button>
+                            </div>
                         </div>
-                        <div class="yy-tool">
-                            <div class="yy-tool-icon">FIG</div>
-                            <div class="yy-tool-name">Figma</div>
+                        
+                        <div class="yy-gallery-info">
+                            <h3 class="yy-gallery-title">Poster Cupid Red</h3>
+                            <p class="yy-gallery-category">Figma Design</p>
                         </div>
-                        <div class="yy-tool">
-                            <div class="yy-tool-icon">UE5</div>
-                            <div class="yy-tool-name">Unreal Engine</div>
+                    </div>
+                    
+                    <!-- Add more gallery items here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="yy-section yy-about-section" id="about">
+            <div class="yy-container">
+                <div class="yy-about-wrapper">
+                    <div class="yy-about-content">
+                        <div class="yy-section-label">
+                            <span class="yy-section-number">03</span>
+                            <span class="yy-section-name">ОБО МНЕ</span>
+                        </div>
+                        
+                        <h2 class="yy-about-title">
+                            ПРИВЕТ, Я
+                            <span class="yy-name-highlight">ЮЛЯ</span>
+                            <div class="yy-title-underline"></div>
+                        </h2>
+                        
+                        <div class="yy-about-text">
+                            <p class="yy-about-paragraph">
+                                Motion-дизайнер и 3D-художник. Создаю динамичные визуальные решения, которые цепляют внимание и рассказывают истории.
+                            </p>
+                            
+                            <p class="yy-about-paragraph">
+                                В работе сочетаю <span class="yy-text-accent">художественный взгляд</span> и <span class="yy-text-accent">технические навыки</span>. Постоянно изучаю новые инструменты и подходы в 3D и моушн-дизайне.
+                            </p>
+                        </div>
+                        
+                        <div class="yy-about-stats">
+                            <div class="yy-stat">
+                                <div class="yy-stat-number">50+</div>
+                                <div class="yy-stat-label">ПРОЕКТОВ</div>
+                            </div>
+                            <div class="yy-stat">
+                                <div class="yy-stat-number">5</div>
+                                <div class="yy-stat-label">ЛЕТ ОПЫТА</div>
+                            </div>
+                            <div class="yy-stat">
+                                <div class="yy-stat-number">100%</div>
+                                <div class="yy-stat-label">ОТДАЧА</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="yy-about-skills">
+                        <h3 class="yy-skills-title">ИНСТРУМЕНТЫ И НАВЫКИ</h3>
+                        
+                        <div class="yy-skills-grid">
+                            <div class="yy-skill">
+                                <div class="yy-skill-icon">C4D</div>
+                                <div class="yy-skill-info">
+                                    <div class="yy-skill-name">Cinema 4D</div>
+                                    <div class="yy-skill-bar">
+                                        <div class="yy-skill-progress" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="yy-skill">
+                                <div class="yy-skill-icon">AE</div>
+                                <div class="yy-skill-info">
+                                    <div class="yy-skill-name">After Effects</div>
+                                    <div class="yy-skill-bar">
+                                        <div class="yy-skill-progress" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="yy-skill">
+                                <div class="yy-skill-icon">AI</div>
+                                <div class="yy-skill-info">
+                                    <div class="yy-skill-name">Illustrator</div>
+                                    <div class="yy-skill-bar">
+                                        <div class="yy-skill-progress" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="yy-skill">
+                                <div class="yy-skill-icon">FIG</div>
+                                <div class="yy-skill-info">
+                                    <div class="yy-skill-name">Figma</div>
+                                    <div class="yy-skill-bar">
+                                        <div class="yy-skill-progress" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="yy-skill">
+                                <div class="yy-skill-icon">UE5</div>
+                                <div class="yy-skill-info">
+                                    <div class="yy-skill-name">Unreal Engine</div>
+                                    <div class="yy-skill-bar">
+                                        <div class="yy-skill-progress" style="width: 70%"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Секция "Контакты" -->
+        <!-- Contact Section -->
         <section class="yy-section yy-contact-section" id="contact">
-            <div class="yy-contact-content">
-                <h2 class="yy-contact-title">
-                    ГОТОВА К НОВЫМ<br>ПРОЕКТАМ
-                    <div class="yy-contact-underline"></div>
-                </h2>
-                <p class="yy-contact-subtitle">Напишите мне — обсудим вашу идею</p>
-
-                <div class="yy-contact-links">
-                    <a href="https://t.me/yulyabyukliu" class="yy-contact-link" target="_blank">
-                        <div class="yy-contact-link-content">
-                            <div class="yy-contact-icon"><i class="fab fa-telegram"></i></div>
-                            <div class="yy-contact-info">
-                                <div class="yy-contact-platform">Telegram</div>
-                                <div class="yy-contact-handle">@yulyabyukliu</div>
-                            </div>
-                            <div class="yy-contact-arrow">→</div>
+            <div class="yy-container">
+                <div class="yy-contact-wrapper">
+                    <div class="yy-contact-content">
+                        <div class="yy-section-label">
+                            <span class="yy-section-number">04</span>
+                            <span class="yy-section-name">КОНТАКТЫ</span>
                         </div>
-                        <div class="yy-link-underline"></div>
-                    </a>
-
-                    <a href="https://instagram.com/jbyuk" class="yy-contact-link" target="_blank">
-                        <div class="yy-contact-link-content">
-                            <div class="yy-contact-icon"><i class="fab fa-instagram"></i></div>
-                            <div class="yy-contact-info">
-                                <div class="yy-contact-platform">Instagram</div>
-                                <div class="yy-contact-handle">@jbyuk</div>
+                        
+                        <h2 class="yy-contact-title">
+                            ГОТОВА К НОВЫМ<br>ПРОЕКТАМ
+                            <div class="yy-title-underline"></div>
+                        </h2>
+                        
+                        <p class="yy-contact-subtitle">Напишите мне — обсудим вашу идею</p>
+                        
+                        <div class="yy-contact-info">
+                            <div class="yy-contact-item">
+                                <div class="yy-contact-icon">
+                                    <i class="fas fa-paper-plane"></i>
+                                </div>
+                                <div class="yy-contact-details">
+                                    <div class="yy-contact-label">Telegram</div>
+                                    <a href="https://t.me/yulyabyukliu" class="yy-contact-link" target="_blank">
+                                        @yulyabyukliu
+                                    </a>
+                                </div>
                             </div>
-                            <div class="yy-contact-arrow">→</div>
+                            
+                            <div class="yy-contact-item">
+                                <div class="yy-contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="yy-contact-details">
+                                    <div class="yy-contact-label">Email</div>
+                                    <a href="mailto:hello@yuliabyukliy.com" class="yy-contact-link">
+                                        hello@yuliabyukliy.com
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="yy-contact-item">
+                                <div class="yy-contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="yy-contact-details">
+                                    <div class="yy-contact-label">Локация</div>
+                                    <div class="yy-contact-text">Удалённо / Москва</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="yy-link-underline"></div>
-                    </a>
-                </div>
-
-                <!-- Декоративный элемент -->
-                <div class="yy-contact-doodle">
-                    <span>✦</span>
-                    <span>✎</span>
-                    <span>✦</span>
+                    </div>
+                    
+                    <div class="yy-contact-form">
+                        <form class="yy-form" id="contactForm">
+                            <div class="yy-form-group">
+                                <input type="text" class="yy-form-input" placeholder="Ваше имя" required>
+                            </div>
+                            
+                            <div class="yy-form-group">
+                                <input type="email" class="yy-form-input" placeholder="Email" required>
+                            </div>
+                            
+                            <div class="yy-form-group">
+                                <textarea class="yy-form-textarea" placeholder="Расскажите о вашем проекте" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="yy-btn yy-btn-primary yy-btn-block">
+                                <span class="yy-btn-text">ОТПРАВИТЬ СООБЩЕНИЕ</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Подвал -->
+    <!-- Footer -->
     <footer class="yy-footer">
-        <div class="yy-footer-content">
-            <div class="yy-footer-logo">YULIA BYUKLIY</div>
-            <div class="yy-footer-rights">
-                <p>© 2025. Все права защищены.</p>
-                <p>Motion Designer & 3D Artist</p>
-            </div>
-            <div class="yy-footer-back">
-                <a href="#" class="yy-back-link">
-                    <span>НАВЕРХ</span>
-                    <svg class="yy-arrow-up" width="16" height="16" viewBox="0 0 16 16">
-                        <path d="M8,0 L8,14 M2,8 L8,14 L14,8" />
-                    </svg>
-                </a>
+        <div class="yy-container">
+            <div class="yy-footer-content">
+                <div class="yy-footer-left">
+                    <div class="yy-footer-logo">YULIA BYUKLIY</div>
+                    <div class="yy-footer-copyright">© 2024. All rights reserved.</div>
+                </div>
+                
+                <div class="yy-footer-center">
+                    <div class="yy-footer-social">
+                        <a href="https://t.me/yulyabyukliu" class="yy-footer-social-link" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://instagram.com/jbyuk" class="yy-footer-social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://ru.pinterest.com/julia_sufle" class="yy-footer-social-link" target="_blank">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                        <a href="https://www.behance.net" class="yy-footer-social-link" target="_blank">
+                            <i class="fab fa-behance"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="yy-footer-right">
+                    <a href="#hero" class="yy-back-to-top">
+                        <span class="yy-back-text">НАВЕРХ</span>
+                        <span class="yy-back-icon">
+                            <svg width="16" height="16" viewBox="0 0 16 16">
+                                <path d="M8,14 L8,2 M2,8 L8,2 L14,8" stroke="currentColor" stroke-width="2" fill="none"/>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
             </div>
         </div>
-        <!-- "Рисованная" верхняя граница подвала -->
-        <div class="yy-footer-border"></div>
     </footer>
 
-    <!-- Модальное окно для изображений -->
+    <!-- Modals -->
     <div class="yy-modal" id="imageModal">
         <div class="yy-modal-overlay"></div>
         <div class="yy-modal-container">
-            <button class="yy-modal-close" id="closeImageModal">✕</button>
-            <img class="yy-modal-image" id="modalImage" alt="">
-            <div class="yy-modal-caption">
-                <h3 id="modalImageTitle"></h3>
-                <p id="modalImageDesc"></p>
+            <button class="yy-modal-close" id="closeImageModal">&times;</button>
+            <div class="yy-modal-content">
+                <img class="yy-modal-image" id="modalImage" alt="">
+                <div class="yy-modal-info">
+                    <h3 class="yy-modal-title" id="modalImageTitle"></h3>
+                    <p class="yy-modal-description" id="modalImageDesc"></p>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Модальное окно для видео -->
+    
     <div class="yy-modal yy-video-modal" id="videoModal">
         <div class="yy-modal-overlay"></div>
-        <div class="yy-modal-container yy-video-container-large">
-            <button class="yy-modal-close" id="closeVideoModal">✕</button>
-            <video class="yy-modal-video" id="modalVideo" controls>
-                Ваш браузер не поддерживает видео.
-            </video>
-            <div class="yy-modal-caption">
-                <h3 id="modalVideoTitle"></h3>
-                <p id="modalVideoDesc"></p>
+        <div class="yy-modal-container">
+            <button class="yy-modal-close" id="closeVideoModal">&times;</button>
+            <div class="yy-modal-content">
+                <video class="yy-modal-video" id="modalVideo" controls>
+                    <source src="" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+                <div class="yy-modal-info">
+                    <h3 class="yy-modal-title" id="modalVideoTitle"></h3>
+                    <p class="yy-modal-description" id="modalVideoDesc"></p>
+                </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/yellowyeti.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
