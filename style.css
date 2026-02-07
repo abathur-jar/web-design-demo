@@ -8,6 +8,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    /* Добавьте это для центрирования всего контента */
+    flex-direction: column;
 }
 
 .about-pixel {
@@ -31,12 +33,15 @@
 
 .about-geometry {
     position: absolute;
-    right: 10%;
+    /* Измените right на left для правильного позиционирования */
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     width: 300px;
     height: 300px;
     z-index: 1;
+    /* Сделайте его менее заметным или уберите вовсе на десктопе */
+    opacity: 0.1;
 }
 
 .geometry-item {
@@ -94,12 +99,14 @@
     text-transform: uppercase;
     letter-spacing: 3px;
     text-align: center;
+    width: 100%;
 }
 
 .about-text {
     font-size: 1.2rem;
     line-height: 1.8;
     text-align: center;
+    width: 100%;
 }
 
 .about-text p {
@@ -107,6 +114,7 @@
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 .about-highlight {
