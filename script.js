@@ -1,3 +1,4 @@
+// script.js
 (() => {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -38,14 +39,13 @@
   const burger = $("#burger");
   const mobile = $("#mobile");
 
-  function openMobile() {
+  function openMobile(){
     if (!mobile || !burger) return;
     mobile.style.display = "block";
     mobile.setAttribute("aria-hidden", "false");
     burger.setAttribute("aria-expanded", "true");
   }
-
-  function closeMobile() {
+  function closeMobile(){
     if (!mobile || !burger) return;
     mobile.style.display = "none";
     mobile.setAttribute("aria-hidden", "true");
@@ -145,7 +145,6 @@
     document.body.style.overflow = "";
   }
 
-  // Click to open from cards
   $$(".card").forEach(card => {
     card.addEventListener("click", () => {
       openModal({
@@ -156,7 +155,6 @@
     });
   });
 
-  // Close by backdrop / button
   if (modal) {
     modal.addEventListener("click", (e) => {
       if (e.target?.dataset?.close) closeModal();
@@ -171,4 +169,64 @@
       closeModal();
     }
   });
+
+  // Minimal parallax on stickers
+  const stickers = document.querySelectorAll(".sticker");
+  let mx = 0, my = 0;
+
+  window.addEventListener("mousemove", (e) => {
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    mx = (e.clientX - cx) / cx;
+    my = (e.clientY - cy) / cy;
+  });
+
+  function parallaxTick(){
+    stickers.forEach((el, i) => {
+      const k = 6 + i * 3;
+      el.style.transform = `translate3d(${mx * k}px, ${my * k}px, 0)`;
+    });
+    requestAnimationFrame(parallaxTick);
+  }
+  parallaxTick();
+
+  // Copy email
+  const copyBtn = $("#copyEmail");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const email = copyBtn.dataset.email || "";
+      if (!email) return;
+      try{
+        await navigator.clipboard.writeText(email);
+        const old = copyBtn.textContent;
+        copyBtn.textContent = "Скопировано ✔️";
+        setTimeout(() => (copyBtn.textContent = old), 1100);
+      }catch{
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+    });
+  }
+
+  // Demo submit
+  const form = $("#contactForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      if (!btn) return;
+      const old = btn.textContent;
+      btn.textContent = "Отправлено ✔️";
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = old;
+        btn.disabled = false;
+        form.reset();
+      }, 1200);
+    });
+  }
 })();

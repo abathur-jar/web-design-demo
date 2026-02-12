@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="ru">
 <head>
@@ -7,17 +8,13 @@
   <meta name="description" content="Motion designer & 3D artist. Selected works, studio shots, about and contacts." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Display + clean grotesk -->
   <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
   <!-- Background FX -->
-  <div class="bg">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
+  <div class="bg" aria-hidden="true">
     <div class="grid-overlay"></div>
     <div class="noise"></div>
   </div>
@@ -38,7 +35,7 @@
       <div class="header__right">
         <button class="theme" id="themeBtn" aria-label="Toggle theme">
           <span class="theme__dot"></span>
-          <span class="theme__label">VIBE</span>
+          <span class="theme__label">THEME</span>
         </button>
         <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span>
@@ -65,6 +62,28 @@
   <main>
     <!-- HERO -->
     <section class="hero">
+      <!-- Stickers (SVG, no images) -->
+      <div class="stickers" aria-hidden="true">
+        <svg class="sticker s1" viewBox="0 0 180 180" fill="none">
+          <path d="M90 16c8 22 10 24 32 32-22 8-24 10-32 32-8-22-10-24-32-32 22-8 24-10 32-32Z"
+            fill="var(--accent)" stroke="rgba(255,255,255,.65)" stroke-width="4" stroke-linejoin="round"/>
+        </svg>
+
+        <svg class="sticker s2" viewBox="0 0 240 180" fill="none">
+          <path d="M54 90c0-34 28-62 66-62s66 28 66 62-28 62-66 62S54 124 54 90Z"
+            fill="rgba(103,213,255,.18)" stroke="rgba(255,255,255,.42)" stroke-width="4"/>
+          <path d="M32 108c26-18 60-28 92-28 38 0 72 10 102 28"
+            stroke="var(--accent2)" stroke-width="10" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="sticker s3" viewBox="0 0 220 220" fill="none">
+          <path d="M56 76c24-38 84-46 116-14 28 28 24 72-10 98-34 26-88 14-110-26-18-32-14-44 4-58Z"
+            fill="rgba(255,230,107,.08)" stroke="rgba(255,255,255,.38)" stroke-width="4"/>
+          <circle cx="140" cy="94" r="10" fill="var(--accent3)"/>
+          <circle cx="112" cy="120" r="6" fill="rgba(255,255,255,.45)"/>
+        </svg>
+      </div>
+
       <div class="container hero__grid">
         <div class="hero__left reveal">
           <div class="pill">
@@ -73,15 +92,14 @@
           </div>
 
           <h1 class="h1">
-            СДЕЛАЮ<br/>
-            <span class="h1__accent">КРИЧАЩУЮ</span><br/>
-            КАРТИНКУ<br/>
-            ДВИЖУЩЕЙСЯ
+            Motion Design<br/>
+            <span class="h1__accent">+ 3D</span><br/>
+            for brands
           </h1>
 
           <p class="lead">
-            3D-анимация, motion-графика, VFX. Люблю «мультяшную» смелость:
-            крупные формы, цвет, ритм и немного космической дерзости.
+            Юля — motion designer. 3D, product animation, titles, loops.
+            Аккуратно, стильно, с лёгким “космо-мульт” вайбом.
           </p>
 
           <div class="hero__cta">
@@ -109,7 +127,6 @@
           <div class="poster">
             <div class="poster__badge">AVAILABLE</div>
             <div class="poster__frame">
-              <!-- You can replace with real showreel video -->
               <video class="poster__media" autoplay muted loop playsinline>
                 <source src="./assets/showreel.mp4" type="video/mp4" />
                 Ваш браузер не поддерживает видео
@@ -124,7 +141,6 @@
         </div>
       </div>
 
-      <!-- marquee -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee__track">
           <span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span>
@@ -151,7 +167,6 @@
           <button class="filter" data-filter="design" role="tab" aria-selected="false">Design</button>
         </div>
 
-        <!-- Replace thumbnails + links with your real assets -->
         <div class="cards" id="cards">
           <article class="card reveal" data-tags="3d motion" data-title="Lipgloss" data-desc="3D Animation for Brand" data-src="./assets/work-lipgloss.mp4">
             <div class="card__media">
@@ -227,7 +242,7 @@
         </div>
 
         <div class="section__foot">
-          <a class="btn btn--ghost" href="#contact">Хочу такой же стиль ✦</a>
+          <a class="btn btn--ghost" href="#contact">Хочу обсудить проект ✦</a>
         </div>
       </div>
     </section>
@@ -253,7 +268,7 @@
             </div>
             <div class="box">
               <div class="box__k">Настроение</div>
-              <div class="box__v">«Космо-мульт», яркие формы, мягкая пластика</div>
+              <div class="box__v">Чёрный минимал + “космо-мульт” детали</div>
             </div>
             <div class="box">
               <div class="box__k">Гео</div>
@@ -285,7 +300,7 @@
               </div>
             </div>
           </div>
-          <p class="hint">💡 Подсказка: в assets положи showreel.mp4 + превью (jpg/png).</p>
+          <p class="hint">💡 Положи в assets showreel.mp4 + превью (jpg/png).</p>
         </div>
       </div>
     </section>
@@ -295,15 +310,15 @@
       <div class="container contact">
         <div class="contact__head reveal">
           <h2 class="h2">Контакты</h2>
-          <p class="section__sub">Напиши — отвечу, задам пару вопросов и предложу подход.</p>
+          <p class="section__sub">Напиши — отвечу и предложу подход под задачу.</p>
         </div>
 
         <div class="contact__grid">
           <div class="contact__left reveal">
             <div class="bigcard">
               <div class="bigcard__top">
-                <div class="bigcard__title">Давай сделаем красоту</div>
-                <div class="bigcard__note">быстро • аккуратно • ярко</div>
+                <div class="bigcard__title">Давай сделаем красиво</div>
+                <div class="bigcard__note">минимал • акценты • тайминг</div>
               </div>
 
               <form class="form" id="contactForm">
@@ -327,7 +342,7 @@
                 </button>
 
                 <p class="form__fine">
-                  Это демо-форма (без бэкенда). Подключу отправку на почту/Telegram webhook за 10 минут.
+                  Сейчас форма демо (без бэкенда). Можно подключить отправку на почту/Telegram webhook.
                 </p>
               </form>
             </div>
