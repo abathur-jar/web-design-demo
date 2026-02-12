@@ -4,410 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Yulia Byukliy — Motion Designer</title>
-  <meta name="description" content="Motion designer & 3D artist. Selected works, about and contacts." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
-  <!-- ВАЖНО: имя файла совпадает с реальным в репо -->
   <link rel="stylesheet" href="./style.css" />
 </head>
-
 <body>
-  <!-- Background FX -->
-  <div class="bg" aria-hidden="true">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="grid-overlay"></div>
-    <div class="noise"></div>
+
+<header class="header">
+  <div class="container header__inner">
+    <div class="logo">YULIA BYUKLIY</div>
+    <nav class="nav">
+      <a href="#work">WORK</a>
+      <a href="#about">ABOUT</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
   </div>
+</header>
 
-  <header class="header" id="top">
-    <div class="container header__inner">
-      <a class="brand" href="#top" aria-label="Go to top">
-        <span class="brand__mark">YB</span>
-        <span class="brand__text">Yulia Byukliy</span>
-      </a>
+<main>
 
-      <nav class="nav" aria-label="Primary">
-        <a href="#works">WORK</a>
-        <a href="#about">ABOUT</a>
-        <a href="#contact">CONTACT</a>
-      </nav>
+<section class="hero">
+  <div class="container">
+    <h1 class="hero__title">
+      MOTION<br>
+      DESIGNER<br>
+      + 3D
+    </h1>
 
-      <div class="header__right">
-        <button class="theme" id="themeBtn" aria-label="Toggle theme">
-          <span class="theme__dot"></span>
-          <span class="theme__label">VIBE</span>
-        </button>
-        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
-          <span></span><span></span>
-        </button>
-      </div>
+    <p class="hero__sub">
+      3D animation • product • titles • loops
+    </p>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="container">
+
+    <div class="work__grid">
+
+      <article class="work__item" data-src="./videos/Lipgloss.mp4">
+        <img src="./videos/previews/Lipgloss-preview.jpg" alt="">
+      </article>
+
+      <article class="work__item" data-src="./videos/Murad.mp4">
+        <img src="./videos/previews/Murad-preview.jpg" alt="">
+      </article>
+
+      <article class="work__item" data-src="./videos/Comp.mp4">
+        <img src="./videos/previews/Comp-preview.jpg" alt="">
+      </article>
+
+      <article class="work__item" data-src="./videos/Ring.mp4">
+        <img src="./videos/previews/Ring-preview.jpg" alt="">
+      </article>
+
     </div>
 
-    <div class="mobile" id="mobile" aria-hidden="true">
-      <div class="mobile__panel">
-        <a href="#works" class="m-link">WORK</a>
-        <a href="#about" class="m-link">ABOUT</a>
-        <a href="#contact" class="m-link">CONTACT</a>
+  </div>
+</section>
 
-        <div class="mobile__sep"></div>
-        <div class="mobile__social">
-          <a href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram</a>
-          <a href="https://instagram.com/jbyuk" target="_blank" rel="noreferrer">Instagram</a>
-          <a href="https://ru.pinterest.com/julia_sufle/" target="_blank" rel="noreferrer">Pinterest</a>
-        </div>
-      </div>
+<section class="about" id="about">
+  <div class="container about__grid">
+    <div>
+      <h2>ABOUT</h2>
     </div>
-  </header>
-
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container hero__grid">
-        <div class="hero__left reveal">
-          <div class="pill">
-            <span class="pill__spark">✦</span>
-            <span>MOTION DESIGNER • 3D ARTIST</span>
-          </div>
-
-          <h1 class="h1">
-            МОУШН<br/>
-            <span class="h1__accent">+ 3D</span><br/>
-            ДЛЯ БРЕНДОВ
-          </h1>
-
-          <p class="lead">
-            3D-анимация, motion-графика, тизеры, лупы. Чётко по задаче — с характером и хорошим вкусом.
-          </p>
-
-          <div class="hero__cta">
-            <a class="btn btn--primary" href="#works">
-              Смотреть работы <span aria-hidden="true">→</span>
-            </a>
-            <a class="btn btn--ghost" href="#contact">
-              Написать <span aria-hidden="true">✎</span>
-            </a>
-          </div>
-
-          <div class="hero__meta">
-            <div class="meta">
-              <span class="meta__k">Tools</span>
-              <span class="meta__v">Cinema 4D + Redshift • After Effects • Illustrator • Figma</span>
-            </div>
-            <div class="meta">
-              <span class="meta__k">Focus</span>
-              <span class="meta__v">3D • Product • Titles • Loops</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero__right reveal">
-          <div class="poster">
-            <div class="poster__badge">AVAILABLE</div>
-            <div class="poster__frame">
-              <!-- Использую твой существующий путь из репо (videos/...) -->
-              <video class="poster__media" autoplay muted loop playsinline>
-                <source src="./videos/Lipgloss.mp4" type="video/mp4" />
-                Ваш браузер не поддерживает видео
-              </video>
-            </div>
-            <div class="poster__row">
-              <a class="chip" href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram</a>
-              <a class="chip" href="https://instagram.com/jbyuk" target="_blank" rel="noreferrer">Instagram</a>
-              <a class="chip" href="https://ru.pinterest.com/julia_sufle/" target="_blank" rel="noreferrer">Pinterest</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee__track">
-          <span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span>
-          <span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- WORKS -->
-    <section class="section" id="works">
-      <div class="container">
-        <div class="section__head">
-          <h2 class="h2">Работы</h2>
-          <p class="section__sub">Нажми на карточку — откроется просмотр видео.</p>
-        </div>
-
-        <div class="filters" role="tablist" aria-label="Work filters">
-          <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">All</button>
-          <button class="filter" data-filter="3d" role="tab" aria-selected="false">3D</button>
-          <button class="filter" data-filter="motion" role="tab" aria-selected="false">Motion</button>
-          <button class="filter" data-filter="vfx" role="tab" aria-selected="false">VFX</button>
-          <button class="filter" data-filter="design" role="tab" aria-selected="false">Design</button>
-        </div>
-
-        <div class="cards" id="cards">
-          <article class="card reveal" data-tags="motion design" data-title="Collage" data-desc="Intro for YouTube" data-src="./videos/Murad.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/Murad-preview.jpg?v=2" alt="Collage preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Collage</h3>
-                <span class="badge">Motion</span>
-              </div>
-              <p class="card__desc">Intro for YouTube</p>
-              <div class="tagrow"><span class="tag">After Effects</span><span class="tag">Edit</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d" data-title="Lipgloss" data-desc="3D Animation for Brand" data-src="./videos/Lipgloss.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/Lipgloss-preview.jpg?v=2" alt="Lipgloss preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Lipgloss</h3>
-                <span class="badge">3D</span>
-              </div>
-              <p class="card__desc">3D Animation for Brand</p>
-              <div class="tagrow"><span class="tag">C4D</span><span class="tag">Redshift</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d vfx" data-title="Comp" data-desc="3D Animation for Brand" data-src="./videos/Comp.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/Comp-preview.jpg?v=2" alt="Comp preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Comp</h3>
-                <span class="badge badge--alt">VFX</span>
-              </div>
-              <p class="card__desc">3D Animation for Brand</p>
-              <div class="tagrow"><span class="tag">Compositing</span><span class="tag">Lighting</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d motion" data-title="Abathur Beats" data-desc="3D Animation for YouTube" data-src="./videos/abathur.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/abathur-preview.jpg?v=2" alt="Abathur preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Abathur Beats</h3>
-                <span class="badge">3D</span>
-              </div>
-              <p class="card__desc">3D Animation for YouTube</p>
-              <div class="tagrow"><span class="tag">C4D</span><span class="tag">Loop</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d" data-title="Ring" data-desc="3D Animation for Brand" data-src="./videos/Ring.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/Ring-preview.jpg?v=2" alt="Ring preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Ring</h3>
-                <span class="badge">3D</span>
-              </div>
-              <p class="card__desc">3D Animation for Brand</p>
-              <div class="tagrow"><span class="tag">C4D</span><span class="tag">Product</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d motion" data-title="Slurry" data-desc="3D Animation for Instagram Profile" data-src="./videos/Slurry.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/Slurry-preview.jpg?v=2" alt="Slurry preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Slurry</h3>
-                <span class="badge">Motion</span>
-              </div>
-              <p class="card__desc">3D Animation for Instagram</p>
-              <div class="tagrow"><span class="tag">Timing</span><span class="tag">Loop</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d design" data-title="ZheeShe" data-desc="3D Animation for ZheeShe" data-src="./videos/ZheeShe.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/ZheeShe-preview.jpg?v=2" alt="ZheeShe preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">ZheeShe</h3>
-                <span class="badge badge--alt">Design</span>
-              </div>
-              <p class="card__desc">3D Animation for Education</p>
-              <div class="tagrow"><span class="tag">Design</span><span class="tag">3D</span></div>
-            </div>
-          </article>
-
-          <article class="card reveal" data-tags="3d" data-title="Solar System" data-desc="3D Animation for YouTube" data-src="./videos/solar.mp4">
-            <div class="card__media">
-              <img src="./videos/previews/solar-preview.jpg?v=2" alt="Solar preview" loading="lazy">
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__title">Solar System</h3>
-                <span class="badge">3D</span>
-              </div>
-              <p class="card__desc">3D Animation for YouTube</p>
-              <div class="tagrow"><span class="tag">C4D</span><span class="tag">Render</span></div>
-            </div>
-          </article>
-        </div>
-
-        <div class="section__foot">
-          <a class="btn btn--ghost" href="#contact">Написать ✦</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="section section--alt" id="about">
-      <div class="container about">
-        <div class="about__left reveal">
-          <h2 class="h2">Обо мне</h2>
-          <p class="lead">
-            Привет! Я Юля — motion-дизайнер. Работаю в Cinema 4D + Redshift,
-            Adobe After Effects, Adobe Illustrator, Figma. Изучаю Unreal Engine.
-          </p>
-
-          <div class="about__grid">
-            <div class="box">
-              <div class="box__k">Сильные стороны</div>
-              <div class="box__v">3D продукт, стилизация, тайминг, типографика</div>
-            </div>
-            <div class="box">
-              <div class="box__k">Форматы</div>
-              <div class="box__v">Рилсы, тизеры, лупы, заставки, UI-motion</div>
-            </div>
-            <div class="box">
-              <div class="box__k">Настроение</div>
-              <div class="box__v">Космо-мульт, яркие формы, аккуратный минимал</div>
-            </div>
-            <div class="box">
-              <div class="box__k">Гео</div>
-              <div class="box__v">Remote • РФ / EU time friendly</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="about__right reveal">
-          <div class="stack">
-            <div class="stack__card">
-              <div class="stack__title">Контакты</div>
-              <p class="stack__text">Быстрее всего — в Telegram. Можно также на почту.</p>
-              <div class="stack__cta">
-                <a class="btn btn--primary" href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram →</a>
-                <button class="btn btn--ghost" id="copyEmail" data-email="hello@example.com">Скопировать email</button>
-              </div>
-            </div>
-
-            <div class="stack__card stack__card--alt">
-              <div class="stack__title">Технологии</div>
-              <div class="tagrow tagrow--big">
-                <span class="tag">Cinema 4D</span>
-                <span class="tag">Redshift</span>
-                <span class="tag">After Effects</span>
-                <span class="tag">Illustrator</span>
-                <span class="tag">Figma</span>
-                <span class="tag">Unreal (learning)</span>
-              </div>
-            </div>
-          </div>
-          <p class="hint">💡 Email в кнопке можно заменить на реальный.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section" id="contact">
-      <div class="container contact">
-        <div class="contact__head reveal">
-          <h2 class="h2">Контакты</h2>
-          <p class="section__sub">Напиши — отвечу и предложу подход.</p>
-        </div>
-
-        <div class="contact__grid">
-          <div class="contact__left reveal">
-            <div class="bigcard">
-              <div class="bigcard__top">
-                <div class="bigcard__title">Давай сделаем красоту</div>
-                <div class="bigcard__note">быстро • аккуратно • ярко</div>
-              </div>
-
-              <form class="form" id="contactForm">
-                <label class="field">
-                  <span>Имя</span>
-                  <input required name="name" placeholder="Как к вам обращаться?" />
-                </label>
-
-                <label class="field">
-                  <span>Email / Telegram</span>
-                  <input required name="contact" placeholder="куда отвечать" />
-                </label>
-
-                <label class="field">
-                  <span>Сообщение</span>
-                  <textarea required name="message" rows="4" placeholder="что нужно сделать? сроки? референсы?"></textarea>
-                </label>
-
-                <button class="btn btn--primary" type="submit">
-                  Отправить <span aria-hidden="true">✦</span>
-                </button>
-
-                <p class="form__fine">
-                  Демо-форма (без бэкенда). Можно подключить отправку на почту/Telegram webhook.
-                </p>
-              </form>
-            </div>
-          </div>
-
-          <aside class="contact__right reveal">
-            <div class="side">
-              <div class="side__title">Соцсети</div>
-              <a class="side__link" href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram →</a>
-              <a class="side__link" href="https://instagram.com/jbyuk" target="_blank" rel="noreferrer">Instagram →</a>
-              <a class="side__link" href="https://ru.pinterest.com/julia_sufle/" target="_blank" rel="noreferrer">Pinterest →</a>
-            </div>
-
-            <div class="side side--alt">
-              <div class="side__title">Файлы</div>
-              <p class="side__text">Можно добавить PDF портфолио, CV, прайс.</p>
-              <a class="btn btn--ghost" href="#works">Открыть работы</a>
-            </div>
-          </aside>
-        </div>
-
-        <footer class="footer">
-          <div class="container footer__inner">
-            <span>© <span id="year"></span> Yulia Byukliy</span>
-            <a href="#top" class="toTop">Наверх ↑</a>
-          </div>
-        </footer>
-      </div>
-    </section>
-  </main>
-
-  <!-- Modal viewer -->
-  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Work viewer">
-    <div class="modal__backdrop" data-close="1"></div>
-    <div class="modal__panel" role="document" aria-modal="true">
-      <button class="modal__close" id="modalClose" aria-label="Close" data-close="1">×</button>
-      <div class="modal__media" id="modalMedia"></div>
-      <div class="modal__info">
-        <h3 class="modal__title" id="modalTitle"></h3>
-        <p class="modal__desc" id="modalDesc"></p>
-      </div>
+    <div>
+      <p>
+        I’m Yulia — motion designer working in Cinema 4D + Redshift,
+        After Effects and Unreal Engine.
+      </p>
+      <p>
+        Focused on strong composition, rhythm and product visuals.
+      </p>
     </div>
   </div>
+</section>
 
-  <script src="./script.js"></script>
+<section class="contact" id="contact">
+  <div class="container contact__grid">
+    <div>
+      <h2>CONTACT</h2>
+    </div>
+    <div>
+      <a class="contact__link" href="https://t.me/yulyabyukliu" target="_blank">Telegram</a>
+      <a class="contact__link" href="mailto:hello@example.com">Email</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    © <span id="year"></span> Yulia Byukliy
+  </div>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal__bg"></div>
+  <div class="modal__content" id="modalContent"></div>
+</div>
+
+<script src="./script.js"></script>
 </body>
 </html>
