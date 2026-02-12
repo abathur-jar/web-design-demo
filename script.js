@@ -1,317 +1,216 @@
-// Инициализация сайта
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Julia Byukliy Portfolio loaded');
-    
-    // Автозапуск видео при наведении
-    initVideoHover();
-    
-    // Инициализация модальных окон
-    initModals();
-    
-    // Инициализация бургер меню
-    initMobileMenu();
-    
-    // Анимация кнопки CTA
-    initCTAButton();
-    
-    // Партиклы и анимации
-    initParticles();
-});
+(() => {
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-// Автозапуск видео при наведении
-function initVideoHover() {
-    const videoContainers = document.querySelectorAll('.video-container');
-    
-    videoContainers.forEach(container => {
-        const video = container.querySelector('video');
-        
-        container.addEventListener('mouseenter', () => {
-            if (video) {
-                video.play().catch(e => console.log('Autoplay prevented:', e));
-            }
-        });
-        
-        container.addEventListener('mouseleave', () => {
-            if (video) {
-                video.pause();
-                video.currentTime = 0;
-            }
-        });
-        
-        // Клик для открытия модального окна с видео
-        container.addEventListener('click', (e) => {
-            if (!e.target.classList.contains('play-button')) {
-                const onclick = container.getAttribute('onclick');
-                if (onclick) {
-                    eval(onclick);
-                }
-            }
-        });
-    });
-}
+  // Year
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-// Инициализация модальных окон
-function initModals() {
-    // Модалка для изображений
-    const imageModal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDescription = document.getElementById('modalDescription');
-    const imageClose = imageModal.querySelector('.modal-close');
-    
-    // Модалка для видео
-    const videoModal = document.getElementById('videoModal');
-    const modalVideo = document.getElementById('modalVideo');
-    const videoTitle = document.getElementById('videoModalTitle');
-    const videoDescription = document.getElementById('videoModalDescription');
-    const videoClose = videoModal.querySelector('.modal-close');
-    
-    // Закрытие по клику на overlay
-    [imageModal, videoModal].forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                if (modal === videoModal) {
-                    modalVideo.pause();
-                }
-            }
-        });
+  // Smooth anchor scroll
+  $$('a[href^="#"]').forEach(a => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      if (!id || id === "#") return;
+      const el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      closeMobile();
     });
-    
-    // Закрытие по кнопке
-    imageClose.addEventListener('click', () => {
-        imageModal.style.display = 'none';
+  });
+
+  // Theme toggle
+  const themeBtn = $("#themeBtn");
+  const root = document.documentElement;
+  const saved = localStorage.getItem("theme");
+  if (saved) root.setAttribute("data-theme", saved);
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
     });
-    
-    videoClose.addEventListener('click', () => {
-        videoModal.style.display = 'none';
-        modalVideo.pause();
+  }
+
+  // Mobile menu
+  const burger = $("#burger");
+  const mobile = $("#mobile");
+
+  function openMobile(){
+    if (!mobile || !burger) return;
+    mobile.style.display = "block";
+    mobile.setAttribute("aria-hidden", "false");
+    burger.setAttribute("aria-expanded", "true");
+  }
+  function closeMobile(){
+    if (!mobile || !burger) return;
+    mobile.style.display = "none";
+    mobile.setAttribute("aria-hidden", "true");
+    burger.setAttribute("aria-expanded", "false");
+  }
+
+  if (burger) {
+    burger.addEventListener("click", () => {
+      const open = burger.getAttribute("aria-expanded") === "true";
+      open ? closeMobile() : openMobile();
     });
-    
-    // Закрытие по ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            imageModal.style.display = 'none';
-            videoModal.style.display = 'none';
-            modalVideo.pause();
+  }
+
+  // Reveal on scroll
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add("is-visible");
+          io.unobserve(ent.target);
         }
+      });
+    }, { threshold: 0.12 });
+
+    $$(".reveal").forEach(el => io.observe(el));
+  } else {
+    $$(".reveal").forEach(el => el.classList.add("is-visible"));
+  }
+
+  // Filters
+  const filters = $$(".filter");
+  const cards = $$(".card");
+
+  const setActive = (btn) => {
+    filters.forEach(b => {
+      b.classList.toggle("is-active", b === btn);
+      b.setAttribute("aria-selected", b === btn ? "true" : "false");
     });
-    
-    // Открытие изображений из галереи
-    document.querySelectorAll('.gallery-item').forEach(item => {
-        item.addEventListener('click', () => {
-            const img = item.querySelector('img');
-            const title = item.querySelector('.gallery-title').textContent;
-            const description = item.querySelector('.gallery-description').textContent;
-            
-            modalImg.src = img.src;
-            modalImg.alt = img.alt;
-            modalTitle.textContent = title;
-            modalDescription.textContent = description;
-            imageModal.style.display = 'flex';
-        });
+  };
+
+  filters.forEach(btn => {
+    btn.addEventListener("click", () => {
+      setActive(btn);
+      const f = btn.dataset.filter;
+
+      cards.forEach(card => {
+        const tags = (card.dataset.tags || "").split(/\s+/).filter(Boolean);
+        const ok = (f === "all") || tags.includes(f);
+        card.style.display = ok ? "" : "none";
+      });
     });
-}
+  });
 
-// Функции для работы с видео модалкой
-function openVideoModal(videoSrc, title, description) {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('modalVideo');
-    const modalTitle = document.getElementById('videoModalTitle');
-    const modalDescription = document.getElementById('videoModalDescription');
-    
-    video.src = videoSrc;
-    modalTitle.textContent = title;
-    modalDescription.textContent = description;
-    modal.style.display = 'flex';
-    
-    // Автозапуск видео
-    setTimeout(() => {
-        video.play().catch(e => {
-            console.log('Autoplay prevented, waiting for user interaction');
-        });
-    }, 300);
-}
+  // Modal viewer
+  const modal = $("#modal");
+  const modalMedia = $("#modalMedia");
+  const modalTitle = $("#modalTitle");
+  const modalDesc = $("#modalDesc");
+  const modalClose = $("#modalClose");
 
-function closeVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const video = document.getElementById('modalVideo');
-    
-    modal.style.display = 'none';
-    video.pause();
-    video.currentTime = 0;
-}
+  function openModal({ title, desc, src }) {
+    if (!modal || !modalMedia || !modalTitle || !modalDesc) return;
 
-// Галерея карусель
-function scrollGallery(distance) {
-    const carousel = document.getElementById('galleryCarousel');
-    carousel.scrollBy({
-        left: distance,
-        behavior: 'smooth'
-    });
-}
+    modalTitle.textContent = title || "";
+    modalDesc.textContent = desc || "";
+    modalMedia.innerHTML = "";
 
-// Мобильное меню
-function initMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLeft = document.querySelector('.nav-left');
-    const navRight = document.querySelector('.nav-right');
-    
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            const isOpen = navLeft.style.display === 'flex';
-            
-            if (isOpen) {
-                navLeft.style.display = 'none';
-                navRight.style.display = 'none';
-                menuToggle.innerHTML = '☰';
-            } else {
-                navLeft.style.display = 'flex';
-                navRight.style.display = 'flex';
-                navLeft.style.flexDirection = 'column';
-                navRight.style.flexDirection = 'column';
-                navLeft.style.position = 'absolute';
-                navRight.style.position = 'absolute';
-                navLeft.style.top = '100%';
-                navRight.style.top = '100%';
-                navLeft.style.left = '20px';
-                navRight.style.right = '20px';
-                navLeft.style.background = 'rgba(0,0,0,0.9)';
-                navRight.style.background = 'rgba(0,0,0,0.9)';
-                navLeft.style.padding = '20px';
-                navRight.style.padding = '20px';
-                navLeft.style.gap = '15px';
-                navRight.style.gap = '15px';
-                menuToggle.innerHTML = '✕';
-            }
-        });
+    const s = (src || "").toLowerCase();
+    const isVideo = s.endsWith(".mp4") || s.includes(".mp4?");
+
+    if (src) {
+      if (isVideo) {
+        const v = document.createElement("video");
+        v.src = src;
+        v.controls = true;
+        v.autoplay = true;
+        v.muted = true;
+        v.playsInline = true;
+        v.style.width = "100%";
+        v.style.height = "100%";
+        v.style.objectFit = "cover";
+        modalMedia.appendChild(v);
+      } else {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = title || "work";
+        modalMedia.appendChild(img);
+      }
     }
-    
-    // Закрытие меню при клике на ссылку
-    document.querySelectorAll('.nav-left a, .nav-right a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                navLeft.style.display = 'none';
-                navRight.style.display = 'none';
-                menuToggle.innerHTML = '☰';
-            }
-        });
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    if (!modal.classList.contains("is-open")) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    if (modalMedia) modalMedia.innerHTML = "";
+    document.body.style.overflow = "";
+  }
+
+  $$(".card").forEach(card => {
+    card.addEventListener("click", () => {
+      openModal({
+        title: card.dataset.title,
+        desc: card.dataset.desc,
+        src: card.dataset.src
+      });
     });
-}
+  });
 
-// Анимация кнопки CTA
-function initCTAButton() {
-    const ctaButton = document.querySelector('.cta-button');
-    
-    if (ctaButton) {
-        ctaButton.addEventListener('click', () => {
-            document.getElementById('works').scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    }
-}
-
-// Дополнительные партиклы и анимации
-function initParticles() {
-    // Добавляем дополнительные партиклы при скролле
-    window.addEventListener('scroll', () => {
-        if (Math.random() > 0.98 && document.querySelectorAll('.floating-particle').length < 10) {
-            createParticle();
-        }
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target?.dataset?.close) closeModal();
     });
-    
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'floating-particle';
-        
-        const size = 2 + Math.random() * 4;
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${Math.random() * 100}%`;
-        particle.style.top = '100%';
-        particle.style.animationDuration = `${15 + Math.random() * 20}s`;
-        particle.style.animationDelay = `${Math.random() * 5}s`;
-        
-        document.body.appendChild(particle);
-        
-        // Удаление после анимации
-        setTimeout(() => {
-            particle.remove();
-        }, 30000);
-    }
-    
-    // Создаем начальные партиклы
-    for (let i = 0; i < 3; i++) {
-        setTimeout(createParticle, i * 1000);
-    }
-}
+  }
+  if (modalClose) modalClose.addEventListener("click", closeModal);
 
-// Предзагрузка видео
-function preloadVideos() {
-    const videoSources = [
-        'videos/Murad.mp4',
-        'videos/Lipgloss.mp4',
-        'videos/Comp.mp4',
-        'videos/abathur.mp4',
-        'videos/Ring.mp4',
-        'videos/Slurry.mp4',
-        'videos/ZheeShe.mp4',
-        'videos/solar.mp4'
-    ];
-    
-    videoSources.forEach(src => {
-        const video = document.createElement('video');
-        video.src = src;
-        video.preload = 'metadata';
+  // Escape
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeMobile();
+      closeModal();
+    }
+  });
+
+  // Copy email
+  const copyBtn = $("#copyEmail");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const email = copyBtn.dataset.email || "";
+      if (!email) return;
+      try{
+        await navigator.clipboard.writeText(email);
+        const old = copyBtn.textContent;
+        copyBtn.textContent = "Скопировано ✔️";
+        setTimeout(() => (copyBtn.textContent = old), 1100);
+      }catch{
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
     });
-}
+  }
 
-// Запускаем предзагрузку
-setTimeout(preloadVideos, 1000);
-
-// Анимация появления элементов при скролле
-function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
+  // Demo submit
+  const form = $("#contactForm");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      if (!btn) return;
+      const old = btn.innerHTML;
+      btn.innerHTML = 'Отправлено <span aria-hidden="true">✔️</span>';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = old;
+        btn.disabled = false;
+        form.reset();
+      }, 1200);
     });
-    
-    // Наблюдаем за всеми секциями
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-    });
-}
-
-// Добавляем CSS для анимации появления
-const style = document.createElement('style');
-style.textContent = `
-    .animate-in {
-        animation: fadeInUp 0.8s ease-out forwards;
-    }
-    
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    section {
-        opacity: 0;
-    }
-`;
-document.head.appendChild(style);
-
-// Запускаем анимации появления
-setTimeout(initScrollAnimations, 500);
+  }
+})();
