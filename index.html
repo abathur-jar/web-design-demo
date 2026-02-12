@@ -1,313 +1,377 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Julia Byukliy - Motion Designer</title>
-    <link href="https://fonts.cdnfonts.com/css/neue-machina" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yulia Byukliy — Motion Designer</title>
+  <meta name="description" content="Motion designer & 3D artist. Selected works, studio shots, about and contacts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Display + clean grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
 </head>
+
 <body>
-    <!-- Плавающие частицы фона -->
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
-    <div class="floating-particle"></div>
+  <!-- Background FX -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <div class="grid-overlay"></div>
+    <div class="noise"></div>
+  </div>
 
-    <!-- Шапка как у Matheus Didier -->
-    <header>
-        <nav>
-            <!-- Левая часть - меню -->
-            <div class="nav-left">
-                <a href="#works">WORK</a>
-                <a href="#about">ABOUT</a>
-                <a href="#contact">CONTACT</a>
-            </div>
-            
-            <!-- Центр - логотип -->
-            <div class="logo">YULIA BYUKLIY</div>
-            
-            <!-- Правая часть - соцсети -->
-            <div class="nav-right">
-                <a href="https://t.me/yulyabyukliu" class="social-icon">
-                    <i class="fab fa-telegram"></i>
-                </a>
-                <a href="https://instagram.com/jbyuk" class="social-icon">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://ru.pinterest.com/julia_sufle" class="social-icon">
-                    <i class="fab fa-pinterest"></i>
-                </a>
-            </div>
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="Go to top">
+        <span class="brand__mark">YB</span>
+        <span class="brand__text">Yulia Byukliy</span>
+      </a>
 
-            <!-- Бургер меню для мобильных -->
-            <button class="menu-toggle">☰</button>
-        </nav>
-    </header>
+      <nav class="nav" aria-label="Primary">
+        <a href="#works">WORK</a>
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
 
-    <!-- Главный экран -->
+      <div class="header__right">
+        <button class="theme" id="themeBtn" aria-label="Toggle theme">
+          <span class="theme__dot"></span>
+          <span class="theme__label">VIBE</span>
+        </button>
+        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile" id="mobile" aria-hidden="true">
+      <div class="mobile__panel">
+        <a href="#works" class="m-link">WORK</a>
+        <a href="#about" class="m-link">ABOUT</a>
+        <a href="#contact" class="m-link">CONTACT</a>
+
+        <div class="mobile__sep"></div>
+        <div class="mobile__social">
+          <a href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram</a>
+          <a href="https://instagram.com/jbyuk" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="https://ru.pinterest.com/julia_sufle/" target="_blank" rel="noreferrer">Pinterest</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
     <section class="hero">
-        <!-- Пиксельные анимации для Hero -->
-        <div class="hero-pixel"></div>
-        <div class="hero-pixel"></div>
-        <div class="hero-pixel"></div>
-        <div class="hero-pixel"></div>
-        <div class="hero-pixel"></div>
-        <div class="hero-pixel"></div>
-        <div class="hero-pixel"></div>
-        
-        <div class="hero-content">
-            <h1>MOTION DESIGNER & 3D ARTIST</h1>
-            <p class="tagline">Creating compelling visual experiences</p>
-            <p class="description">Specializing in 3D animation, motion graphics and visual effects</p>
-            <button class="cta-button">VIEW WORKS</button>
-        </div>
-    </section>
+      <div class="container hero__grid">
+        <div class="hero__left reveal">
+          <div class="pill">
+            <span class="pill__spark">✦</span>
+            <span>MOTION DESIGNER • 3D ARTIST</span>
+          </div>
 
-    <!-- Галерея работ -->
-    <section class="gallery-section">
-        <h2>STUDIO SHOTS</h2>
-        <div class="gallery-carousel" id="galleryCarousel">
-            <div class="gallery-item">
-                <img src="images/cupid2.png" alt="Figma Design">
-                <div class="gallery-overlay">
-                    <div class="gallery-title">Poster Cupid</div>
-                    <div class="gallery-description">Figma Design</div>
-                </div>
-            </div>
+          <h1 class="h1">
+            СДЕЛАЮ<br/>
+            <span class="h1__accent">КРИЧАЩУЮ</span><br/>
+            КАРТИНКУ<br/>
+            ДВИЖУЩЕЙСЯ
+          </h1>
 
-            <div class="gallery-item">
-                <img src="images/cupid.png" alt="Figma Design">
-                <div class="gallery-overlay">
-                    <div class="gallery-title">Poster Cupid Red</div>
-                    <div class="gallery-description">Figma Design</div>
-                </div>
-            </div>
+          <p class="lead">
+            3D-анимация, motion-графика, VFX. Люблю «мультяшную» смелость:
+            крупные формы, цвет, ритм и немного космической дерзости.
+          </p>
 
-            <div class="gallery-item">
-                <img src="images/Flower.png" alt="Cinema 4D">
-                <div class="gallery-overlay">
-                    <div class="gallery-title">Alien Flower</div>
-                    <div class="gallery-description">Cinema 4D</div>
-                </div>
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/pink.jpg" alt="Cinema 4D">
-                <div class="gallery-overlay">
-                    <div class="gallery-title">Lipgloss</div>
-                    <div class="gallery-description">Cinema 4D</div>
-                </div>
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/pinkFlower.png" alt="Adobe Illustrator">
-                <div class="gallery-overlay">
-                    <div class="gallery-title">Beauty</div>
-                    <div class="gallery-description">Adobe Illustrator</div>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-nav">
-            <button class="carousel-btn" onclick="scrollGallery(-300)">❮</button>
-            <button class="carousel-btn" onclick="scrollGallery(300)">❯</button>
-        </div>
-    </section>
-
-    <!-- Работы -->
-    <section id="works" class="works">
-        <h2>SELECTED WORKS</h2>
-        <div class="works-grid">
-            <!-- Murad -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/Murad.mp4', 'Collage', 'Intro for Youtube')">
-                    <video muted playsinline poster="videos/previews/Murad-preview.jpg?v=2">
-                        <source src="videos/Murad.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Collage</h3>
-                    <p>Intro for Youtube</p>
-                </div>
-            </div>
-            
-            <!-- Pink Lipgloss -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/Lipgloss.mp4', 'Lipgloss', '3D Animation for Brand')">
-                    <video muted playsinline poster="videos/previews/Lipgloss-preview.jpg?v=2">
-                        <source src="videos/Lipgloss.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Lipgloss</h3>
-                    <p>3D Animation for Brand</p>
-                </div>
-            </div>
-            
-            <!-- Comp -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/Comp.mp4', 'Comp', '3D Animation for Brand')">
-                    <video muted playsinline poster="videos/previews/Comp-preview.jpg?v=2">
-                        <source src="videos/Comp.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Comp</h3>
-                    <p>3D Animation for Brand</p>
-                </div>
-            </div>
-
-            <!-- Abathur -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/abathur.mp4', 'Abathur Beats', '3D Animation for YouTube')">
-                    <video muted playsinline poster="videos/previews/abathur-preview.jpg?v=2">
-                        <source src="videos/abathur.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Abathur Beats</h3>
-                    <p>3D Animation for YouTube</p>
-                </div>
-            </div>
-
-            <!-- Ring -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/Ring.mp4', 'Ring', '3D Animation for Brand')">
-                    <video muted playsinline poster="videos/previews/Ring-preview.jpg?v=2">
-                        <source src="videos/Ring.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Ring</h3>
-                    <p>3D Animation for Brand</p>
-                </div>
-            </div>
-
-            <!-- Slurry -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/Slurry.mp4', 'Slurry', '3D Animation for Instagram Profile')">
-                    <video muted playsinline poster="videos/previews/Slurry-preview.jpg?v=2">
-                        <source src="videos/Slurry.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Slurry</h3>
-                    <p>3D Animation for Instagram Profile</p>
-                </div>
-            </div>
-
-            <!-- ZheeShe -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/ZheeShe.mp4', 'ZheeShe', '3D Animation Bang Bang Education for ZheeShe')">
-                    <video muted playsinline poster="videos/previews/ZheeShe-preview.jpg?v=2">
-                        <source src="videos/ZheeShe.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>ZheeShe</h3>
-                    <p>3D Animation Bang Bang Education for ZheeShe</p>
-                </div>
-            </div>
-            
-            <!-- Solar System -->
-            <div class="work-item">
-                <div class="video-container" onclick="openVideoModal('videos/solar.mp4', 'Solar System', '3D Animation for YouTube')">
-                    <video muted playsinline poster="videos/previews/solar-preview.jpg?v=2">
-                        <source src="videos/solar.mp4" type="video/mp4">
-                    </video>
-                    <div class="play-button">▶</div>
-                </div>
-                <div class="work-content">
-                    <h3>Solar System</h3>
-                    <p>3D Animation for YouTube</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Обо мне -->
-    <section id="about" class="about">
-        <!-- Летающие пиксели -->
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        <div class="about-pixel"></div>
-        
-        <!-- Геометрические элементы -->
-        <div class="about-geometry">
-            <div class="geometry-item"></div>
-            <div class="geometry-item"></div>
-            <div class="geometry-item"></div>
-        </div>
-        
-        <div class="about-content">
-            <h2>ABOUT</h2>  
-            <div class="about-text">
-                <p>👩‍💻 Привет! Я <span class="about-highlight">Юля</span> - motion-дизайнер</p>
-                <p>Работаю в <span class="about-highlight">Cinema 4D + Redshift</span>, <span class="about-highlight">Adobe After Effects</span>, <span class="about-highlight">Adobe Illustrator</span>, <span class="about-highlight">Figma</span>. Изучаю <span class="about-highlight">Unreal Engine</span></p>
-                <p>🎬 Специализируюсь на <span class="about-highlight">3D анимации</span>, <span class="about-highlight">моушн-графике</span> и <span class="about-highlight">визуальных эффектах</span></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Контакты -->
-    <section id="contact" class="contact">
-        <h2>CONTACT</h2>
-        <div class="contact-links">
-            <a href="https://t.me/yulyabyukliu">
-                <i class="fab fa-telegram"></i>
-                Telegram
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#works">
+              Смотреть работы <span aria-hidden="true">→</span>
             </a>
-            <a href="https://instagram.com/jbyuk">
-                <i class="fab fa-instagram"></i>
-                Instagram
+            <a class="btn btn--ghost" href="#contact">
+              Написать <span aria-hidden="true">✎</span>
             </a>
-            <a href="https://ru.pinterest.com/julia_sufle">
-                <i class="fab fa-pinterest"></i>
-                Pinterest
-            </a>
+          </div>
+
+          <div class="hero__meta">
+            <div class="meta">
+              <span class="meta__k">Tools</span>
+              <span class="meta__v">C4D + Redshift • AE • Illustrator • Figma</span>
+            </div>
+            <div class="meta">
+              <span class="meta__k">Focus</span>
+              <span class="meta__v">3D • Product • Titles • Loops</span>
+            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- Подвал -->
-    <footer>
-        <p>© 2025 Yulia Byukliy. Все права защищены.</p>
-    </footer>
-
-    <!-- Модальные окна -->
-    <div id="imageModal" class="modal">
-        <span class="modal-close">&times;</span>
-        <img class="modal-content" id="modalImage">
-        <div class="modal-caption">
-            <div id="modalTitle" class="modal-title"></div>
-            <div id="modalDescription" class="modal-description"></div>
-        </div>
-    </div>
-
-    <div id="videoModal" class="modal video-modal">
-        <span class="modal-close" onclick="closeVideoModal()">&times;</span>
-        <div class="video-modal-content">
-            <video id="modalVideo" controls>
+        <div class="hero__right reveal">
+          <div class="poster">
+            <div class="poster__badge">AVAILABLE</div>
+            <div class="poster__frame">
+              <!-- You can replace with real showreel video -->
+              <video class="poster__media" autoplay muted loop playsinline>
+                <source src="./assets/showreel.mp4" type="video/mp4" />
                 Ваш браузер не поддерживает видео
-            </video>
-            <div class="video-modal-caption">
-                <div id="videoModalTitle" class="modal-title"></div>
-                <div id="videoModalDescription" class="modal-description"></div>
+              </video>
             </div>
+            <div class="poster__row">
+              <a class="chip" href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram</a>
+              <a class="chip" href="https://instagram.com/jbyuk" target="_blank" rel="noreferrer">Instagram</a>
+              <a class="chip" href="https://ru.pinterest.com/julia_sufle/" target="_blank" rel="noreferrer">Pinterest</a>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <script src="script.js"></script>
+      <!-- marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span>
+          <span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span><span>3D • MOTION • VFX •</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKS -->
+    <section class="section" id="works">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="h2">Работы</h2>
+          <p class="section__sub">
+            Подборка проектов. Нажми на карточку — откроется просмотр.
+          </p>
+        </div>
+
+        <div class="filters" role="tablist" aria-label="Work filters">
+          <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter" data-filter="3d" role="tab" aria-selected="false">3D</button>
+          <button class="filter" data-filter="motion" role="tab" aria-selected="false">Motion</button>
+          <button class="filter" data-filter="vfx" role="tab" aria-selected="false">VFX</button>
+          <button class="filter" data-filter="design" role="tab" aria-selected="false">Design</button>
+        </div>
+
+        <!-- Replace thumbnails + links with your real assets -->
+        <div class="cards" id="cards">
+          <article class="card reveal" data-tags="3d motion" data-title="Lipgloss" data-desc="3D Animation for Brand" data-src="./assets/work-lipgloss.mp4">
+            <div class="card__media">
+              <img src="./assets/thumb-lipgloss.jpg" alt="Lipgloss thumbnail" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__title">Lipgloss</h3>
+                <span class="badge">3D</span>
+              </div>
+              <p class="card__desc">3D Animation for Brand</p>
+              <div class="tagrow">
+                <span class="tag">Cinema 4D</span>
+                <span class="tag">Redshift</span>
+                <span class="tag">Loop</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-tags="3d vfx" data-title="Alien Flower" data-desc="Cinema 4D exploration" data-src="./assets/work-alienflower.mp4">
+            <div class="card__media">
+              <img src="./assets/thumb-alienflower.jpg" alt="Alien Flower thumbnail" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__title">Alien Flower</h3>
+                <span class="badge badge--alt">VFX</span>
+              </div>
+              <p class="card__desc">Cinema 4D exploration</p>
+              <div class="tagrow">
+                <span class="tag">Shading</span>
+                <span class="tag">Lighting</span>
+                <span class="tag">Render</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-tags="motion design" data-title="Abathur Beats" data-desc="Intro for YouTube" data-src="./assets/work-abathur.mp4">
+            <div class="card__media">
+              <img src="./assets/thumb-abathur.jpg" alt="Abathur Beats thumbnail" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__title">Abathur Beats</h3>
+                <span class="badge">Motion</span>
+              </div>
+              <p class="card__desc">Intro for YouTube</p>
+              <div class="tagrow">
+                <span class="tag">After Effects</span>
+                <span class="tag">Type</span>
+                <span class="tag">Rhythm</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal" data-tags="design motion" data-title="Poster Cupid" data-desc="Figma design + motion" data-src="./assets/work-cupid.mp4">
+            <div class="card__media">
+              <img src="./assets/thumb-cupid.jpg" alt="Poster Cupid thumbnail" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__title">Poster Cupid</h3>
+                <span class="badge badge--alt">Design</span>
+              </div>
+              <p class="card__desc">Figma design + motion</p>
+              <div class="tagrow">
+                <span class="tag">Figma</span>
+                <span class="tag">Layout</span>
+                <span class="tag">Animation</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="section__foot">
+          <a class="btn btn--ghost" href="#contact">Хочу такой же стиль ✦</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section section--alt" id="about">
+      <div class="container about">
+        <div class="about__left reveal">
+          <h2 class="h2">Обо мне</h2>
+          <p class="lead">
+            Привет! Я Юля — motion-дизайнер. Работаю в Cinema 4D + Redshift,
+            Adobe After Effects, Adobe Illustrator, Figma. Изучаю Unreal Engine.
+          </p>
+
+          <div class="about__grid">
+            <div class="box">
+              <div class="box__k">Сильные стороны</div>
+              <div class="box__v">3D продукт, стилизация, тайминг, типографика</div>
+            </div>
+            <div class="box">
+              <div class="box__k">Форматы</div>
+              <div class="box__v">Рилсы, заставки, тизеры, лупы, UI-motion</div>
+            </div>
+            <div class="box">
+              <div class="box__k">Настроение</div>
+              <div class="box__v">«Космо-мульт», яркие формы, мягкая пластика</div>
+            </div>
+            <div class="box">
+              <div class="box__k">Гео</div>
+              <div class="box__v">Remote • РФ / EU time friendly</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__right reveal">
+          <div class="stack">
+            <div class="stack__card">
+              <div class="stack__title">Showreel</div>
+              <p class="stack__text">Можно заменить на актуальный ролик и короткий питч.</p>
+              <div class="stack__cta">
+                <a class="btn btn--primary" href="#works">К работам →</a>
+                <button class="btn btn--ghost" id="copyEmail" data-email="hello@example.com">Скопировать email</button>
+              </div>
+            </div>
+
+            <div class="stack__card stack__card--alt">
+              <div class="stack__title">Технологии</div>
+              <div class="tagrow tagrow--big">
+                <span class="tag">Cinema 4D</span>
+                <span class="tag">Redshift</span>
+                <span class="tag">After Effects</span>
+                <span class="tag">Illustrator</span>
+                <span class="tag">Figma</span>
+                <span class="tag">Unreal (learning)</span>
+              </div>
+            </div>
+          </div>
+          <p class="hint">💡 Подсказка: в assets положи showreel.mp4 + превью (jpg/png).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container contact">
+        <div class="contact__head reveal">
+          <h2 class="h2">Контакты</h2>
+          <p class="section__sub">Напиши — отвечу, задам пару вопросов и предложу подход.</p>
+        </div>
+
+        <div class="contact__grid">
+          <div class="contact__left reveal">
+            <div class="bigcard">
+              <div class="bigcard__top">
+                <div class="bigcard__title">Давай сделаем красоту</div>
+                <div class="bigcard__note">быстро • аккуратно • ярко</div>
+              </div>
+
+              <form class="form" id="contactForm">
+                <label class="field">
+                  <span>Имя</span>
+                  <input required name="name" placeholder="Как к вам обращаться?" />
+                </label>
+
+                <label class="field">
+                  <span>Email / Telegram</span>
+                  <input required name="contact" placeholder="куда отвечать" />
+                </label>
+
+                <label class="field">
+                  <span>Сообщение</span>
+                  <textarea required name="message" rows="4" placeholder="что нужно сделать? сроки? референсы?"></textarea>
+                </label>
+
+                <button class="btn btn--primary" type="submit">
+                  Отправить <span aria-hidden="true">✦</span>
+                </button>
+
+                <p class="form__fine">
+                  Это демо-форма (без бэкенда). Подключу отправку на почту/Telegram webhook за 10 минут.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <aside class="contact__right reveal">
+            <div class="side">
+              <div class="side__title">Соцсети</div>
+              <a class="side__link" href="https://t.me/yulyabyukliu" target="_blank" rel="noreferrer">Telegram →</a>
+              <a class="side__link" href="https://instagram.com/jbyuk" target="_blank" rel="noreferrer">Instagram →</a>
+              <a class="side__link" href="https://ru.pinterest.com/julia_sufle/" target="_blank" rel="noreferrer">Pinterest →</a>
+            </div>
+
+            <div class="side side--alt">
+              <div class="side__title">Файлы</div>
+              <p class="side__text">Можно добавить PDF портфолио, CV, прайс.</p>
+              <a class="btn btn--ghost" href="#works">Открыть работы</a>
+            </div>
+          </aside>
+        </div>
+
+        <footer class="footer">
+          <div class="container footer__inner">
+            <span>© <span id="year"></span> Yulia Byukliy</span>
+            <a href="#top" class="toTop">Наверх ↑</a>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal viewer -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Work viewer">
+    <div class="modal__backdrop" data-close="1"></div>
+    <div class="modal__panel" role="document" aria-modal="true">
+      <button class="modal__close" id="modalClose" aria-label="Close" data-close="1">×</button>
+      <div class="modal__media" id="modalMedia"></div>
+      <div class="modal__info">
+        <h3 class="modal__title" id="modalTitle"></h3>
+        <p class="modal__desc" id="modalDesc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
 </body>
 </html>
