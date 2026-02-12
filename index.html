@@ -6,7 +6,6 @@
   <title>Yulia Byukliy — Motion Designer</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css" />
@@ -26,6 +25,7 @@
 
 <main>
 
+<!-- HERO -->
 <section class="hero">
   <div class="container">
     <h1 class="hero__title">
@@ -33,31 +33,38 @@
       DESIGNER<br>
       + 3D
     </h1>
-
-    <p class="hero__sub">
-      3D animation • product • titles • loops
-    </p>
   </div>
 </section>
 
-<section class="work" id="work">
+<!-- WORK -->
+<section class="section" id="work">
   <div class="container">
 
-    <div class="work__grid">
+    <div class="section__head">
+      <h2>SELECTED WORK</h2>
 
-      <article class="work__item" data-src="./videos/Lipgloss.mp4">
+      <div class="filters">
+        <button data-filter="all" class="active">ALL</button>
+        <button data-filter="3d">3D</button>
+        <button data-filter="motion">MOTION</button>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <article class="work-item" data-category="3d" data-video="./videos/Lipgloss.mp4">
         <img src="./videos/previews/Lipgloss-preview.jpg" alt="">
       </article>
 
-      <article class="work__item" data-src="./videos/Murad.mp4">
+      <article class="work-item" data-category="motion" data-video="./videos/Murad.mp4">
         <img src="./videos/previews/Murad-preview.jpg" alt="">
       </article>
 
-      <article class="work__item" data-src="./videos/Comp.mp4">
+      <article class="work-item" data-category="3d" data-video="./videos/Comp.mp4">
         <img src="./videos/previews/Comp-preview.jpg" alt="">
       </article>
 
-      <article class="work__item" data-src="./videos/Ring.mp4">
+      <article class="work-item" data-category="3d" data-video="./videos/Ring.mp4">
         <img src="./videos/previews/Ring-preview.jpg" alt="">
       </article>
 
@@ -66,31 +73,33 @@
   </div>
 </section>
 
-<section class="about" id="about">
-  <div class="container about__grid">
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="container split">
     <div>
       <h2>ABOUT</h2>
     </div>
     <div>
       <p>
-        I’m Yulia — motion designer working in Cinema 4D + Redshift,
+        I’m Yulia — motion designer working with Cinema 4D, Redshift,
         After Effects and Unreal Engine.
       </p>
       <p>
-        Focused on strong composition, rhythm and product visuals.
+        Focused on clean visuals, composition and product storytelling.
       </p>
     </div>
   </div>
 </section>
 
-<section class="contact" id="contact">
-  <div class="container contact__grid">
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container split">
     <div>
       <h2>CONTACT</h2>
     </div>
     <div>
-      <a class="contact__link" href="https://t.me/yulyabyukliu" target="_blank">Telegram</a>
-      <a class="contact__link" href="mailto:hello@example.com">Email</a>
+      <a href="https://t.me/yulyabyukliu" target="_blank" class="contact-link">Telegram</a>
+      <a href="mailto:hello@example.com" class="contact-link">Email</a>
     </div>
   </div>
 </section>
@@ -101,10 +110,9 @@
   </div>
 </footer>
 
-<!-- Modal -->
+<!-- MODAL -->
 <div class="modal" id="modal">
-  <div class="modal__bg"></div>
-  <div class="modal__content" id="modalContent"></div>
+  <div class="modal__inner" id="modalInner"></div>
 </div>
 
 <script src="./script.js"></script>
